@@ -6,27 +6,23 @@
 
 #include <qp_solver_collection/QpSolver.h>
 
-using QpSolverCollection::QpSolverType;
 using QpSolverCollection::QpCoeff;
+using QpSolverCollection::QpSolverType;
 
-void testQP(const QpCoeff& qp_coeff,
-            const Eigen::VectorXd& x_gt)
+void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
 {
   const std::vector<QpSolverType> qp_solver_type_list = {
-    QpSolverType::QLD,
-    QpSolverType::QuadProg,
-    QpSolverType::LSSOL,
-    QpSolverType::JRLQP,
-    QpSolverType::qpOASES,
-    QpSolverType::OSQP,
-    QpSolverType::NASOQ};
-  for (const auto& qp_solver_type : qp_solver_type_list) {
-    const auto& qp_solver = allocateQpSolver(qp_solver_type);
+      QpSolverType::QLD,     QpSolverType::QuadProg, QpSolverType::LSSOL, QpSolverType::JRLQP,
+      QpSolverType::qpOASES, QpSolverType::OSQP,     QpSolverType::NASOQ};
+  for(const auto & qp_solver_type : qp_solver_type_list)
+  {
+    const auto & qp_solver = allocateQpSolver(qp_solver_type);
     QpCoeff qp_coeff_copied = qp_coeff;
     Eigen::VectorXd x_opt = qp_solver->solve(qp_coeff_copied);
 
     double thre = 1e-6;
-    if (qp_solver_type == QpSolverType::OSQP) {
+    if(qp_solver_type == QpSolverType::OSQP)
+    {
       thre = 1e-3;
     }
     EXPECT_LT((x_opt - x_gt).norm(), thre)
@@ -60,7 +56,8 @@ TEST(TestSampleQP, IdentityObj)
 
 TEST(TestSampleQP, Unconstrained)
 {
-  // QP coefficients are copied from https://github.com/robotology/osqp-eigen/blob/83812bd0a56bbb656cac7016b307845e4a0ed11e/tests/QPTest.cpp#L13-L44
+  // QP coefficients are copied from
+  // https://github.com/robotology/osqp-eigen/blob/83812bd0a56bbb656cac7016b307845e4a0ed11e/tests/QPTest.cpp#L13-L44
   int dim_var = 2;
   int dim_eq = 0;
   int dim_ineq = 0;
