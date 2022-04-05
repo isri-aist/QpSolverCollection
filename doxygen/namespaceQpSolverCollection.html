@@ -104,6 +104,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae1a213b741b13757dbe1db80c05f142f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#ae1a213b741b13757dbe1db80c05f142f">strToQpSolverType</a> (const std::string &amp;qp_solver_type)</td></tr>
 <tr class="memdesc:ae1a213b741b13757dbe1db80c05f142f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert std::string to QpSolverType.  <a href="#ae1a213b741b13757dbe1db80c05f142f">More...</a><br /></td></tr>
 <tr class="separator:ae1a213b741b13757dbe1db80c05f142f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52259fdd829ae6ed00a9b391589b12f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9">isQpSolverEnabled</a> (const <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> &amp;qp_solver_type)</td></tr>
+<tr class="memdesc:a52259fdd829ae6ed00a9b391589b12f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether QP solver is enabled.  <a href="#a52259fdd829ae6ed00a9b391589b12f9">More...</a><br /></td></tr>
+<tr class="separator:a52259fdd829ae6ed00a9b391589b12f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59484007a421161de16ac32eb5c85598"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classQpSolverCollection_1_1QpSolver.html">QpSolver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a59484007a421161de16ac32eb5c85598">allocateQpSolver</a> (const <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> &amp;qp_solver_type)</td></tr>
 <tr class="memdesc:a59484007a421161de16ac32eb5c85598"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate the specified QP solver.  <a href="#a59484007a421161de16ac32eb5c85598">More...</a><br /></td></tr>
 <tr class="separator:a59484007a421161de16ac32eb5c85598"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,6 +166,32 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Allocate the specified QP solver. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">qp_solver_type</td><td>QP solver type </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a52259fdd829ae6ed00a9b391589b12f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52259fdd829ae6ed00a9b391589b12f9">&#9670;&nbsp;</a></span>isQpSolverEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QpSolverCollection::isQpSolverEnabled </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> &amp;&#160;</td>
+          <td class="paramname"><em>qp_solver_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check whether QP solver is enabled. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">qp_solver_type</td><td>QP solver type </td></tr>
