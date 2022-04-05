@@ -62,7 +62,7 @@ $(function() {
 <div class="title">qp_solver_collection </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Unified interface for quadratic programming solvers</p>
+<div class="textblock"><p>Unified C++ interface for quadratic programming solvers</p>
 <p><a href="https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml"></a> <a href="https://isri-aist.github.io/QpSolverCollection/"></a></p>
 <h2>Supported QP solvers</h2>
 <ul>
@@ -76,21 +76,28 @@ $(function() {
 </ul>
 <h2>Installation</h2>
 <h3>Installation procedure</h3>
-<p>None of the following QP solvers are mandatory to install. You can select the desired QP solvers.</p>
+<p>It is assumed that ROS is installed.</p>
+<ol type="1">
+<li>Install the QP solver you wish to use according to <a href="#qp-solver-installation">this section</a>. You can skip installing QP solvers that you do not use.</li>
+<li>Setup catkin workspace. <div class="fragment"><div class="line">$ mkdir -p ~/ros/ws_qp_solver_collection/src</div><div class="line">$ cd ~/ros/ws_qp_solver_collection</div><div class="line">$ wstool init src</div><div class="line">$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y</div><div class="line">$ wstool update -t src</div></div><!-- fragment --></li>
+<li>Install dependent packages. <div class="fragment"><div class="line">$ source /opt/ros/${ROS_DISTRO}/setup.bash</div><div class="line">$ rosdep install -y -r --from-paths src --ignore-src</div></div><!-- fragment --></li>
+<li>Build a package. <div class="fragment"><div class="line">$ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo &lt;qp-solver-flags&gt; --catkin-make-args all tests</div></div><!-- fragment --> See <a href="#qp-solver-installation">this section</a> for <code>&lt;qp-solver-flags&gt;</code>.</li>
+</ol>
+<h3>QP solver installation</h3>
 <h4>QLD</h4>
-<p>Install <a href="https://github.com/jrl-umi3218/eigen-qld">eigen-qld</a>. Add <code>-DENABLE_QLD=ON</code> to the catkin build command.</p>
+<p>Install <a href="https://github.com/jrl-umi3218/eigen-qld">eigen-qld</a>. Add <code>-DENABLE_QLD=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>QuadProg</h4>
-<p>Install <a href="https://github.com/jrl-umi3218/eigen-quadprog">eigen-quadprog</a>. Add <code>-DENABLE_QUADPROG=ON</code> to the catkin build command.</p>
+<p>Install <a href="https://github.com/jrl-umi3218/eigen-quadprog">eigen-quadprog</a>. Add <code>-DENABLE_QUADPROG=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>JRLQP</h4>
-<p>Install <a href="https://github.com/jrl-umi3218/jrl-qp/tree/topic/BlockStructure">BlockStructure branch</a> of jrl-qp. Add <code>-DENABLE_JRLQP=ON</code> to the catkin build command.</p>
+<p>Install <a href="https://github.com/jrl-umi3218/jrl-qp/tree/topic/BlockStructure">BlockStructure branch</a> of jrl-qp . Add <code>-DENABLE_JRLQP=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>qpOASES</h4>
-<p>Install master branch of <a href="https://github.com/coin-or/qpOASES">qpOASES</a> with <code>-DBUILD_SHARED_LIBS=ON</code> cmake option. Add <code>-DENABLE_QPOASES=ON</code> to the catkin build command. Also, add <code>-DQPOASES_INCLUDE_DIR=&lt;path to qpOASES.hpp&gt;</code> and <code>-DQPOASES_LIBRARY_DIR=&lt;path to libqpOASES.so&gt;</code> to the catkin build command.</p>
+<p>Install master branch of <a href="https://github.com/coin-or/qpOASES">qpOASES</a> with <code>-DBUILD_SHARED_LIBS=ON</code> cmake option. Add <code>-DENABLE_QPOASES=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>). Also, add <code>-DQPOASES_INCLUDE_DIR=&lt;path to qpOASES.hpp&gt;</code> and <code>-DQPOASES_LIBRARY_DIR=&lt;path to libqpOASES.so&gt;</code> to the catkin build command.</p>
 <h4>OSQP</h4>
-<p>Install master branch of <a href="https://github.com/osqp/osqp">osqp</a> and <a href="https://github.com/robotology/osqp-eigen">osqp-eigen</a>. Add <code>-DENABLE_OSQP=ON</code> to the catkin build command.</p>
+<p>Install master branch of <a href="https://github.com/osqp/osqp">osqp</a> and <a href="https://github.com/robotology/osqp-eigen">osqp-eigen</a>. Add <code>-DENABLE_OSQP=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>NASOQ</h4>
-<p>Install <a href="https://github.com/mmurooka/nasoq/tree/cmake-install">cmake-install branch</a> of nasoq. Add <code>-DENABLE_NASOQ=ON</code> to the catkin build command.</p>
+<p>Install <a href="https://github.com/mmurooka/nasoq/tree/cmake-install">cmake-install branch</a> of nasoq. Add <code>-DENABLE_NASOQ=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>LSSOL (private)</h4>
-<p>Install <a href="https://gite.lirmm.fr/multi-contact/eigen-lssol">eigen-lssol</a>. Add <code>-DENABLE_LSSOL=ON</code> to the catkin build command. </p>
+<p>Install <a href="https://gite.lirmm.fr/multi-contact/eigen-lssol">eigen-lssol</a>. Add <code>-DENABLE_LSSOL=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>). </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
