@@ -123,7 +123,7 @@ Eigen::VectorXd QpSolverQld::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQld::solve] failed to solve: " << qld_.fail());
+    ROS_WARN_STREAM("[QpSolverQld::solve] Failed to solve: " << qld_.fail());
   }
 
   return qld_.result();
@@ -160,7 +160,7 @@ Eigen::VectorXd QpSolverQuadprog::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQuadprog::solve] failed to solve: " << quadprog_.fail());
+    ROS_WARN_STREAM("[QpSolverQuadprog::solve] Failed to solve: " << quadprog_.fail());
   }
 
   return quadprog_.result();
@@ -203,7 +203,7 @@ Eigen::VectorXd QpSolverLssol::solve(int dim_var,
     solve_failed_ = true;
     std::stringstream sstream;
     lssol_.inform(sstream);
-    ROS_WARN_STREAM("[QpSolverLssol::solve] failed to solve: " << sstream.str());
+    ROS_WARN_STREAM("[QpSolverLssol::solve] Failed to solve: " << sstream.str());
   }
 
   return lssol_.result();
@@ -252,7 +252,7 @@ Eigen::VectorXd QpSolverJrlqp::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverJrlqp::solve] failed to solve: " << status);
+    ROS_WARN_STREAM("[QpSolverJrlqp::solve] Failed to solve: " << status);
   }
 
   return jrlqp_.solution();
@@ -303,7 +303,7 @@ Eigen::VectorXd QpSolverQpoases::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQpoases::solve] failed to solve: " << static_cast<int>(status));
+    ROS_WARN_STREAM("[QpSolverQpoases::solve] Failed to solve: " << static_cast<int>(status));
   }
 
   Eigen::VectorXd sol(dim_var);
@@ -394,7 +394,7 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverOsqp::solve] failed to solve: " << osqp_.workspace()->info->status);
+    ROS_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_.workspace()->info->status);
   }
 
   return osqp_.getSolution();
@@ -442,7 +442,7 @@ Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverNasoq::solve] failed to solve: " << solve_ret);
+    ROS_WARN_STREAM("[QpSolverNasoq::solve] Failed to solve: " << solve_ret);
   }
 
   return sol;
