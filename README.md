@@ -1,6 +1,9 @@
 # qp_solver_collection
 Unified interface for quadratic programming solvers
 
+[![CI](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml/badge.svg)](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml)
+[![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](https://isri-aist.github.io/QpSolverCollection/)
+
 ## Supported QP solvers
 - [QLD](https://github.com/jrl-umi3218/eigen-qld)
 - [QuadProg](https://github.com/jrl-umi3218/eigen-quadprog)
