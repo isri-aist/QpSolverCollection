@@ -158,9 +158,11 @@ jobs:
         run: |
           set -x
           set -e
+          sudo apt-get install -qq libmetis-dev
           cd ${GITHUB_WORKSPACE}/nasoq
           mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON \
+          cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+          -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON \
           -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
           make && sudo make install
       - name: Checkout eigen-lssol
