@@ -194,7 +194,6 @@ public:
   bool solve_failed_ = false;
 };
 
-// constexpr bool qld_enabled = ENABLE_QLD;
 #if ENABLE_QLD
 /** \brief QP solver QLD. */
 class QpSolverQld : public QpSolver
@@ -224,9 +223,8 @@ public:
 };
 #endif
 
-// constexpr bool quadprog_enabled = ENABLE_QUADPROG;
 #if ENABLE_QUADPROG
-/** \brief QP solver Quadprog. */
+/** \brief QP solver QuadProg. */
 class QpSolverQuadprog : public QpSolver
 {
 public:
@@ -254,7 +252,6 @@ public:
 };
 #endif
 
-// constexpr bool lssol_enabled = ENABLE_LSSOL;
 #if ENABLE_LSSOL
 /** \brief QP solver LSSOL. */
 class QpSolverLssol : public QpSolver
@@ -284,7 +281,6 @@ public:
 };
 #endif
 
-// constexpr bool jrlqp_enabled = ENABLE_JRLQP;
 #if ENABLE_JRLQP
 /** \brief QP solver JRLQP. */
 class QpSolverJrlqp : public QpSolver
@@ -314,7 +310,6 @@ public:
 };
 #endif
 
-// constexpr bool qpoases_enabled = ENABLE_QPOASES;
 #if ENABLE_QPOASES
 /** \brief QP solver qpOASES.
     \todo Support an efficient interface (QProblemB) dedicated to QP with only box constraints.
@@ -354,7 +349,6 @@ public:
 };
 #endif
 
-// constexpr bool osqp_enabled = ENABLE_OSQP;
 #if ENABLE_OSQP
 /** \brief QP solver OSQP.
     \todo Set without going through a dense matrix.
@@ -401,7 +395,6 @@ protected:
 };
 #endif
 
-// constexpr bool nasoq_enabled = ENABLE_NASOQ;
 #if ENABLE_NASOQ
 /** \brief QP solver NASOQ.
     \todo Set without going through a dense matrix.
