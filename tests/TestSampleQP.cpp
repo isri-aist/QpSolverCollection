@@ -24,7 +24,14 @@ void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
   // clang-format on
   for(const auto & qp_solver_type : qp_solver_type_list)
   {
-    auto qp_solver = allocateQpSolver(qp_solver_type);
+    if(!QpSolverCollection::isQpSolverEnabled(qp_solver_type))
+    {
+      std::cout << "[testQP] Skip QP solver " << std::to_string(qp_solver_type) << " because it is not enabled."
+                << std::endl;
+      continue;
+    }
+
+    auto qp_solver = QpSolverCollection::allocateQpSolver(qp_solver_type);
     EXPECT_TRUE(qp_solver) << "Instantiation of QP solver " << std::to_string(qp_solver_type) << " failed";
     if(!qp_solver)
     {

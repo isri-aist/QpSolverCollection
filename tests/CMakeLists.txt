@@ -1,4 +1,5 @@
 set(QpSolverCollection_gtest_list
+  TestQpSolversEnabled
   TestSampleQP
   )
 
