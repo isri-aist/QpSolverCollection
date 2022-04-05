@@ -2,8 +2,13 @@ add_library(QpSolverCollection
   QpSolver.cpp
   )
 
+target_include_directories(QpSolverCollection PUBLIC
+  ${PROJECT_SOURCE_DIR}/include
+  ${catkin_INCLUDE_DIRS}
+  )
 target_link_libraries(QpSolverCollection PUBLIC
-  ${catkin_LIBRARIES})
+  ${catkin_LIBRARIES}
+  )
 if(${ENABLE_QLD})
   target_link_libraries(QpSolverCollection PUBLIC
     eigen-qld::eigen-qld)

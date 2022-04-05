@@ -8,29 +8,33 @@
 
 #include <Eigen/SparseCore>
 
+#include <qp_solver_collection/QpSolverOptions.h>
+
+// clang-format off
 #if ENABLE_QLD
-#  include <eigen-qld/QLD.h>
+#include <eigen-qld/QLD.h>
 #endif
 #if ENABLE_QUADPROG
-#  include <eigen-quadprog/QuadProg.h>
+#include <eigen-quadprog/QuadProg.h>
 #endif
 #if ENABLE_LSSOL
-#  include <eigen-lssol/LSSOL_QP.h>
+#include <eigen-lssol/LSSOL_QP.h>
 #endif
 #if ENABLE_JRLQP
-#  include <jrl-qp/GoldfarbIdnaniSolver.h>
-#  include <jrl-qp/utils/enumsIO.h>
+#include <jrl-qp/GoldfarbIdnaniSolver.h>
+#include <jrl-qp/utils/enumsIO.h>
 #endif
 #if ENABLE_QPOASES
-#  include <qpOASES.hpp>
+#include <qpOASES.hpp>
 #endif
 #if ENABLE_OSQP
-#  include <OsqpEigen/OsqpEigen.h>
-#  define OSQP_EIGEN_DEBUG_OUTPUT
+#include <OsqpEigen/OsqpEigen.h>
+#define OSQP_EIGEN_DEBUG_OUTPUT
 #endif
 #if ENABLE_NASOQ
-#  include <nasoq/nasoq_eigen.h>
+#include <nasoq/nasoq_eigen.h>
 #endif
+// clang-format on
 
 #include <ros/console.h>
 

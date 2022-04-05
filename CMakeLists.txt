@@ -29,9 +29,6 @@ macro(add_qp_solver _SOLVER_NAME _PACKAGE_NAME)
     if(NOT "${_PACKAGE_NAME}" STREQUAL "")
       find_package(${_PACKAGE_NAME} REQUIRED)
     endif()
-    add_definitions(-DENABLE_${_SOLVER_NAME}=1)
-  else()
-    add_definitions(-DENABLE_${_SOLVER_NAME}=0)
   endif()
   message(NOTICE "- ENABLE_${_SOLVER_NAME}: ${ENABLE_${_SOLVER_NAME}}")
 endmacro()
@@ -65,7 +62,8 @@ catkin_package(
   LIBRARIES QpSolverCollection
   )
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+set(QP_SOLVER_OPTIONS_FILE "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverOptions.h")
+configure_file("${QP_SOLVER_OPTIONS_FILE}.in" "${QP_SOLVER_OPTIONS_FILE}")
 
 add_subdirectory(src)
 
