@@ -82,14 +82,14 @@ jobs:
           repository: jrl-umi3218/eigen-quadprog
           submodules: recursive
           path: eigen-quadprog
-      # - name: Install eigen-quadprog
-      #   run: |
-      #     set -x
-      #     set -e
-      #     cd ${GITHUB_WORKSPACE}/eigen-quadprog
-      #     mkdir build && cd build
-      #     cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF
-      #     make && sudo make install
+      - name: Install eigen-quadprog
+        run: |
+          set -x
+          set -e
+          cd ${GITHUB_WORKSPACE}/eigen-quadprog
+          mkdir build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF
+          make && sudo make install
       - name: Checkout jrl-qp
         uses: actions/checkout@v2
         with:
@@ -97,14 +97,14 @@ jobs:
           ref: topic/BlockStructure
           submodules: recursive
           path: jrl-qp
-      # - name: Install jrl-qp
-      #   run: |
-      #     set -x
-      #     set -e
-      #     cd ${GITHUB_WORKSPACE}/jrl-qp
-      #     mkdir build && cd build
-      #     cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF
-      #     make && sudo make install
+      - name: Install jrl-qp
+        run: |
+          set -x
+          set -e
+          cd ${GITHUB_WORKSPACE}/jrl-qp
+          mkdir build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF
+          make && sudo make install
       - name: Checkout qpOASES
         uses: actions/checkout@v2
         with:
