@@ -60,10 +60,14 @@ catkin_package(
   DEPENDS EIGEN3
   INCLUDE_DIRS include
   LIBRARIES QpSolverCollection
+  CFG_EXTRAS qp_solver_options.cmake
   )
 
-set(QP_SOLVER_OPTIONS_FILE "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverOptions.h")
-configure_file("${QP_SOLVER_OPTIONS_FILE}.in" "${QP_SOLVER_OPTIONS_FILE}")
+set(QP_SOLVER_OPTIONS_HEADER_FILE "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverOptions.h")
+configure_file("${QP_SOLVER_OPTIONS_HEADER_FILE}.in" "${QP_SOLVER_OPTIONS_HEADER_FILE}")
+
+set(QP_SOLVER_OPTIONS_CMAKE_FILE "${PROJECT_SOURCE_DIR}/cmake/qp_solver_options.cmake")
+configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_FILE}")
 
 add_subdirectory(src)
 
