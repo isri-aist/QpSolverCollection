@@ -11,12 +11,26 @@ using QpSolverCollection::QpSolverType;
 
 void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
 {
+  // clang-format off
   const std::vector<QpSolverType> qp_solver_type_list = {
-      QpSolverType::QLD,     QpSolverType::QuadProg, QpSolverType::LSSOL, QpSolverType::JRLQP,
-      QpSolverType::qpOASES, QpSolverType::OSQP,     QpSolverType::NASOQ};
+      QpSolverType::QLD,
+      QpSolverType::QuadProg,
+      QpSolverType::LSSOL,
+      QpSolverType::JRLQP,
+      QpSolverType::qpOASES,
+      QpSolverType::OSQP,
+      QpSolverType::NASOQ
+  };
+  // clang-format on
   for(const auto & qp_solver_type : qp_solver_type_list)
   {
-    const auto & qp_solver = allocateQpSolver(qp_solver_type);
+    auto qp_solver = allocateQpSolver(qp_solver_type);
+    EXPECT_TRUE(qp_solver) << "Instantiation of QP solver " << std::to_string(qp_solver_type) << " failed";
+    if(!qp_solver)
+    {
+      continue;
+    }
+
     QpCoeff qp_coeff_copied = qp_coeff;
     Eigen::VectorXd x_opt = qp_solver->solve(qp_coeff_copied);
 
@@ -26,7 +40,7 @@ void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
       thre = 1e-3;
     }
     EXPECT_LT((x_opt - x_gt).norm(), thre)
-        << "Test failed with " << std::to_string(qp_solver_type) << ":\n"
+        << "QP solution of " << std::to_string(qp_solver_type) << " is incorrect:\n"
         << "  solution: " << x_opt.transpose() << "\n  ground truth: " << x_gt.transpose()
         << "\n  error: " << (x_opt - x_gt).norm() << std::endl;
   }

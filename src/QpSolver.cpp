@@ -495,11 +495,9 @@ std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverTyp
 #endif
   }
 
-  // Default solver
   if(!qp)
   {
     ROS_ERROR_STREAM("[allocateQpSolver] Failed to initialize QP solver: " << std::to_string(qp_solver_type));
-    qp = std::make_shared<QpSolverQuadprog>();
   }
 
   return qp;
