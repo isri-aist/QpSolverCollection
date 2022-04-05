@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -294,7 +300,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <p>QP is formulated as follows: </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ min_{\bm{x}} &amp; \ \frac{1}{2}{\bm{x}^T \bm{Q} \bm{x}} + {\bm{c}^T \bm{x}} \\ &amp; \bm{A} \bm{x} = \bm{b} \nonumber \\ &amp; \bm{C} \bm{x} \leq \bm{d} \nonumber \\ &amp; \ \bm{x}_{min} \leq \bm{x} \leq \bm{x}_{max} \nonumber \]" src="form_0.png"/>
+\begin{align*} &amp; min_{\boldsymbol{x}} \ \frac{1}{2}{\boldsymbol{x}^T \boldsymbol{Q} \boldsymbol{x}} + {\boldsymbol{c}^T \boldsymbol{x}} \\ &amp; s.t. \ \ \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b} \nonumber \\ &amp; \phantom{s.t.} \ \ \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d} \nonumber \\ &amp; \phantom{s.t.} \ \ \boldsymbol{x}_{min} \leq \boldsymbol{x} \leq \boldsymbol{x}_{max} \nonumber \end{align*}
 </p>
  
 </div>
@@ -348,7 +354,7 @@ Public Attributes</h2></td></tr>
 
 <p>Whether it failed to solve the QP. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolver_8h_source.html#l00194">194</a> of file <a class="el" href="QpSolver_8h_source.html">QpSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolver_8h_source.html#l00195">195</a> of file <a class="el" href="QpSolver_8h_source.html">QpSolver.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +372,7 @@ Public Attributes</h2></td></tr>
 
 <p>QP solver type. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolver_8h_source.html#l00191">191</a> of file <a class="el" href="QpSolver_8h_source.html">QpSolver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolver_8h_source.html#l00192">192</a> of file <a class="el" href="QpSolver_8h_source.html">QpSolver.h</a>.</p>
 
 </div>
 </div>

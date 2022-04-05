@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -64,7 +70,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><dl class="reflist">
 <dt><a class="anchor" id="_todo000001"></a>Class <a class="el" href="classQpSolverCollection_1_1QpCoeff.html">QpSolverCollection::QpCoeff</a>  </dt>
-<dd>Support both-sided inequality constraints (i.e., d_{lower} &lt;= C x &lt;= d_{upper}) QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints. </dd>
+<dd>Support both-sided inequality constraints (i.e., \(\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d}_{upper}\)). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints. </dd>
 </dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
