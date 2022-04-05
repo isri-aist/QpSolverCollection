@@ -7,6 +7,7 @@ var searchData=
   ['qpsolver',['QpSolver',['../classQpSolverCollection_1_1QpSolver.html',1,'QpSolverCollection::QpSolver'],['../classQpSolverCollection_1_1QpSolver.html#a7e61f5324d573b5005cd5296f45c8c29',1,'QpSolverCollection::QpSolver::QpSolver()']]],
   ['qpsolver_2eh',['QpSolver.h',['../QpSolver_8h.html',1,'']]],
   ['qpsolvercollection',['QpSolverCollection',['../namespaceQpSolverCollection.html',1,'']]],
+  ['qpsolveroptions_2eh',['QpSolverOptions.h',['../QpSolverOptions_8h.html',1,'']]],
   ['qpsolvertype',['QpSolverType',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0',1,'QpSolverCollection::QpSolverType()'],['../namespacestd.html#a7eeb7b691606fc7480c89d84725beaa0',1,'std::QpSolverType()']]],
   ['quadprog',['QuadProg',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01',1,'QpSolverCollection']]]
 ];
