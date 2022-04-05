@@ -449,6 +449,40 @@ Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
 }
 #endif
 
+bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
+{
+  if(qp_solver_type == QpSolverType::QLD)
+  {
+    return ENABLE_QLD;
+  }
+  else if(qp_solver_type == QpSolverType::QuadProg)
+  {
+    return ENABLE_QUADPROG;
+  }
+  else if(qp_solver_type == QpSolverType::LSSOL)
+  {
+    return ENABLE_LSSOL;
+  }
+  else if(qp_solver_type == QpSolverType::JRLQP)
+  {
+    return ENABLE_JRLQP;
+  }
+  else if(qp_solver_type == QpSolverType::qpOASES)
+  {
+    return ENABLE_QPOASES;
+  }
+  else if(qp_solver_type == QpSolverType::OSQP)
+  {
+    return ENABLE_OSQP;
+  }
+  else if(qp_solver_type == QpSolverType::NASOQ)
+  {
+    return ENABLE_NASOQ;
+  }
+
+  return false;
+}
+
 std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverType & qp_solver_type)
 {
   std::shared_ptr<QpSolver> qp;

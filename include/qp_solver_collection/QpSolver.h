@@ -435,6 +435,11 @@ protected:
 };
 #endif
 
+/** \brief Check whether QP solver is enabled.
+    \param qp_solver_type QP solver type
+ */
+bool isQpSolverEnabled(const QpSolverType & qp_solver_type);
+
 /** \brief Allocate the specified QP solver.
     \param qp_solver_type QP solver type
  */
