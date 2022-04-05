@@ -87,9 +87,9 @@ namespace QpSolverCollection
 {
 /** \brief Class of QP coefficient.
 
-    \todo Support both-sided inequality constraints (i.e., d_{lower} <= C x <= d_{upper})
-    QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support
-   both-sided constraints.
+    \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x}
+   \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP,
+   QPOASES, and OSQP support both-sided constraints.
 */
 class QpCoeff
 {
@@ -162,12 +162,13 @@ public:
       \param x_max upper bound
 
       QP is formulated as follows:
-      \f[
-      min_{\bm{x}} & \ \frac{1}{2}{\bm{x}^T \bm{Q} \bm{x}} + {\bm{c}^T \bm{x}} \\
-      & \bm{A} \bm{x} = \bm{b} \nonumber \\
-      & \bm{C} \bm{x} \leq \bm{d} \nonumber \\
-      & \ \bm{x}_{min} \leq \bm{x} \leq \bm{x}_{max} \nonumber
-      \f]
+      \f{align*}{
+      & min_{\boldsymbol{x}} \ \frac{1}{2}{\boldsymbol{x}^T \boldsymbol{Q} \boldsymbol{x}} + {\boldsymbol{c}^T
+     \boldsymbol{x}} \\
+      & s.t. \ \ \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b} \nonumber \\
+      & \phantom{s.t.} \ \ \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d} \nonumber \\
+      & \phantom{s.t.} \ \ \boldsymbol{x}_{min} \leq \boldsymbol{x} \leq \boldsymbol{x}_{max} \nonumber
+      \f}
   */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
