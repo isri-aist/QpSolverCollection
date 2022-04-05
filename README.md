@@ -4,11 +4,11 @@ Unified interface for quadratic programming solvers
 ## Supported QP solvers
 - [QLD](https://github.com/jrl-umi3218/eigen-qld)
 - [QuadProg](https://github.com/jrl-umi3218/eigen-quadprog)
-- [LSSOL](https://gite.lirmm.fr/multi-contact/eigen-lssol) (private)
 - [JRLQP](https://github.com/jrl-umi3218/jrl-qp)
 - [qpOASES](https://github.com/coin-or/qpOASES)
 - [OSQP](https://osqp.org/)
 - [NASOQ](https://nasoq.github.io/)
+- [LSSOL](https://gite.lirmm.fr/multi-contact/eigen-lssol) (private)
 
 ## Installation
 
@@ -23,10 +23,6 @@ Add `-DENABLE_QLD=ON` to the catkin build command.
 #### QuadProg
 Install [eigen-quadprog](https://github.com/jrl-umi3218/eigen-quadprog).
 Add `-DENABLE_QUADPROG=ON` to the catkin build command.
-
-#### LSSOL
-Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).
-Add `-DENABLE_LSSOL=ON` to the catkin build command.
 
 #### JRLQP
 Install [BlockStructure branch](https://github.com/jrl-umi3218/jrl-qp/tree/topic/BlockStructure) of jrl-qp.
@@ -44,3 +40,7 @@ Add `-DENABLE_OSQP=ON` to the catkin build command.
 #### NASOQ
 Install [cmake-install branch](https://github.com/mmurooka/nasoq/tree/cmake-install) of nasoq.
 Add `-DENABLE_NASOQ=ON` to the catkin build command.
+
+#### LSSOL (private)
+Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).
+Add `-DENABLE_LSSOL=ON` to the catkin build command.
