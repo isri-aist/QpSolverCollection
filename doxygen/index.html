@@ -84,10 +84,10 @@ $(function() {
 <h3>Installation procedure</h3>
 <p>It is assumed that ROS is installed.</p>
 <ol type="1">
-<li>Install the QP solver you wish to use according to <a href="#qp-solver-installation">this section</a>. You can skip installing QP solvers that you do not use.</li>
+<li>Install the QP solver you wish to use according to <a href="https://github.com/isri-aist/QpSolverCollection#qp-solver-installation">this section</a>. You can skip installing QP solvers that you do not use.</li>
 <li>Setup catkin workspace. <div class="fragment"><div class="line">$ mkdir -p ~/ros/ws_qp_solver_collection/src</div><div class="line">$ cd ~/ros/ws_qp_solver_collection</div><div class="line">$ wstool init src</div><div class="line">$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y</div><div class="line">$ wstool update -t src</div></div><!-- fragment --></li>
 <li>Install dependent packages. <div class="fragment"><div class="line">$ source /opt/ros/${ROS_DISTRO}/setup.bash</div><div class="line">$ rosdep install -y -r --from-paths src --ignore-src</div></div><!-- fragment --></li>
-<li>Build a package. <div class="fragment"><div class="line">$ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo &lt;qp-solver-flags&gt; --catkin-make-args all tests</div></div><!-- fragment --> See <a href="#qp-solver-installation">this section</a> for <code>&lt;qp-solver-flags&gt;</code>.</li>
+<li>Build a package. <div class="fragment"><div class="line">$ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo &lt;qp-solver-flags&gt; --catkin-make-args all tests</div></div><!-- fragment --> See <a href="https://github.com/isri-aist/QpSolverCollection#qp-solver-installation">this section</a> for <code>&lt;qp-solver-flags&gt;</code>.</li>
 </ol>
 <h3>QP solver installation</h3>
 <h4>QLD</h4>
@@ -103,7 +103,9 @@ $(function() {
 <h4>NASOQ</h4>
 <p>Install <a href="https://github.com/mmurooka/nasoq/tree/cmake-install">cmake-install branch</a> of nasoq. Add <code>-DENABLE_NASOQ=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
 <h4>LSSOL (private)</h4>
-<p>Install <a href="https://gite.lirmm.fr/multi-contact/eigen-lssol">eigen-lssol</a>. Add <code>-DENABLE_LSSOL=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>). </p>
+<p>Install <a href="https://gite.lirmm.fr/multi-contact/eigen-lssol">eigen-lssol</a>. Add <code>-DENABLE_LSSOL=ON</code> to the catkin build command (i.e., <code>&lt;qp-solver-flags&gt;</code>).</p>
+<h2>How to use</h2>
+<p>See <a href="https://github.com/isri-aist/QpSolverCollection/blob/master/tests/TestSampleQP.cpp">TestSampleQP.cpp</a> for examples of solving QP problems. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
