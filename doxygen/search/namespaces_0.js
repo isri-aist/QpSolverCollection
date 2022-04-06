@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qpsolvercollection',['QpSolverCollection',['../namespaceQpSolverCollection.html',1,'']]]
+  ['eigen',['Eigen',['../namespaceEigen.html',1,'']]]
 ];

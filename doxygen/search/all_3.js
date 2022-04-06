@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['eigen',['Eigen',['../namespaceEigen.html',1,'']]],
   ['enable_5fjrlqp',['ENABLE_JRLQP',['../QpSolverOptions_8h.html#aadb418b2341effc27b0809825cb9a903',1,'QpSolverOptions.h']]],
   ['enable_5flssol',['ENABLE_LSSOL',['../QpSolverOptions_8h.html#aead8d5218c2407386c2eb93a31b328ad',1,'QpSolverOptions.h']]],
   ['enable_5fnasoq',['ENABLE_NASOQ',['../QpSolverOptions_8h.html#a487a0c15e1c3e9ced30cfdd020fa8d6c',1,'QpSolverOptions.h']]],
