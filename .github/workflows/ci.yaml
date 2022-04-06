@@ -74,7 +74,7 @@ jobs:
           set -e
           cd ${GITHUB_WORKSPACE}/eigen-qld
           mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
           make && sudo make install
       - name: Checkout eigen-quadprog
         uses: actions/checkout@v2
@@ -88,7 +88,7 @@ jobs:
           set -e
           cd ${GITHUB_WORKSPACE}/eigen-quadprog
           mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
           make && sudo make install
       - name: Checkout jrl-qp
         uses: actions/checkout@v2
@@ -103,7 +103,7 @@ jobs:
           set -e
           cd ${GITHUB_WORKSPACE}/jrl-qp
           mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
           make && sudo make install
       - name: Checkout qpOASES
         uses: actions/checkout@v2
@@ -177,7 +177,7 @@ jobs:
           set -e
           cd ${GITHUB_WORKSPACE}/eigen-lssol
           mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF
+          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
           make && sudo make install
       #### [End] Install QP solvers ####
       - name: Catkin build
