@@ -42,6 +42,7 @@ namespace QpSolverCollection
 /** \brief QP solver type. */
 enum class QpSolverType
 {
+  Any = -2,
   Uninitialized = -1,
   QLD = 0,
   QuadProg,
@@ -190,7 +191,19 @@ public:
   */
   virtual Eigen::VectorXd solve(QpCoeff & qp_coeff);
 
-public:
+  /** \brief Get QP solver type. */
+  inline QpSolverType type() const
+  {
+    return type_;
+  }
+
+  /** \brief Get whether it failed to solve the QP. */
+  inline bool solveFailed() const
+  {
+    return solve_failed_;
+  }
+
+protected:
   /** \brief QP solver type. */
   QpSolverType type_ = QpSolverType::Uninitialized;
 
@@ -413,6 +426,13 @@ protected:
   double sparse_duration_ = 0; // [ms]
 };
 #endif
+
+/** \brief Get one QP solver type that is enabled.
+
+    Checks whether each QP solver is enabled in the order of definition in QpSolverType and returns the first one that
+   is enabled.
+ */
+QpSolverType getAnyQpSolverType();
 
 /** \brief Check whether QP solver is enabled.
     \param qp_solver_type QP solver type

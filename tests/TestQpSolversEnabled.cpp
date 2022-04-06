@@ -6,39 +6,50 @@
 
 using QpSolverCollection::QpSolverType;
 
+void checkOneSolver(QpSolverType qp_solver_type)
+{
+  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(qp_solver_type));
+  EXPECT_TRUE(QpSolverCollection::allocateQpSolver(qp_solver_type));
+}
+
+TEST(TestQpSolversEnabled, Any)
+{
+  checkOneSolver(QpSolverType::Any);
+}
+
 TEST(TestQpSolversEnabled, QLD)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::QLD));
+  checkOneSolver(QpSolverType::QLD);
 }
 
 TEST(TestQpSolversEnabled, QuadProg)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::QuadProg));
+  checkOneSolver(QpSolverType::QuadProg);
 }
 
 TEST(TestQpSolversEnabled, LSSOL)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::LSSOL));
+  checkOneSolver(QpSolverType::LSSOL);
 }
 
 TEST(TestQpSolversEnabled, JRLQP)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::JRLQP));
+  checkOneSolver(QpSolverType::JRLQP);
 }
 
 TEST(TestQpSolversEnabled, qpOASES)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::qpOASES));
+  checkOneSolver(QpSolverType::qpOASES);
 }
 
 TEST(TestQpSolversEnabled, OSQP)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::OSQP));
+  checkOneSolver(QpSolverType::OSQP);
 }
 
 TEST(TestQpSolversEnabled, NASOQ)
 {
-  EXPECT_TRUE(QpSolverCollection::isQpSolverEnabled(QpSolverType::NASOQ));
+  checkOneSolver(QpSolverType::NASOQ);
 }
 
 int main(int argc, char ** argv)

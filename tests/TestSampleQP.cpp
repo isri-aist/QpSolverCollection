@@ -9,7 +9,7 @@
 using QpSolverCollection::QpCoeff;
 using QpSolverCollection::QpSolverType;
 
-void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
+void solveOneQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
 {
   // clang-format off
   const std::vector<QpSolverType> qp_solver_type_list = {
@@ -26,7 +26,7 @@ void testQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
   {
     if(!QpSolverCollection::isQpSolverEnabled(qp_solver_type))
     {
-      std::cout << "[testQP] Skip QP solver " << std::to_string(qp_solver_type) << " because it is not enabled."
+      std::cout << "[solveOneQP] Skip QP solver " << std::to_string(qp_solver_type) << " because it is not enabled."
                 << std::endl;
       continue;
     }
@@ -72,7 +72,7 @@ TEST(TestSampleQP, IdentityObj)
   Eigen::VectorXd x_gt(dim_var);
   x_gt << 1.7975426, -0.3381487, 0.1633880, -4.9884023, 0.6054943, -3.1155623;
 
-  testQP(qp_coeff, x_gt);
+  solveOneQP(qp_coeff, x_gt);
 }
 
 TEST(TestSampleQP, Unconstrained)
@@ -91,7 +91,7 @@ TEST(TestSampleQP, Unconstrained)
   Eigen::VectorXd x_gt(dim_var);
   x_gt << -1.2500, 0.3750;
 
-  testQP(qp_coeff, x_gt);
+  solveOneQP(qp_coeff, x_gt);
 }
 
 TEST(TestSampleQP, OnlyEqConst)
@@ -111,7 +111,7 @@ TEST(TestSampleQP, OnlyEqConst)
   Eigen::VectorXd x_gt(dim_var);
   x_gt << 0.25, 0.75;
 
-  testQP(qp_coeff, x_gt);
+  solveOneQP(qp_coeff, x_gt);
 }
 
 int main(int argc, char ** argv)

@@ -515,9 +515,50 @@ Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
 }
 #endif
 
+QpSolverType QpSolverCollection::getAnyQpSolverType()
+{
+  if(ENABLE_QLD)
+  {
+    return QpSolverType::QLD;
+  }
+  else if(ENABLE_QUADPROG)
+  {
+    return QpSolverType::QuadProg;
+  }
+  else if(ENABLE_LSSOL)
+  {
+    return QpSolverType::LSSOL;
+  }
+  else if(ENABLE_JRLQP)
+  {
+    return QpSolverType::JRLQP;
+  }
+  else if(ENABLE_QPOASES)
+  {
+    return QpSolverType::qpOASES;
+  }
+  else if(ENABLE_OSQP)
+  {
+    return QpSolverType::OSQP;
+  }
+  else if(ENABLE_NASOQ)
+  {
+    return QpSolverType::NASOQ;
+  }
+  else
+  {
+    throw std::runtime_error("[getAnyQpSolverType] No QP solver is enabled.");
+    return QpSolverType::Uninitialized;
+  }
+}
+
 bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
 {
-  if(qp_solver_type == QpSolverType::QLD)
+  if(qp_solver_type == QpSolverType::Any)
+  {
+    return getAnyQpSolverType() != QpSolverType::Uninitialized;
+  }
+  else if(qp_solver_type == QpSolverType::QLD)
   {
     return ENABLE_QLD;
   }
@@ -545,14 +586,22 @@ bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
   {
     return ENABLE_NASOQ;
   }
-
-  return false;
+  else
+  {
+    ROS_ERROR_STREAM("[isQpSolverEnabled] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
+    return false;
+  }
 }
 
 std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverType & qp_solver_type)
 {
   std::shared_ptr<QpSolver> qp;
-  if(qp_solver_type == QpSolverType::QLD)
+
+  if(qp_solver_type == QpSolverType::Any)
+  {
+    return allocateQpSolver(getAnyQpSolverType());
+  }
+  else if(qp_solver_type == QpSolverType::QLD)
   {
 #if ENABLE_QLD
     qp = std::make_shared<QpSolverQld>();
@@ -593,6 +642,10 @@ std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverTyp
 #if ENABLE_NASOQ
     qp = std::make_shared<QpSolverNasoq>();
 #endif
+  }
+  else
+  {
+    ROS_ERROR_STREAM("[allocateQpSolver] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
 
   if(!qp)
