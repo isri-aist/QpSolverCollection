@@ -71,7 +71,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classQpSolverCollection_1_1QpSolver-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QpSolverCollection::QpSolver Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
@@ -85,7 +85,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:af784632f7fcb8cca6996a1d879a43bb6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#af784632f7fcb8cca6996a1d879a43bb6">clock</a> = typename std::conditional&lt; std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock, std::chrono::steady_clock &gt;::type</td></tr>
+<tr class="memitem:af784632f7fcb8cca6996a1d879a43bb6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#af784632f7fcb8cca6996a1d879a43bb6">clock</a> = typename std::conditional&lt; std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock, std::chrono::steady_clock &gt;::<a class="el" href="classQpSolverCollection_1_1QpSolver.html#a18775c09dd7449248fb9a2b9c8f91712">type</a></td></tr>
 <tr class="separator:af784632f7fcb8cca6996a1d879a43bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -102,9 +102,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa2eb9ed73696f21432c8871fbe6b28a6"><td class="memItemLeft" align="right" valign="top">virtual Eigen::VectorXd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#aa2eb9ed73696f21432c8871fbe6b28a6">solve</a> (<a class="el" href="classQpSolverCollection_1_1QpCoeff.html">QpCoeff</a> &amp;qp_coeff)</td></tr>
 <tr class="memdesc:aa2eb9ed73696f21432c8871fbe6b28a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve QP.  <a href="#aa2eb9ed73696f21432c8871fbe6b28a6">More...</a><br /></td></tr>
 <tr class="separator:aa2eb9ed73696f21432c8871fbe6b28a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18775c09dd7449248fb9a2b9c8f91712"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#a18775c09dd7449248fb9a2b9c8f91712">type</a> () const</td></tr>
+<tr class="memdesc:a18775c09dd7449248fb9a2b9c8f91712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get QP solver type.  <a href="#a18775c09dd7449248fb9a2b9c8f91712">More...</a><br /></td></tr>
+<tr class="separator:a18775c09dd7449248fb9a2b9c8f91712"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9d7c9e7e4c1920b60b98559c33a11b1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#af9d7c9e7e4c1920b60b98559c33a11b1">solveFailed</a> () const</td></tr>
+<tr class="memdesc:af9d7c9e7e4c1920b60b98559c33a11b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get whether it failed to solve the QP.  <a href="#af9d7c9e7e4c1920b60b98559c33a11b1">More...</a><br /></td></tr>
+<tr class="separator:af9d7c9e7e4c1920b60b98559c33a11b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:aa61676ec71b6c0bfd4374cca8b065bc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolver.html#aa61676ec71b6c0bfd4374cca8b065bc6">type_</a> = <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverType::Uninitialized</a></td></tr>
 <tr class="memdesc:aa61676ec71b6c0bfd4374cca8b065bc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver type.  <a href="#aa61676ec71b6c0bfd4374cca8b065bc6">More...</a><br /></td></tr>
 <tr class="separator:aa61676ec71b6c0bfd4374cca8b065bc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,7 +121,7 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Virtual class of QP solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00140">140</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00141">141</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="af784632f7fcb8cca6996a1d879a43bb6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af784632f7fcb8cca6996a1d879a43bb6">&#9670;&nbsp;</a></span>clock</h2>
@@ -124,12 +130,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="classQpSolverCollection_1_1QpSolver.html#af784632f7fcb8cca6996a1d879a43bb6">QpSolverCollection::QpSolver::clock</a> =  typename std::conditional&lt;std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock, std::chrono::steady_clock&gt;::type</td>
+          <td class="memname">using <a class="el" href="classQpSolverCollection_1_1QpSolver.html#af784632f7fcb8cca6996a1d879a43bb6">QpSolverCollection::QpSolver::clock</a> =  typename std::conditional&lt;std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock, std::chrono::steady_clock&gt;::<a class="el" href="classQpSolverCollection_1_1QpSolver.html#a18775c09dd7449248fb9a2b9c8f91712">type</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00145">145</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00146">146</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -159,7 +165,7 @@ Public Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00149">149</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00150">150</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -339,22 +345,88 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af9d7c9e7e4c1920b60b98559c33a11b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9d7c9e7e4c1920b60b98559c33a11b1">&#9670;&nbsp;</a></span>solveFailed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QpSolverCollection::QpSolver::solveFailed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get whether it failed to solve the QP. </p>
+
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00201">201</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+
+</div>
+</div>
+<a id="a18775c09dd7449248fb9a2b9c8f91712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18775c09dd7449248fb9a2b9c8f91712">&#9670;&nbsp;</a></span>type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> QpSolverCollection::QpSolver::type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get QP solver type. </p>
+
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00195">195</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a9442cebfd4ed46f3152b2ee860b2ea42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9442cebfd4ed46f3152b2ee860b2ea42">&#9670;&nbsp;</a></span>solve_failed_</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool QpSolverCollection::QpSolver::solve_failed_ = false</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Whether it failed to solve the QP. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00198">198</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00211">211</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -363,16 +435,24 @@ Public Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> QpSolverCollection::QpSolver::type_ = <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverType::Uninitialized</a></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>QP solver type. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00195">195</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00208">208</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>

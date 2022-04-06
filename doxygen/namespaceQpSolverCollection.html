@@ -85,15 +85,17 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a04c5180b8f435d0d78976bdc8fed3da0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> { <br />
-&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverType::Uninitialized</a> = -1, 
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0aed36a1ef76a59ee3f15180e0441188ad">QpSolverType::Any</a> = -2, 
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverType::Uninitialized</a> = -1, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728">QpSolverType::QLD</a> = 0, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01">QpSolverType::QuadProg</a>, 
-<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf">QpSolverType::LSSOL</a>, 
 <br />
-&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38">QpSolverType::JRLQP</a>, 
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf">QpSolverType::LSSOL</a>, 
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38">QpSolverType::JRLQP</a>, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a18bce89676122da431c3205305e71a50">QpSolverType::qpOASES</a>, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a53730f1bac13c301a753dd108a172c2c">QpSolverType::OSQP</a>, 
-<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927">QpSolverType::NASOQ</a>
+<br />
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927">QpSolverType::NASOQ</a>
 <br />
  }<tr class="memdesc:a04c5180b8f435d0d78976bdc8fed3da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver type.  <a href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">More...</a><br /></td></tr>
 </td></tr>
@@ -104,6 +106,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ae1a213b741b13757dbe1db80c05f142f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#ae1a213b741b13757dbe1db80c05f142f">strToQpSolverType</a> (const std::string &amp;qp_solver_type)</td></tr>
 <tr class="memdesc:ae1a213b741b13757dbe1db80c05f142f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert std::string to QpSolverType.  <a href="#ae1a213b741b13757dbe1db80c05f142f">More...</a><br /></td></tr>
 <tr class="separator:ae1a213b741b13757dbe1db80c05f142f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fd01c57826ce7419db27e604e105b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#ab5fd01c57826ce7419db27e604e105b5">getAnyQpSolverType</a> ()</td></tr>
+<tr class="memdesc:ab5fd01c57826ce7419db27e604e105b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get one QP solver type that is enabled.  <a href="#ab5fd01c57826ce7419db27e604e105b5">More...</a><br /></td></tr>
+<tr class="separator:ab5fd01c57826ce7419db27e604e105b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52259fdd829ae6ed00a9b391589b12f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9">isQpSolverEnabled</a> (const <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> &amp;qp_solver_type)</td></tr>
 <tr class="memdesc:a52259fdd829ae6ed00a9b391589b12f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether QP solver is enabled.  <a href="#a52259fdd829ae6ed00a9b391589b12f9">More...</a><br /></td></tr>
 <tr class="separator:a52259fdd829ae6ed00a9b391589b12f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +139,8 @@ Functions</h2></td></tr>
 
 <p>QP solver type. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0aed36a1ef76a59ee3f15180e0441188ad"></a>Any&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96"></a>Uninitialized&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728"></a>QLD&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01"></a>QuadProg&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf"></a>LSSOL&#160;</td><td class="fielddoc"></td></tr>
@@ -172,6 +178,26 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ab5fd01c57826ce7419db27e604e105b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5fd01c57826ce7419db27e604e105b5">&#9670;&nbsp;</a></span>getAnyQpSolverType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverType</a> QpSolverCollection::getAnyQpSolverType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get one QP solver type that is enabled. </p>
+<p>Checks whether each QP solver is enabled in the order of definition in QpSolverType and returns the first one that is enabled. </p>
 
 </div>
 </div>

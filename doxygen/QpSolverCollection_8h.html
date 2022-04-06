@@ -129,15 +129,17 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a04c5180b8f435d0d78976bdc8fed3da0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">QpSolverCollection::QpSolverType</a> { <br />
-&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverCollection::QpSolverType::Uninitialized</a> = -1, 
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0aed36a1ef76a59ee3f15180e0441188ad">QpSolverCollection::QpSolverType::Any</a> = -2, 
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0af704f57ea420275ad51bf55b7dec2c96">QpSolverCollection::QpSolverType::Uninitialized</a> = -1, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728">QpSolverCollection::QpSolverType::QLD</a> = 0, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01">QpSolverCollection::QpSolverType::QuadProg</a>, 
-<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf">QpSolverCollection::QpSolverType::LSSOL</a>, 
 <br />
-&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38">QpSolverCollection::QpSolverType::JRLQP</a>, 
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf">QpSolverCollection::QpSolverType::LSSOL</a>, 
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38">QpSolverCollection::QpSolverType::JRLQP</a>, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a18bce89676122da431c3205305e71a50">QpSolverCollection::QpSolverType::qpOASES</a>, 
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a53730f1bac13c301a753dd108a172c2c">QpSolverCollection::QpSolverType::OSQP</a>, 
-<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927">QpSolverCollection::QpSolverType::NASOQ</a>
+<br />
+&#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927">QpSolverCollection::QpSolverType::NASOQ</a>
 <br />
  }<tr class="memdesc:a04c5180b8f435d0d78976bdc8fed3da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver type.  <a href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">More...</a><br /></td></tr>
 </td></tr>
@@ -150,6 +152,9 @@ Functions</h2></td></tr>
 <tr class="separator:ae1a213b741b13757dbe1db80c05f142f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38c80c080c0e9ccb63ead1d834e2c7b7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestd.html#a38c80c080c0e9ccb63ead1d834e2c7b7">std::to_string</a> (QpSolverType qp_solver_type)</td></tr>
 <tr class="separator:a38c80c080c0e9ccb63ead1d834e2c7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5fd01c57826ce7419db27e604e105b5"><td class="memItemLeft" align="right" valign="top">QpSolverType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#ab5fd01c57826ce7419db27e604e105b5">QpSolverCollection::getAnyQpSolverType</a> ()</td></tr>
+<tr class="memdesc:ab5fd01c57826ce7419db27e604e105b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get one QP solver type that is enabled.  <a href="namespaceQpSolverCollection.html#ab5fd01c57826ce7419db27e604e105b5">More...</a><br /></td></tr>
+<tr class="separator:ab5fd01c57826ce7419db27e604e105b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52259fdd829ae6ed00a9b391589b12f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9">QpSolverCollection::isQpSolverEnabled</a> (const QpSolverType &amp;qp_solver_type)</td></tr>
 <tr class="memdesc:a52259fdd829ae6ed00a9b391589b12f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether QP solver is enabled.  <a href="namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9">More...</a><br /></td></tr>
 <tr class="separator:a52259fdd829ae6ed00a9b391589b12f9"><td class="memSeparator" colspan="2">&#160;</td></tr>

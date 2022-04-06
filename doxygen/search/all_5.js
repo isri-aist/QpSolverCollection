@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jrl',['jrl',['../namespacejrl.html',1,'']]],
-  ['jrlqp',['JRLQP',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38',1,'QpSolverCollection']]],
-  ['qp',['qp',['../namespacejrl_1_1qp.html',1,'jrl']]]
+  ['ineq_5fmat_5f',['ineq_mat_',['../classQpSolverCollection_1_1QpCoeff.html#a17d0dd07d872341562cac1f06ac7edc5',1,'QpSolverCollection::QpCoeff']]],
+  ['ineq_5fvec_5f',['ineq_vec_',['../classQpSolverCollection_1_1QpCoeff.html#a0b27937c2bfdb66b0ad12747e6ea30d5',1,'QpSolverCollection::QpCoeff']]],
+  ['isqpsolverenabled',['isQpSolverEnabled',['../namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9',1,'QpSolverCollection']]]
 ];
