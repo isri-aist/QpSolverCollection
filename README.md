@@ -43,6 +43,8 @@ See [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-ins
 
 ### QP solver installation
 
+Please refer to the license specified by each QP solver.
+
 #### QLD
 Install [eigen-qld](https://github.com/jrl-umi3218/eigen-qld).  
 Add `-DENABLE_QLD=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
