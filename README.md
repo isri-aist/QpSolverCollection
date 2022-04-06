@@ -4,6 +4,11 @@ Unified C++ interface for quadratic programming solvers
 [![CI](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml/badge.svg)](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml)
 [![Documentation](https://img.shields.io/badge/doxygen-online-brightgreen?logo=read-the-docs&style=flat)](https://isri-aist.github.io/QpSolverCollection/)
 
+## Features
+- Unified C++ interface to many QP solvers
+- Can be built as a ROS package
+- High portability decoupled from each QP solver by [Pimpl technique](https://en.cppreference.com/w/cpp/language/pimpl)
+
 ## Supported QP solvers
 - [QLD](https://github.com/jrl-umi3218/eigen-qld)
 - [QuadProg](https://github.com/jrl-umi3218/eigen-quadprog)
@@ -42,8 +47,8 @@ $ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo <qp-solver-flags> --catkin-make
 See [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-installation) for `<qp-solver-flags>`.
 
 ### QP solver installation
-
-Please refer to the license specified by each QP solver.
+As all supported QP solvers are installed in [CI](https://github.com/isri-aist/QpSolverCollection/blob/master/.github/workflows/ci.yaml), please refer to the installation procedure.  
+Please refer to the license specified in each QP solver when using it.
 
 #### QLD
 Install [eigen-qld](https://github.com/jrl-umi3218/eigen-qld).  
