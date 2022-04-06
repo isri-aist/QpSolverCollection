@@ -18,7 +18,7 @@ Unified C++ interface for quadratic programming solvers
 ### Installation procedure
 It is assumed that ROS is installed.
 
-1. Install the QP solver you wish to use according to [this section](#qp-solver-installation). You can skip installing QP solvers that you do not use.
+1. Install the QP solver you wish to use according to [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-installation). You can skip installing QP solvers that you do not use.
 
 2. Setup catkin workspace.
 ```bash
@@ -39,7 +39,7 @@ $ rosdep install -y -r --from-paths src --ignore-src
 ```bash
 $ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo <qp-solver-flags> --catkin-make-args all tests
 ```
-See [this section](#qp-solver-installation) for `<qp-solver-flags>`.
+See [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-installation) for `<qp-solver-flags>`.
 
 ### QP solver installation
 
@@ -71,3 +71,6 @@ Add `-DENABLE_NASOQ=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 #### LSSOL (private)
 Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).  
 Add `-DENABLE_LSSOL=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
+
+## How to use
+See [TestSampleQP.cpp](https://github.com/isri-aist/QpSolverCollection/blob/master/tests/TestSampleQP.cpp) for examples of solving QP problems.
