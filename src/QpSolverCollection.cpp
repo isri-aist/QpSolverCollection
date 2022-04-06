@@ -3,7 +3,33 @@
 #include <limits>
 #include <sstream>
 
-#include <qp_solver_collection/QpSolver.h>
+#include <qp_solver_collection/QpSolverCollection.h>
+
+// clang-format off
+#if ENABLE_QLD
+#include <eigen-qld/QLD.h>
+#endif
+#if ENABLE_QUADPROG
+#include <eigen-quadprog/QuadProg.h>
+#endif
+#if ENABLE_LSSOL
+#include <eigen-lssol/LSSOL_QP.h>
+#endif
+#if ENABLE_JRLQP
+#include <jrl-qp/GoldfarbIdnaniSolver.h>
+#include <jrl-qp/utils/enumsIO.h>
+#endif
+#if ENABLE_QPOASES
+#include <qpOASES.hpp>
+#endif
+#if ENABLE_OSQP
+#include <OsqpEigen/OsqpEigen.h>
+#define OSQP_EIGEN_DEBUG_OUTPUT
+#endif
+#if ENABLE_NASOQ
+#include <nasoq/nasoq_eigen.h>
+#endif
+// clang-format on
 
 using namespace QpSolverCollection;
 
@@ -96,6 +122,12 @@ Eigen::VectorXd QpSolver::solve(QpCoeff & qp_coeff)
 }
 
 #if ENABLE_QLD
+QpSolverQld::QpSolverQld()
+{
+  type_ = QpSolverType::QLD;
+  qld_ = std::make_unique<Eigen::QLDDirect>();
+}
+
 Eigen::VectorXd QpSolverQld::solve(int dim_var,
                                    int dim_eq,
                                    int dim_ineq,
@@ -113,24 +145,30 @@ Eigen::VectorXd QpSolverQld::solve(int dim_var,
   AC << -A, -C;
   bd << b, d;
 
-  qld_.problem(dim_var, dim_eq, dim_ineq);
-  qld_.solve(Q, c, AC, bd, x_min, x_max, dim_eq);
+  qld_->problem(dim_var, dim_eq, dim_ineq);
+  qld_->solve(Q, c, AC, bd, x_min, x_max, dim_eq);
 
-  if(qld_.fail() == 0)
+  if(qld_->fail() == 0)
   {
     solve_failed_ = false;
   }
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQld::solve] Failed to solve: " << qld_.fail());
+    ROS_WARN_STREAM("[QpSolverQld::solve] Failed to solve: " << qld_->fail());
   }
 
-  return qld_.result();
+  return qld_->result();
 }
 #endif
 
 #if ENABLE_QUADPROG
+QpSolverQuadprog::QpSolverQuadprog()
+{
+  type_ = QpSolverType::QuadProg;
+  quadprog_ = std::make_unique<Eigen::QuadProgDense>();
+}
+
 Eigen::VectorXd QpSolverQuadprog::solve(int dim_var,
                                         int dim_eq,
                                         int dim_ineq,
@@ -150,24 +188,30 @@ Eigen::VectorXd QpSolverQuadprog::solve(int dim_var,
   C_with_bound << C, I, -I;
   d_with_bound << d, x_max, -x_min;
 
-  quadprog_.problem(dim_var, dim_eq, dim_ineq_with_bound);
-  quadprog_.solve(Q, c, A, b, C_with_bound, d_with_bound);
+  quadprog_->problem(dim_var, dim_eq, dim_ineq_with_bound);
+  quadprog_->solve(Q, c, A, b, C_with_bound, d_with_bound);
 
-  if(quadprog_.fail() == 0)
+  if(quadprog_->fail() == 0)
   {
     solve_failed_ = false;
   }
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQuadprog::solve] Failed to solve: " << quadprog_.fail());
+    ROS_WARN_STREAM("[QpSolverQuadprog::solve] Failed to solve: " << quadprog_->fail());
   }
 
-  return quadprog_.result();
+  return quadprog_->result();
 }
 #endif
 
 #if ENABLE_LSSOL
+QpSolverLssol::QpSolverLssol()
+{
+  type_ = QpSolverType::LSSOL;
+  lssol_ = std::make_unique<Eigen::LSSOL_QP>();
+}
+
 Eigen::VectorXd QpSolverLssol::solve(int dim_var,
                                      int dim_eq,
                                      int dim_ineq,
@@ -187,14 +231,14 @@ Eigen::VectorXd QpSolverLssol::solve(int dim_var,
   bd_min << b, Eigen::VectorXd::Constant(dim_ineq, -1 * std::numeric_limits<double>::infinity());
   bd_max << b, d;
 
-  lssol_.resize(dim_var, dim_eq + dim_ineq, Eigen::lssol::QP2);
+  lssol_->resize(dim_var, dim_eq + dim_ineq, Eigen::lssol::QP2);
 
-  lssol_.persistence(!solve_failed_);
-  lssol_.warm(!solve_failed_);
+  lssol_->persistence(!solve_failed_);
+  lssol_->warm(!solve_failed_);
 
-  lssol_.solve(x_min, x_max, Q, c, AC, bd_min, bd_max);
+  lssol_->solve(x_min, x_max, Q, c, AC, bd_min, bd_max);
 
-  if(lssol_.inform() == Eigen::lssol::STRONG_MINIMUM)
+  if(lssol_->inform() == Eigen::lssol::STRONG_MINIMUM)
   {
     solve_failed_ = false;
   }
@@ -202,15 +246,21 @@ Eigen::VectorXd QpSolverLssol::solve(int dim_var,
   {
     solve_failed_ = true;
     std::stringstream sstream;
-    lssol_.inform(sstream);
+    lssol_->inform(sstream);
     ROS_WARN_STREAM("[QpSolverLssol::solve] Failed to solve: " << sstream.str());
   }
 
-  return lssol_.result();
+  return lssol_->result();
 }
 #endif
 
 #if ENABLE_JRLQP
+QpSolverJrlqp::QpSolverJrlqp()
+{
+  type_ = QpSolverType::JRLQP;
+  jrlqp_ = std::make_unique<jrl::qp::GoldfarbIdnaniSolver>();
+}
+
 Eigen::VectorXd QpSolverJrlqp::solve(int dim_var,
                                      int dim_eq,
                                      int dim_ineq,
@@ -230,20 +280,20 @@ Eigen::VectorXd QpSolverJrlqp::solve(int dim_var,
   bd_min << b, Eigen::VectorXd::Constant(dim_ineq, -1 * std::numeric_limits<double>::infinity());
   bd_max << b, d;
 
-  jrlqp_.resize(dim_var, dim_eq + dim_ineq, true);
+  jrlqp_->resize(dim_var, dim_eq + dim_ineq, true);
 
   if(solve_failed_)
   {
-    jrlqp_.resetActiveSet();
+    jrlqp_->resetActiveSet();
   }
   else
   {
     jrl::qp::SolverOptions solver_option;
     solver_option.warmStart(true);
-    jrlqp_.options(solver_option);
+    jrlqp_->options(solver_option);
   }
 
-  jrl::qp::TerminationStatus status = jrlqp_.solve(Q, c, AC.transpose(), bd_min, bd_max, x_min, x_max);
+  jrl::qp::TerminationStatus status = jrlqp_->solve(Q, c, AC.transpose(), bd_min, bd_max, x_min, x_max);
 
   if(status == jrl::qp::TerminationStatus::SUCCESS)
   {
@@ -255,11 +305,16 @@ Eigen::VectorXd QpSolverJrlqp::solve(int dim_var,
     ROS_WARN_STREAM("[QpSolverJrlqp::solve] Failed to solve: " << status);
   }
 
-  return jrlqp_.solution();
+  return jrlqp_->solution();
 }
 #endif
 
 #if ENABLE_QPOASES
+QpSolverQpoases::QpSolverQpoases()
+{
+  type_ = QpSolverType::qpOASES;
+}
+
 Eigen::VectorXd QpSolverQpoases::solve(int dim_var,
                                        int dim_eq,
                                        int dim_ineq,
@@ -289,7 +344,7 @@ Eigen::VectorXd QpSolverQpoases::solve(int dim_var,
   }
   if(status != qpOASES::SUCCESSFUL_RETURN)
   {
-    qpoases_ = std::make_shared<qpOASES::SQProblem>(dim_var, dim_eq + dim_ineq);
+    qpoases_ = std::make_unique<qpOASES::SQProblem>(dim_var, dim_eq + dim_ineq);
     qpoases_->setPrintLevel(qpOASES::PL_LOW);
     status = qpoases_->init(
         // Since Q is a symmetric matrix, row/column-majors are interchangeable
@@ -313,6 +368,12 @@ Eigen::VectorXd QpSolverQpoases::solve(int dim_var,
 #endif
 
 #if ENABLE_OSQP
+QpSolverOsqp::QpSolverOsqp()
+{
+  type_ = QpSolverType::OSQP;
+  osqp_ = std::make_unique<OsqpEigen::Solver>();
+}
+
 Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
                                     int dim_eq,
                                     int dim_ineq,
@@ -346,62 +407,67 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
   sparse_duration_ =
       1e3 * std::chrono::duration_cast<std::chrono::duration<double>>(sparse_end_time - sparse_start_time).count();
 
-  // osqp_.settings()->setAbsoluteTolerance(1e-2);
-  // osqp_.settings()->setRelativeTolerance(1e-2);
-  // osqp_.settings()->setScaledTerimination(1);
-  // ROS_INFO_STREAM("max_iter: " << osqp_.settings()->getSettings()->max_iter << ", " <<
-  //                 "eps_abs: " << osqp_.settings()->getSettings()->eps_abs << ", " <<
-  //                 "eps_rel: " << osqp_.settings()->getSettings()->eps_rel << ", " <<
-  //                 "scaled_termination: " << osqp_.settings()->getSettings()->scaled_termination);
+  // osqp_->settings()->setAbsoluteTolerance(1e-2);
+  // osqp_->settings()->setRelativeTolerance(1e-2);
+  // osqp_->settings()->setScaledTerimination(1);
+  // ROS_INFO_STREAM("max_iter: " << osqp_->settings()->getSettings()->max_iter << ", " <<
+  //                 "eps_abs: " << osqp_->settings()->getSettings()->eps_abs << ", " <<
+  //                 "eps_rel: " << osqp_->settings()->getSettings()->eps_rel << ", " <<
+  //                 "scaled_termination: " << osqp_->settings()->getSettings()->scaled_termination);
 
-  osqp_.settings()->setVerbosity(false);
-  osqp_.settings()->setWarmStart(true);
-  if(!solve_failed_ && !force_initialize_ && osqp_.isInitialized() && dim_var == osqp_.data()->getData()->n
-     && dim_eq_ineq_with_bound == osqp_.data()->getData()->m)
+  osqp_->settings()->setVerbosity(false);
+  osqp_->settings()->setWarmStart(true);
+  if(!solve_failed_ && !force_initialize_ && osqp_->isInitialized() && dim_var == osqp_->data()->getData()->n
+     && dim_eq_ineq_with_bound == osqp_->data()->getData()->m)
   {
     // Update only matrices and vectors
-    osqp_.updateHessianMatrix(Q_sparse_);
-    osqp_.updateGradient(c_);
-    osqp_.updateLinearConstraintsMatrix(AC_with_bound_sparse_);
-    osqp_.updateBounds(bd_with_bound_min_, bd_with_bound_max_);
+    osqp_->updateHessianMatrix(Q_sparse_);
+    osqp_->updateGradient(c_);
+    osqp_->updateLinearConstraintsMatrix(AC_with_bound_sparse_);
+    osqp_->updateBounds(bd_with_bound_min_, bd_with_bound_max_);
   }
   else
   {
     // Initialize fully
-    if(osqp_.isInitialized())
+    if(osqp_->isInitialized())
     {
-      osqp_.clearSolver();
-      osqp_.data()->clearHessianMatrix();
-      osqp_.data()->clearLinearConstraintsMatrix();
+      osqp_->clearSolver();
+      osqp_->data()->clearHessianMatrix();
+      osqp_->data()->clearLinearConstraintsMatrix();
     }
 
-    osqp_.data()->setNumberOfVariables(dim_var);
-    osqp_.data()->setNumberOfConstraints(dim_eq_ineq_with_bound);
-    osqp_.data()->setHessianMatrix(Q_sparse_);
-    osqp_.data()->setGradient(c_);
-    osqp_.data()->setLinearConstraintsMatrix(AC_with_bound_sparse_);
-    osqp_.data()->setLowerBound(bd_with_bound_min_);
-    osqp_.data()->setUpperBound(bd_with_bound_max_);
-    osqp_.initSolver();
+    osqp_->data()->setNumberOfVariables(dim_var);
+    osqp_->data()->setNumberOfConstraints(dim_eq_ineq_with_bound);
+    osqp_->data()->setHessianMatrix(Q_sparse_);
+    osqp_->data()->setGradient(c_);
+    osqp_->data()->setLinearConstraintsMatrix(AC_with_bound_sparse_);
+    osqp_->data()->setLowerBound(bd_with_bound_min_);
+    osqp_->data()->setUpperBound(bd_with_bound_max_);
+    osqp_->initSolver();
   }
 
-  osqp_.solve();
+  osqp_->solve();
 
-  if(osqp_.workspace()->info->status_val == OSQP_SOLVED)
+  if(osqp_->workspace()->info->status_val == OSQP_SOLVED)
   {
     solve_failed_ = false;
   }
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_.workspace()->info->status);
+    ROS_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_->workspace()->info->status);
   }
 
-  return osqp_.getSolution();
+  return osqp_->getSolution();
 }
 #endif
 
 #if ENABLE_NASOQ
+QpSolverNasoq::QpSolverNasoq()
+{
+  type_ = QpSolverType::NASOQ;
+}
+
 Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
                                      int dim_eq,
                                      int dim_ineq,

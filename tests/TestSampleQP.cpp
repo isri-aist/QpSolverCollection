@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include <qp_solver_collection/QpSolver.h>
+#include <qp_solver_collection/QpSolverCollection.h>
 
 using QpSolverCollection::QpCoeff;
 using QpSolverCollection::QpSolverType;

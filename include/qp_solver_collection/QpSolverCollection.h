@@ -10,33 +10,32 @@
 
 #include <qp_solver_collection/QpSolverOptions.h>
 
-// clang-format off
-#if ENABLE_QLD
-#include <eigen-qld/QLD.h>
-#endif
-#if ENABLE_QUADPROG
-#include <eigen-quadprog/QuadProg.h>
-#endif
-#if ENABLE_LSSOL
-#include <eigen-lssol/LSSOL_QP.h>
-#endif
-#if ENABLE_JRLQP
-#include <jrl-qp/GoldfarbIdnaniSolver.h>
-#include <jrl-qp/utils/enumsIO.h>
-#endif
-#if ENABLE_QPOASES
-#include <qpOASES.hpp>
-#endif
-#if ENABLE_OSQP
-#include <OsqpEigen/OsqpEigen.h>
-#define OSQP_EIGEN_DEBUG_OUTPUT
-#endif
-#if ENABLE_NASOQ
-#include <nasoq/nasoq_eigen.h>
-#endif
-// clang-format on
-
 #include <ros/console.h>
+
+namespace Eigen
+{
+class QLDDirect;
+class QuadProgDense;
+class LSSOL_QP;
+} // namespace Eigen
+
+namespace jrl
+{
+namespace qp
+{
+class GoldfarbIdnaniSolver;
+} // namespace qp
+} // namespace jrl
+
+namespace qpOASES
+{
+class SQProblem;
+} // namespace qpOASES
+
+namespace OsqpEigen
+{
+class Solver;
+} // namespace OsqpEigen
 
 namespace QpSolverCollection
 {
@@ -205,10 +204,7 @@ class QpSolverQld : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverQld()
-  {
-    type_ = QpSolverType::QLD;
-  }
+  QpSolverQld();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -223,8 +219,8 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
-public:
-  Eigen::QLDDirect qld_;
+protected:
+  std::unique_ptr<Eigen::QLDDirect> qld_;
 };
 #endif
 
@@ -234,10 +230,7 @@ class QpSolverQuadprog : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverQuadprog()
-  {
-    type_ = QpSolverType::QuadProg;
-  }
+  QpSolverQuadprog();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -252,8 +245,8 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
-public:
-  Eigen::QuadProgDense quadprog_;
+protected:
+  std::unique_ptr<Eigen::QuadProgDense> quadprog_;
 };
 #endif
 
@@ -263,10 +256,7 @@ class QpSolverLssol : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverLssol()
-  {
-    type_ = QpSolverType::LSSOL;
-  }
+  QpSolverLssol();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -281,8 +271,8 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
-public:
-  Eigen::LSSOL_QP lssol_;
+protected:
+  std::unique_ptr<Eigen::LSSOL_QP> lssol_;
 };
 #endif
 
@@ -292,10 +282,7 @@ class QpSolverJrlqp : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverJrlqp()
-  {
-    type_ = QpSolverType::JRLQP;
-  }
+  QpSolverJrlqp();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -310,8 +297,8 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
-public:
-  jrl::qp::GoldfarbIdnaniSolver jrlqp_;
+protected:
+  std::unique_ptr<jrl::qp::GoldfarbIdnaniSolver> jrlqp_;
 };
 #endif
 
@@ -323,10 +310,7 @@ class QpSolverQpoases : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverQpoases()
-  {
-    type_ = QpSolverType::qpOASES;
-  }
+  QpSolverQpoases();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -342,8 +326,6 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
 public:
-  std::shared_ptr<qpOASES::SQProblem> qpoases_;
-
   int n_wsr_ = 10000;
 
   /** \brief Whether to initialize each time instead of doing a warm start.
@@ -351,6 +333,9 @@ public:
       \note Warm start did not give good results.
   */
   bool force_initialize_ = true;
+
+protected:
+  std::unique_ptr<qpOASES::SQProblem> qpoases_;
 };
 #endif
 
@@ -362,10 +347,7 @@ class QpSolverOsqp : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverOsqp()
-  {
-    type_ = QpSolverType::OSQP;
-  }
+  QpSolverOsqp();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
@@ -381,8 +363,6 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
 public:
-  OsqpEigen::Solver osqp_;
-
   /** \brief Whether to initialize each time instead of doing a warm start.
 
       \note Warm start did not give good results.
@@ -390,6 +370,8 @@ public:
   bool force_initialize_ = true;
 
 protected:
+  std::unique_ptr<OsqpEigen::Solver> osqp_;
+
   Eigen::SparseMatrix<double> Q_sparse_;
   Eigen::VectorXd c_;
   Eigen::SparseMatrix<double> AC_with_bound_sparse_;
@@ -408,10 +390,7 @@ class QpSolverNasoq : public QpSolver
 {
 public:
   /** \brief Constructor. */
-  QpSolverNasoq()
-  {
-    type_ = QpSolverType::NASOQ;
-  }
+  QpSolverNasoq();
 
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
