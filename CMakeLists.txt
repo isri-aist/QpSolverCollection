@@ -16,7 +16,6 @@ option(ENABLE_OSQP "Enable OSQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
 
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   roscpp
   )
 
