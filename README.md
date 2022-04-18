@@ -80,7 +80,7 @@ Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).
 Add `-DENABLE_LSSOL=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 ## How to use
-See [documentation](https://isri-aist.github.io/QpSolverCollection/) and [test](https://github.com/isri-aist/QpSolverCollection/blob/master/tests/TestSampleQP.cpp) for examples of solving QP problems.
+See [documentation](https://isri-aist.github.io/QpSolverCollection/doxygen/classQpSolverCollection_1_1QpSolver.html) and [test](https://github.com/isri-aist/QpSolverCollection/blob/master/tests/TestSampleQP.cpp) for examples of solving QP problems.
 
 The following is a simple example.
 ```cpp
