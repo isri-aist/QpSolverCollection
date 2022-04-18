@@ -89,12 +89,7 @@ inline string to_string(QpSolverType qp_solver_type)
 
 namespace QpSolverCollection
 {
-/** \brief Class of QP coefficient.
-
-    \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x}
-   \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP,
-   QPOASES, and OSQP support both-sided constraints.
-*/
+/** \brief Class of QP coefficient. */
 class QpCoeff
 {
 public:
@@ -115,26 +110,38 @@ public:
   void dump(std::ofstream & ofs) const;
 
 public:
-  /** \brief Dimensions.
-      @{
-  */
+  //! Dimension of decision variable
   int dim_var_ = 0;
-  int dim_eq_ = 0;
-  int dim_ineq_ = 0;
-  /** @} */
 
-  /** \brief Coefficients.
-      @{
-  */
+  //! Dimension of equality constraint
+  int dim_eq_ = 0;
+
+  //! Dimension of inequality constraint
+  int dim_ineq_ = 0;
+
+  //! Objective matrix (corresponding to \f$\boldsymbol{Q}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::MatrixXd obj_mat_;
+
+  //! Objective vector (corresponding to \f$\boldsymbol{c}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::VectorXd obj_vec_;
+
+  //! Equality constraint matrix (corresponding to \f$\boldsymbol{A}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::MatrixXd eq_mat_;
+
+  //! Equality constraint vector (corresponding to \f$\boldsymbol{b}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::VectorXd eq_vec_;
+
+  //! Inequality constraint matrix (corresponding to \f$\boldsymbol{C}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::MatrixXd ineq_mat_;
+
+  //! Inequality constraint vector (corresponding to \f$\boldsymbol{d}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::VectorXd ineq_vec_;
+
+  //! Lower bound (corresponding to \f$\boldsymbol{x}_{min}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::VectorXd x_min_;
+
+  //! Upper bound (corresponding to \f$\boldsymbol{x}_{max}\f$ in @ref QpSolver#solve "QpSolver::solve".)
   Eigen::VectorXd x_max_;
-  /** @} */
 };
 
 /** \brief Virtual class of QP solver. */
@@ -173,6 +180,10 @@ public:
       & \phantom{s.t.} \ \ \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d} \nonumber \\
       & \phantom{s.t.} \ \ \boldsymbol{x}_{min} \leq \boldsymbol{x} \leq \boldsymbol{x}_{max} \nonumber
       \f}
+
+      \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C}
+     \boldsymbol{x} \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while
+     LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints.
   */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
