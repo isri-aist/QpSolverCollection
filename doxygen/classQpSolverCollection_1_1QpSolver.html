@@ -121,7 +121,7 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Virtual class of QP solver. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00141">141</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00148">148</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="af784632f7fcb8cca6996a1d879a43bb6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af784632f7fcb8cca6996a1d879a43bb6">&#9670;&nbsp;</a></span>clock</h2>
@@ -135,7 +135,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00146">146</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00153">153</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -165,7 +165,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Constructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00150">150</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00157">157</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -308,7 +308,8 @@ Protected Attributes</h2></td></tr>
 <p>QP is formulated as follows: </p><p class="formulaDsp">
 \begin{align*} &amp; min_{\boldsymbol{x}} \ \frac{1}{2}{\boldsymbol{x}^T \boldsymbol{Q} \boldsymbol{x}} + {\boldsymbol{c}^T \boldsymbol{x}} \\ &amp; s.t. \ \ \boldsymbol{A} \boldsymbol{x} = \boldsymbol{b} \nonumber \\ &amp; \phantom{s.t.} \ \ \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d} \nonumber \\ &amp; \phantom{s.t.} \ \ \boldsymbol{x}_{min} \leq \boldsymbol{x} \leq \boldsymbol{x}_{max} \nonumber \end{align*}
 </p>
- 
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Support both-sided inequality constraints (i.e., \(\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d}_{upper}\)). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints. </dd></dl>
+
 </div>
 </div>
 <a id="aa2eb9ed73696f21432c8871fbe6b28a6"></a>
@@ -370,7 +371,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get whether it failed to solve the QP. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00201">201</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00212">212</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +400,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Get QP solver type. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00195">195</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00206">206</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -426,7 +427,7 @@ Protected Attributes</h2></td></tr>
 
 <p>Whether it failed to solve the QP. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00211">211</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00222">222</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
@@ -452,7 +453,7 @@ Protected Attributes</h2></td></tr>
 
 <p>QP solver type. </p>
 
-<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00208">208</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="QpSolverCollection_8h_source.html#l00219">219</a> of file <a class="el" href="QpSolverCollection_8h_source.html">QpSolverCollection.h</a>.</p>
 
 </div>
 </div>
