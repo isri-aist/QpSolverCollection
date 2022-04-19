@@ -82,7 +82,7 @@ Add `-DENABLE_LSSOL=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 ## How to use
 See [documentation](https://isri-aist.github.io/QpSolverCollection/doxygen/classQpSolverCollection_1_1QpSolver.html) and [test](https://github.com/isri-aist/QpSolverCollection/blob/master/tests/TestSampleQP.cpp) for examples of solving QP problems.
 
-The following is a simple example.
+The following is a simple sample.
 ```cpp
 // sample.cpp
 
@@ -110,7 +110,7 @@ int main()
 }
 ```
 
-In addition to building as a catkin package, you can also build standalone as follows.
+In addition to building a sample in a catkin package, you can also build it standalone as follows.
 ```bash
 $ g++ sample.cpp `pkg-config --cflags qp_solver_collection` `pkg-config --libs qp_solver_collection`
 ```
