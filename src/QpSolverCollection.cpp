@@ -85,8 +85,8 @@ void QpCoeff::setup(int dim_var, int dim_eq, int dim_ineq)
   eq_vec_.setZero(dim_eq);
   ineq_mat_.setZero(dim_ineq, dim_var);
   ineq_vec_.setZero(dim_ineq);
-  x_min_.setZero(dim_var);
-  x_max_.setZero(dim_var);
+  x_min_.setConstant(dim_var, std::numeric_limits<double>::lowest());
+  x_max_.setConstant(dim_var, std::numeric_limits<double>::max());
 }
 
 void QpCoeff::printInfo(bool, const std::string & header) const
