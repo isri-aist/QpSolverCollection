@@ -1,9 +1,24 @@
 var searchData=
 [
-  ['setup',['setup',['../classQpSolverCollection_1_1QpCoeff.html#a9bfb7d87b406378e814858e92661a25a',1,'QpSolverCollection::QpCoeff']]],
-  ['solve',['solve',['../classQpSolverCollection_1_1QpSolver.html#ae068bd64513531eb10a17da7a9bc18e2',1,'QpSolverCollection::QpSolver::solve(int dim_var, int dim_eq, int dim_ineq, Eigen::Ref&lt; Eigen::MatrixXd &gt; Q, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;c, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;A, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;b, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;C, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;d, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_min, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_max)=0'],['../classQpSolverCollection_1_1QpSolver.html#aa2eb9ed73696f21432c8871fbe6b28a6',1,'QpSolverCollection::QpSolver::solve(QpCoeff &amp;qp_coeff)']]],
-  ['solve_5ffailed_5f',['solve_failed_',['../classQpSolverCollection_1_1QpSolver.html#a9442cebfd4ed46f3152b2ee860b2ea42',1,'QpSolverCollection::QpSolver']]],
-  ['solvefailed',['solveFailed',['../classQpSolverCollection_1_1QpSolver.html#af9d7c9e7e4c1920b60b98559c33a11b1',1,'QpSolverCollection::QpSolver']]],
-  ['std',['std',['../namespacestd.html',1,'']]],
-  ['strtoqpsolvertype',['strToQpSolverType',['../namespaceQpSolverCollection.html#ae1a213b741b13757dbe1db80c05f142f',1,'QpSolverCollection']]]
+  ['qp_5fsolver_5fcollection',['qp_solver_collection',['../index.html',1,'']]],
+  ['q_5fsparse_5f',['Q_sparse_',['../classQpSolverCollection_1_1QpSolverOsqp.html#a7acbe4ec77d3e3950ae2dcecdf725ef7',1,'QpSolverCollection::QpSolverOsqp::Q_sparse_()'],['../classQpSolverCollection_1_1QpSolverNasoq.html#a877a8daa15d1475701803810294562f6',1,'QpSolverCollection::QpSolverNasoq::Q_sparse_()']]],
+  ['qld',['QLD',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728',1,'QpSolverCollection']]],
+  ['qld_5f',['qld_',['../classQpSolverCollection_1_1QpSolverQld.html#a0c5b81a383e1c01fca530fb967373c62',1,'QpSolverCollection::QpSolverQld']]],
+  ['qpcoeff',['QpCoeff',['../classQpSolverCollection_1_1QpCoeff.html',1,'QpSolverCollection::QpCoeff'],['../classQpSolverCollection_1_1QpCoeff.html#a1a612c62b242a930c88e8abd2734778e',1,'QpSolverCollection::QpCoeff::QpCoeff()']]],
+  ['qpoases',['qpOASES',['../namespaceqpOASES.html',1,'qpOASES'],['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a18bce89676122da431c3205305e71a50',1,'QpSolverCollection::qpOASES()']]],
+  ['qpoases_5f',['qpoases_',['../classQpSolverCollection_1_1QpSolverQpoases.html#a78fcb1064760624e3f055f889236cb36',1,'QpSolverCollection::QpSolverQpoases']]],
+  ['qpsolver',['QpSolver',['../classQpSolverCollection_1_1QpSolver.html',1,'QpSolverCollection::QpSolver'],['../classQpSolverCollection_1_1QpSolver.html#a7e61f5324d573b5005cd5296f45c8c29',1,'QpSolverCollection::QpSolver::QpSolver()']]],
+  ['qpsolvercollection',['QpSolverCollection',['../namespaceQpSolverCollection.html',1,'']]],
+  ['qpsolvercollection_2eh',['QpSolverCollection.h',['../QpSolverCollection_8h.html',1,'']]],
+  ['qpsolverjrlqp',['QpSolverJrlqp',['../classQpSolverCollection_1_1QpSolverJrlqp.html',1,'QpSolverCollection::QpSolverJrlqp'],['../classQpSolverCollection_1_1QpSolverJrlqp.html#a28e696bfc983b0d21e28cbe20715e4f9',1,'QpSolverCollection::QpSolverJrlqp::QpSolverJrlqp()']]],
+  ['qpsolverlssol',['QpSolverLssol',['../classQpSolverCollection_1_1QpSolverLssol.html',1,'QpSolverCollection::QpSolverLssol'],['../classQpSolverCollection_1_1QpSolverLssol.html#a66dc4297fc14884b2dc9ae79a853af58',1,'QpSolverCollection::QpSolverLssol::QpSolverLssol()']]],
+  ['qpsolvernasoq',['QpSolverNasoq',['../classQpSolverCollection_1_1QpSolverNasoq.html',1,'QpSolverCollection::QpSolverNasoq'],['../classQpSolverCollection_1_1QpSolverNasoq.html#a938b5c424849ec1546c21626df64dcc1',1,'QpSolverCollection::QpSolverNasoq::QpSolverNasoq()']]],
+  ['qpsolveroptions_2eh',['QpSolverOptions.h',['../QpSolverOptions_8h.html',1,'']]],
+  ['qpsolverosqp',['QpSolverOsqp',['../classQpSolverCollection_1_1QpSolverOsqp.html',1,'QpSolverCollection::QpSolverOsqp'],['../classQpSolverCollection_1_1QpSolverOsqp.html#a5a93397caab03bb88a6d765a417d1b9a',1,'QpSolverCollection::QpSolverOsqp::QpSolverOsqp()']]],
+  ['qpsolverqld',['QpSolverQld',['../classQpSolverCollection_1_1QpSolverQld.html',1,'QpSolverCollection::QpSolverQld'],['../classQpSolverCollection_1_1QpSolverQld.html#a4bee785b01b40153e8765f67bcca44c1',1,'QpSolverCollection::QpSolverQld::QpSolverQld()']]],
+  ['qpsolverqpoases',['QpSolverQpoases',['../classQpSolverCollection_1_1QpSolverQpoases.html',1,'QpSolverCollection::QpSolverQpoases'],['../classQpSolverCollection_1_1QpSolverQpoases.html#a2f3697aba8cd2b1a51ce98fa07c224e2',1,'QpSolverCollection::QpSolverQpoases::QpSolverQpoases()']]],
+  ['qpsolverquadprog',['QpSolverQuadprog',['../classQpSolverCollection_1_1QpSolverQuadprog.html',1,'QpSolverCollection::QpSolverQuadprog'],['../classQpSolverCollection_1_1QpSolverQuadprog.html#a48ccec273267791b40a6a42d9dc2feba',1,'QpSolverCollection::QpSolverQuadprog::QpSolverQuadprog()']]],
+  ['qpsolvertype',['QpSolverType',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0',1,'QpSolverCollection::QpSolverType()'],['../namespacestd.html#a7eeb7b691606fc7480c89d84725beaa0',1,'std::QpSolverType()']]],
+  ['quadprog',['QuadProg',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01',1,'QpSolverCollection']]],
+  ['quadprog_5f',['quadprog_',['../classQpSolverCollection_1_1QpSolverQuadprog.html#a29427e0db876630a76e6183a5118c836',1,'QpSolverCollection::QpSolverQuadprog']]]
 ];

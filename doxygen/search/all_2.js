@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['dim_5feq_5f',['dim_eq_',['../classQpSolverCollection_1_1QpCoeff.html#ada37485190df191798d3b49bd08149c5',1,'QpSolverCollection::QpCoeff']]],
-  ['dim_5fineq_5f',['dim_ineq_',['../classQpSolverCollection_1_1QpCoeff.html#a3b6b93562cffe06d74a817ba5eea152b',1,'QpSolverCollection::QpCoeff']]],
-  ['dim_5fvar_5f',['dim_var_',['../classQpSolverCollection_1_1QpCoeff.html#add308fe5b5d03641ac163fb8b6968dfc',1,'QpSolverCollection::QpCoeff']]],
-  ['dump',['dump',['../classQpSolverCollection_1_1QpCoeff.html#a46006966da8189073247598f73fdf0e4',1,'QpSolverCollection::QpCoeff']]]
+  ['c_5f',['c_',['../classQpSolverCollection_1_1QpSolverOsqp.html#a3d7f2c0eb08e852874feb2ff6ae359bb',1,'QpSolverCollection::QpSolverOsqp']]],
+  ['c_5fwith_5fbound_5fsparse_5f',['C_with_bound_sparse_',['../classQpSolverCollection_1_1QpSolverNasoq.html#adffa2a056d78a135363bae3971abde77',1,'QpSolverCollection::QpSolverNasoq']]],
+  ['clock',['clock',['../classQpSolverCollection_1_1QpSolver.html#af784632f7fcb8cca6996a1d879a43bb6',1,'QpSolverCollection::QpSolver']]]
 ];

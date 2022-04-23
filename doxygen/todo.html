@@ -69,8 +69,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt><a class="anchor" id="_todo000001"></a>Member <a class="el" href="classQpSolverCollection_1_1QpSolver.html#ae068bd64513531eb10a17da7a9bc18e2">QpSolverCollection::QpSolver::solve</a>  (int dim_var, int dim_eq, int dim_ineq, Eigen::Ref&lt; Eigen::MatrixXd &gt; Q, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;c, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;A, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;b, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;C, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;d, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_min, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_max)=0</dt>
-<dd>Support both-sided inequality constraints (i.e., \(\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d}_{upper}\)). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints. </dd>
+<dt><a class="anchor" id="_todo000004"></a>Member <a class="el" href="classQpSolverCollection_1_1QpSolver.html#ae068bd64513531eb10a17da7a9bc18e2">QpSolverCollection::QpSolver::solve</a>  (int dim_var, int dim_eq, int dim_ineq, Eigen::Ref&lt; Eigen::MatrixXd &gt; Q, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;c, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;A, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;b, const Eigen::Ref&lt; const Eigen::MatrixXd &gt; &amp;C, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;d, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_min, const Eigen::Ref&lt; const Eigen::VectorXd &gt; &amp;x_max)=0</dt>
+<dd>Support both-sided inequality constraints (i.e., \(\boldsymbol{d}_{lower} \leq \boldsymbol{C} \boldsymbol{x} \leq \boldsymbol{d}_{upper}\)). QLD, QuadProg, and NASOQ support only one-sided constraints, while LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints.  </dd>
+<dt><a class="anchor" id="_todo000003"></a>Class <a class="el" href="classQpSolverCollection_1_1QpSolverNasoq.html">QpSolverCollection::QpSolverNasoq</a>  </dt>
+<dd>Set without going through a dense matrix.  </dd>
+<dt><a class="anchor" id="_todo000002"></a>Class <a class="el" href="classQpSolverCollection_1_1QpSolverOsqp.html">QpSolverCollection::QpSolverOsqp</a>  </dt>
+<dd>Set without going through a dense matrix.  </dd>
+<dt><a class="anchor" id="_todo000001"></a>Class <a class="el" href="classQpSolverCollection_1_1QpSolverQpoases.html">QpSolverCollection::QpSolverQpoases</a>  </dt>
+<dd>Support an efficient interface (QProblemB) dedicated to QP with only box constraints. </dd>
 </dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

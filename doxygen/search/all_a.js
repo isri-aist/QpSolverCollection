@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['printinfo',['printInfo',['../classQpSolverCollection_1_1QpCoeff.html#a4f22cf7d8fd1098562ae8d6041a9d63e',1,'QpSolverCollection::QpCoeff::printInfo()'],['../classQpSolverCollection_1_1QpSolver.html#a04d7304d8567eaa474b42c11b2f1723e',1,'QpSolverCollection::QpSolver::printInfo()']]]
+  ['n_5fwsr_5f',['n_wsr_',['../classQpSolverCollection_1_1QpSolverQpoases.html#a95dc07b44d39bea6c4a0245222c9c99b',1,'QpSolverCollection::QpSolverQpoases']]],
+  ['nasoq',['NASOQ',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927',1,'QpSolverCollection']]]
 ];
