@@ -399,7 +399,7 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
   // Matrices and vectors must be hold during solver's lifetime
   Q_sparse_ = Q.sparseView();
   AC_with_bound_sparse_ = AC_with_bound.sparseView();
-  // You must pass an unconst vectors to OSQP
+  // You must pass unconst vectors to OSQP
   c_ = c;
   bd_with_bound_min_ = bd_with_bound_min;
   bd_with_bound_max_ = bd_with_bound_max;
