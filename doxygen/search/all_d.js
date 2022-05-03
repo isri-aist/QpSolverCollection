@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['qp_5fsolver_5fcollection',['qp_solver_collection',['../index.html',1,'']]],
   ['q_5fsparse_5f',['Q_sparse_',['../classQpSolverCollection_1_1QpSolverOsqp.html#a7acbe4ec77d3e3950ae2dcecdf725ef7',1,'QpSolverCollection::QpSolverOsqp::Q_sparse_()'],['../classQpSolverCollection_1_1QpSolverNasoq.html#a877a8daa15d1475701803810294562f6',1,'QpSolverCollection::QpSolverNasoq::Q_sparse_()']]],
   ['qld',['QLD',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728',1,'QpSolverCollection']]],
   ['qld_5f',['qld_',['../classQpSolverCollection_1_1QpSolverQld.html#a0c5b81a383e1c01fca530fb967373c62',1,'QpSolverCollection::QpSolverQld']]],
