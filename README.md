@@ -1,4 +1,4 @@
-# qp_solver_collection
+# [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 Unified C++ interface for quadratic programming solvers
 
 [![CI](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml/badge.svg)](https://github.com/isri-aist/QpSolverCollection/actions/workflows/ci.yaml)
