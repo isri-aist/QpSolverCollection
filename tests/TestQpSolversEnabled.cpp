@@ -17,40 +17,54 @@ TEST(TestQpSolversEnabled, Any)
   checkOneSolver(QpSolverType::Any);
 }
 
+#if ENABLE_QLD
 TEST(TestQpSolversEnabled, QLD)
 {
   checkOneSolver(QpSolverType::QLD);
 }
+#endif
 
+#if ENABLE_QUADPROG
 TEST(TestQpSolversEnabled, QuadProg)
 {
   checkOneSolver(QpSolverType::QuadProg);
 }
+#endif
 
+#if ENABLE_LSSOL
 TEST(TestQpSolversEnabled, LSSOL)
 {
   checkOneSolver(QpSolverType::LSSOL);
 }
+#endif
 
+#if ENABLE_JRLQP
 TEST(TestQpSolversEnabled, JRLQP)
 {
   checkOneSolver(QpSolverType::JRLQP);
 }
+#endif
 
+#if ENABLE_QPOASES
 TEST(TestQpSolversEnabled, qpOASES)
 {
   checkOneSolver(QpSolverType::qpOASES);
 }
+#endif
 
+#if ENABLE_OSQP
 TEST(TestQpSolversEnabled, OSQP)
 {
   checkOneSolver(QpSolverType::OSQP);
 }
+#endif
 
+#if ENABLE_NASOQ
 TEST(TestQpSolversEnabled, NASOQ)
 {
   checkOneSolver(QpSolverType::NASOQ);
 }
+#endif
 
 int main(int argc, char ** argv)
 {
