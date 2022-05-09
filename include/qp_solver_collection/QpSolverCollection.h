@@ -10,7 +10,17 @@
 
 #include <qp_solver_collection/QpSolverOptions.h>
 
-#include <ros/console.h>
+#if QP_SOLVER_COLLECTION_STANDALONE
+#  include <iostream>
+#  define QSC_ERROR_STREAM(x) std::cerr << x
+#  define QSC_WARN_STREAM(x) std::cerr << x
+#  define QSC_INFO_STREAM(x) std::cerr << x
+#else
+#  include <ros/console.h>
+#  define QSC_ERROR_STREAM ROS_ERROR_STREAM
+#  define QSC_WARN_STREAM ROS_INFO_STREAM
+#  define QSC_INFO_STREAM ROS_INFO_STREAM
+#endif
 
 namespace Eigen
 {
@@ -80,7 +90,7 @@ inline string to_string(QpSolverType qp_solver_type)
     case QpSolverType::NASOQ:
       return "QpSolverType::NASOQ";
     default:
-      ROS_ERROR_STREAM("[QpSolverType] Unsupported value: " << std::to_string(static_cast<int>(qp_solver_type)));
+      QSC_ERROR_STREAM("[QpSolverType] Unsupported value: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
 
   return "";

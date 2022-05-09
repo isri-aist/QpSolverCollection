@@ -1,5 +1,7 @@
 /* Author: Masaki Murooka */
 
+#define NOMINMAX
+
 #include <limits>
 #include <sstream>
 
@@ -91,7 +93,7 @@ void QpCoeff::setup(int dim_var, int dim_eq, int dim_ineq)
 
 void QpCoeff::printInfo(bool, const std::string & header) const
 {
-  ROS_INFO_STREAM(header << "dim_var: " << dim_var_ << ", dim_eq: " << dim_eq_ << ", dim_ineq: " << dim_ineq_);
+  QSC_INFO_STREAM(header << "dim_var: " << dim_var_ << ", dim_eq: " << dim_eq_ << ", dim_ineq: " << dim_ineq_);
 }
 
 void QpCoeff::dump(std::ofstream & ofs) const
@@ -111,7 +113,7 @@ void QpCoeff::dump(std::ofstream & ofs) const
 
 void QpSolver::printInfo(bool, const std::string & header) const
 {
-  ROS_INFO_STREAM(header << "QP solver: " << std::to_string(type_));
+  QSC_INFO_STREAM(header << "QP solver: " << std::to_string(type_));
 }
 
 Eigen::VectorXd QpSolver::solve(QpCoeff & qp_coeff)
@@ -155,7 +157,7 @@ Eigen::VectorXd QpSolverQld::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQld::solve] Failed to solve: " << qld_->fail());
+    QSC_WARN_STREAM("[QpSolverQld::solve] Failed to solve: " << qld_->fail());
   }
 
   return qld_->result();
@@ -247,7 +249,7 @@ Eigen::VectorXd QpSolverLssol::solve(int dim_var,
     solve_failed_ = true;
     std::stringstream sstream;
     lssol_->inform(sstream);
-    ROS_WARN_STREAM("[QpSolverLssol::solve] Failed to solve: " << sstream.str());
+    QSC_WARN_STREAM("[QpSolverLssol::solve] Failed to solve: " << sstream.str());
   }
 
   return lssol_->result();
@@ -302,7 +304,7 @@ Eigen::VectorXd QpSolverJrlqp::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverJrlqp::solve] Failed to solve: " << status);
+    QSC_WARN_STREAM("[QpSolverJrlqp::solve] Failed to solve: " << status);
   }
 
   return jrlqp_->solution();
@@ -358,7 +360,7 @@ Eigen::VectorXd QpSolverQpoases::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQpoases::solve] Failed to solve: " << static_cast<int>(status));
+    QSC_WARN_STREAM("[QpSolverQpoases::solve] Failed to solve: " << static_cast<int>(status));
   }
 
   Eigen::VectorXd sol(dim_var);
@@ -410,7 +412,7 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
   // osqp_->settings()->setAbsoluteTolerance(1e-2);
   // osqp_->settings()->setRelativeTolerance(1e-2);
   // osqp_->settings()->setScaledTerimination(1);
-  // ROS_INFO_STREAM("max_iter: " << osqp_->settings()->getSettings()->max_iter << ", " <<
+  // QSC_INFO_STREAM("max_iter: " << osqp_->settings()->getSettings()->max_iter << ", " <<
   //                 "eps_abs: " << osqp_->settings()->getSettings()->eps_abs << ", " <<
   //                 "eps_rel: " << osqp_->settings()->getSettings()->eps_rel << ", " <<
   //                 "scaled_termination: " << osqp_->settings()->getSettings()->scaled_termination);
@@ -455,7 +457,7 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_->workspace()->info->status);
+    QSC_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_->workspace()->info->status);
   }
 
   return osqp_->getSolution();
@@ -508,7 +510,7 @@ Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverNasoq::solve] Failed to solve: " << solve_ret);
+    QSC_WARN_STREAM("[QpSolverNasoq::solve] Failed to solve: " << solve_ret);
   }
 
   return sol;
@@ -588,7 +590,7 @@ bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
   }
   else
   {
-    ROS_ERROR_STREAM("[isQpSolverEnabled] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
+    QSC_ERROR_STREAM("[isQpSolverEnabled] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
     return false;
   }
 }
@@ -645,12 +647,12 @@ std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverTyp
   }
   else
   {
-    ROS_ERROR_STREAM("[allocateQpSolver] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
+    QSC_ERROR_STREAM("[allocateQpSolver] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
 
   if(!qp)
   {
-    ROS_ERROR_STREAM("[allocateQpSolver] Failed to initialize QP solver: " << std::to_string(qp_solver_type));
+    QSC_ERROR_STREAM("[allocateQpSolver] Failed to initialize QP solver: " << std::to_string(qp_solver_type));
   }
 
   return qp;
