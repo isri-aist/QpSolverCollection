@@ -11,4 +11,5 @@ namespace QpSolverCollection
 #cmakedefine01 ENABLE_QPOASES
 #cmakedefine01 ENABLE_OSQP
 #cmakedefine01 ENABLE_NASOQ
+#cmakedefine01 QP_SOLVER_COLLECTION_STANDALONE
 } // namespace QpSolverCollection
