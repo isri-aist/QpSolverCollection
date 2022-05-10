@@ -32,6 +32,17 @@ jobs:
     env:
       ROS_DISTRO: melodic
     steps:
+      - name: Check secrets
+        run: |
+          if test -n "$GITLAB_TOKEN"; then
+            echo "ENABLE_PRIVATE_SOLVERS=ON" >> $GITHUB_ENV
+            echo "Install private solvers."
+          else
+            echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
+            echo "NOT install private solvers."
+          fi
+        env:
+          GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install ROS
         run: |
           set -e
@@ -166,12 +177,14 @@ jobs:
           -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
           make && sudo make install
       - name: Checkout eigen-lssol
+        if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         run: |
           git clone "https://m-murooka_at_aist_go_jp:$GITLAB_TOKEN@gite.lirmm.fr/multi-contact/eigen-lssol" \
           --recursive ${GITHUB_WORKSPACE}/eigen-lssol
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install eigen-lssol
+        if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         run: |
           set -x
           set -e
@@ -186,7 +199,8 @@ jobs:
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
           . devel/setup.bash
-          catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DDEFAULT_ENABLE_ALL=ON -DINSTALL_DOCUMENTATION=ON
+          catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+          -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
         run: |
           set -e
