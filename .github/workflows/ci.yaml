@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - '**'
+  schedule:
+    - cron: '0 0 * * 0'
 
 jobs:
 
@@ -32,6 +34,19 @@ jobs:
     env:
       ROS_DISTRO: melodic
     steps:
+      - name: Check secrets
+        run: |
+          if test -n "$GITLAB_TOKEN"; then
+            echo "Install private solvers."
+            echo "ENABLE_PRIVATE_SOLVERS=ON" >> $GITHUB_ENV
+            echo "SKIP_PRIVATE_SOLVER_TEST=OFF" >> $GITHUB_ENV
+          else
+            echo "NOT install private solvers."
+            echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
+            echo "SKIP_PRIVATE_SOLVER_TEST=ON" >> $GITHUB_ENV
+          fi
+        env:
+          GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install ROS
         run: |
           set -e
@@ -42,9 +57,13 @@ jobs:
           sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base python-catkin-tools python-rosdep doxygen graphviz
       - name: Setup catkin workspace
         run: |
+          set -e
+          set -x
           mkdir -p ${GITHUB_WORKSPACE}/catkin_ws/src/
           cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
           . /opt/ros/${ROS_DISTRO}/setup.bash
+          set -x
           catkin init
           catkin build --limit-status-rate 0.1
       - name: Checkout repository code
@@ -57,7 +76,9 @@ jobs:
           set -e
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
           . devel/setup.bash
+          set -x
           sudo rosdep init
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
@@ -70,8 +91,8 @@ jobs:
           path: eigen-qld
       - name: Install eigen-qld
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/eigen-qld
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
@@ -84,8 +105,8 @@ jobs:
           path: eigen-quadprog
       - name: Install eigen-quadprog
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/eigen-quadprog
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
@@ -99,8 +120,8 @@ jobs:
           path: jrl-qp
       - name: Install jrl-qp
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/jrl-qp
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
@@ -113,8 +134,8 @@ jobs:
           path: qpOASES
       - name: Install qpOASES
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/qpOASES
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
@@ -127,8 +148,8 @@ jobs:
           path: osqp
       - name: Install osqp
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/osqp
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
@@ -141,8 +162,8 @@ jobs:
           path: osqp-eigen
       - name: Install osqp-eigen
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/osqp-eigen
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
@@ -156,8 +177,8 @@ jobs:
           path: nasoq
       - name: Install nasoq
         run: |
-          set -x
           set -e
+          set -x
           sudo apt-get install -qq libmetis-dev
           cd ${GITHUB_WORKSPACE}/nasoq
           mkdir build && cd build
@@ -166,15 +187,17 @@ jobs:
           -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
           make && sudo make install
       - name: Checkout eigen-lssol
+        if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         run: |
           git clone "https://m-murooka_at_aist_go_jp:$GITLAB_TOKEN@gite.lirmm.fr/multi-contact/eigen-lssol" \
           --recursive ${GITHUB_WORKSPACE}/eigen-lssol
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install eigen-lssol
+        if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         run: |
-          set -x
           set -e
+          set -x
           cd ${GITHUB_WORKSPACE}/eigen-lssol
           mkdir build && cd build
           cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
@@ -185,19 +208,25 @@ jobs:
           set -e
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
           . devel/setup.bash
-          catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DDEFAULT_ENABLE_ALL=ON -DINSTALL_DOCUMENTATION=ON
+          set -x
+          catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
+          -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} \
+          -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
         run: |
           set -e
           set -x
           cd ${GITHUB_WORKSPACE}/catkin_ws
+          set +x
           . devel/setup.bash
+          set -x
           catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- qp_solver_collection --no-deps
           catkin_test_results --verbose --all build
       - name: Upload documentation
         # Only run on master branch and for one configuration
-        if: matrix.build-type == 'RelWithDebInfo' && github.ref == 'refs/heads/master'
+        if: matrix.build-type == 'RelWithDebInfo' && github.repository_owner== 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x

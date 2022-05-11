@@ -15,6 +15,11 @@ option(ENABLE_QPOASES "Enable qpOASES" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_OSQP "Enable OSQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
 
+option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
+if(${SKIP_PRIVATE_SOLVER_TEST})
+  add_definitions(-DSKIP_PRIVATE_SOLVER_TEST)
+endif()
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   )
