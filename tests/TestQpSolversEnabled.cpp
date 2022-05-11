@@ -27,10 +27,12 @@ TEST(TestQpSolversEnabled, QuadProg)
   checkOneSolver(QpSolverType::QuadProg);
 }
 
+#ifndef SKIP_PRIVATE_SOLVER_TEST
 TEST(TestQpSolversEnabled, LSSOL)
 {
   checkOneSolver(QpSolverType::LSSOL);
 }
+#endif
 
 TEST(TestQpSolversEnabled, JRLQP)
 {

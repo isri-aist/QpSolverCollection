@@ -35,11 +35,13 @@ jobs:
       - name: Check secrets
         run: |
           if test -n "$GITLAB_TOKEN"; then
-            echo "ENABLE_PRIVATE_SOLVERS=ON" >> $GITHUB_ENV
             echo "Install private solvers."
+            echo "ENABLE_PRIVATE_SOLVERS=ON" >> $GITHUB_ENV
+            echo "SKIP_PRIVATE_SOLVER_TEST=OFF" >> $GITHUB_ENV
           else
-            echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
             echo "NOT install private solvers."
+            echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
+            echo "SKIP_PRIVATE_SOLVER_TEST=ON" >> $GITHUB_ENV
           fi
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
@@ -200,7 +202,8 @@ jobs:
           cd ${GITHUB_WORKSPACE}/catkin_ws
           . devel/setup.bash
           catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
-          -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DINSTALL_DOCUMENTATION=ON
+          -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} \
+          -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
         run: |
           set -e
