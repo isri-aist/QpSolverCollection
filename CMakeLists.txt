@@ -28,11 +28,13 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+set(EXIST_ENABLED_SOLVER FALSE)
 macro(add_qp_solver _SOLVER_NAME _PACKAGE_NAME)
   if(${ENABLE_${_SOLVER_NAME}})
     if(NOT "${_PACKAGE_NAME}" STREQUAL "")
       find_package(${_PACKAGE_NAME} REQUIRED)
     endif()
+    set(EXIST_ENABLED_SOLVER TRUE)
   endif()
   message(NOTICE "- ENABLE_${_SOLVER_NAME}: ${ENABLE_${_SOLVER_NAME}}")
 endmacro()
@@ -57,6 +59,10 @@ add_qp_solver(OSQP OsqpEigen)
 
 # NASOQ
 add_qp_solver(NASOQ nasoq)
+
+if(NOT ${EXIST_ENABLED_SOLVER})
+  message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")
+endif()
 
 catkin_package(
   CATKIN_DEPENDS
