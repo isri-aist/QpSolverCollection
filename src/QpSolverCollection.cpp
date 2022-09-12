@@ -200,7 +200,7 @@ Eigen::VectorXd QpSolverQuadprog::solve(int dim_var,
   else
   {
     solve_failed_ = true;
-    ROS_WARN_STREAM("[QpSolverQuadprog::solve] Failed to solve: " << quadprog_->fail());
+    QSC_WARN_STREAM("[QpSolverQuadprog::solve] Failed to solve: " << quadprog_->fail());
   }
 
   return quadprog_->result();
