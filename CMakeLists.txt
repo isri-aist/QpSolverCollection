@@ -14,10 +14,11 @@ option(ENABLE_QPOASES "Enable qpOASES" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_OSQP "Enable OSQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
 
+option(FORCE_ALL_SOLVER_TEST "Test for all solvers regardless of options" OFF)
+mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
+
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
-if(${SKIP_PRIVATE_SOLVER_TEST})
-  add_definitions(-DSKIP_PRIVATE_SOLVER_TEST)
-endif()
+mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
 # Option to switch between Catkin and pure CMake build system
 option(QP_SOLVER_COLLECTION_STANDALONE "If ON, build without requiring Catkin and roscpp" OFF)
