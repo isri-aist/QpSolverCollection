@@ -12,13 +12,13 @@
 
 #if QP_SOLVER_COLLECTION_STANDALONE
 #  include <iostream>
-#  define QSC_ERROR_STREAM(x) std::cerr << x
-#  define QSC_WARN_STREAM(x) std::cerr << x
-#  define QSC_INFO_STREAM(x) std::cerr << x
+#  define QSC_ERROR_STREAM(x) std::cerr << x << "\n"
+#  define QSC_WARN_STREAM(x) std::cerr << x << "\n"
+#  define QSC_INFO_STREAM(x) std::cerr << x << "\n"
 #else
 #  include <ros/console.h>
 #  define QSC_ERROR_STREAM ROS_ERROR_STREAM
-#  define QSC_WARN_STREAM ROS_INFO_STREAM
+#  define QSC_WARN_STREAM ROS_WARN_STREAM
 #  define QSC_INFO_STREAM ROS_INFO_STREAM
 #endif
 
