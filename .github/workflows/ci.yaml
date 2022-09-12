@@ -103,6 +103,14 @@ jobs:
           sudo rosdep init
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
+      - name: Install GTest
+        if: matrix.standalone == 'ON' && matrix.os == 'ubuntu-18.04'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          build-type: ${{ matrix.build-type }}
+          github: |
+            - path: google/googletest
+              ref: release-1.12.1
       - name: Install solvers
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
