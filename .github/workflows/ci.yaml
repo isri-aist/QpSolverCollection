@@ -108,7 +108,7 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           ubuntu: |
-            apt: libmetis-dev libeigen3-dev graphviz doxygen
+            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen
           github: |
             - path: jrl-umi3218/eigen-qld
               options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
