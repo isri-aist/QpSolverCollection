@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install clang-format-10
         run: |
           sudo apt-get -qq update
@@ -82,13 +82,13 @@ jobs:
           catkin build --limit-status-rate 0.1
       - name: Checkout repository code
         if: matrix.standalone == 'OFF'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
           path: catkin_ws/src/QpSolverCollection
       - name: Checkout repository code
         if: matrix.standalone == 'ON'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Rosdep install
