@@ -2,8 +2,9 @@ add_library(QpSolverCollection
   QpSolverCollection.cpp
   )
 
+target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
+
 if(QP_SOLVER_COLLECTION_STANDALONE)
-  target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
   install(TARGETS QpSolverCollection

@@ -1,6 +1,5 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.8)
 project(qp_solver_collection)
-
 
 # Options for solvers
 option(DEFAULT_ENABLE_ALL "Enable all QP solvers by default" OFF)
@@ -27,7 +26,6 @@ if(NOT QP_SOLVER_COLLECTION_STANDALONE)
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     )
-  add_compile_options(-std=c++17)
 else()
   if(CMAKE_VERSION VERSION_LESS "3.16")
     message(FATAL_ERROR "To enable QP_SOLVER_COLLECTION_STANDALONE option you need at least CMake 3.16")
