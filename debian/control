@@ -16,6 +16,7 @@ Build-Depends: debhelper (>= 9),
                libeigen3-dev (>= 3.2),
                libeigen-qld-dev,
                libeigen-quadprog-dev,
+               libgtest-dev,
                libmetis-dev
 
 Package: qpsolvercollection
