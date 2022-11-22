@@ -22,7 +22,11 @@ if(QP_SOLVER_COLLECTION_STANDALONE)
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
   install(TARGETS QpSolverCollection
-          EXPORT ${PROJECT_NAME})
+          EXPORT ${PROJECT_NAME}
+          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+          RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  )
 else()
   target_include_directories(QpSolverCollection PUBLIC
     ${catkin_INCLUDE_DIRS})
