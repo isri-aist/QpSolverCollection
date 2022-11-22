@@ -2,13 +2,26 @@ add_library(QpSolverCollection
   QpSolverCollection.cpp
   )
 
+target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
+
+if(QP_SOLVER_COLLECTION_STANDALONE)
+  target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
+
+  install(TARGETS QpSolverCollection
+          EXPORT ${PROJECT_NAME})
+else()
+  target_include_directories(QpSolverCollection PUBLIC
+    ${catkin_INCLUDE_DIRS})
+
+  target_link_libraries(QpSolverCollection PUBLIC
+    ${catkin_LIBRARIES}
+  )
+endif()
+
 target_include_directories(QpSolverCollection PUBLIC
-  ${PROJECT_SOURCE_DIR}/include
-  ${catkin_INCLUDE_DIRS}
-  )
-target_link_libraries(QpSolverCollection PUBLIC
-  ${catkin_LIBRARIES}
-  )
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
+
 if(${ENABLE_QLD})
   target_link_libraries(QpSolverCollection PRIVATE
     eigen-qld::eigen-qld)

@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install clang-format-10
         run: |
           sudo apt-get -qq update
@@ -31,9 +31,11 @@ jobs:
       matrix:
         os: [ubuntu-20.04, ubuntu-18.04]
         build-type: [Debug, RelWithDebInfo]
+        standalone: [ON, OFF]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set ROS version
+        if: matrix.standalone == 'OFF'
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-20.04" ]
           then
@@ -49,14 +51,18 @@ jobs:
             echo "Install private solvers."
             echo "ENABLE_PRIVATE_SOLVERS=ON" >> $GITHUB_ENV
             echo "SKIP_PRIVATE_SOLVER_TEST=OFF" >> $GITHUB_ENV
+            git config --global url."https://m-murooka_at_aist_go_jp:${GITLAB_TOKEN}@gite.lirmm.fr/".insteadOf git@gite.lirmm.fr:
           else
             echo "NOT install private solvers."
             echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
             echo "SKIP_PRIVATE_SOLVER_TEST=ON" >> $GITHUB_ENV
           fi
+          # Temporary change to clone qpOASES
+          git config --global url."https://github.com/".insteadOf git@github.com:
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install ROS
+        if: matrix.standalone == 'OFF'
         run: |
           set -e
           set -x
@@ -65,6 +71,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
       - name: Setup catkin workspace
+        if: matrix.standalone == 'OFF'
         run: |
           set -e
           set -x
@@ -76,11 +83,18 @@ jobs:
           catkin init
           catkin build --limit-status-rate 0.1
       - name: Checkout repository code
-        uses: actions/checkout@v2
+        if: matrix.standalone == 'OFF'
+        uses: actions/checkout@v3
         with:
           submodules: recursive
           path: catkin_ws/src/QpSolverCollection
+      - name: Checkout repository code
+        if: matrix.standalone == 'ON'
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - name: Rosdep install
+        if: matrix.standalone == 'OFF'
         run: |
           set -e
           set -x
@@ -91,128 +105,45 @@ jobs:
           sudo rosdep init
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
-      #### [Start] Install QP solvers ####
-      - name: Checkout eigen-qld
-        uses: actions/checkout@v2
+      - name: Install GTest
+        if: matrix.standalone == 'ON' && matrix.os == 'ubuntu-18.04'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
-          repository: jrl-umi3218/eigen-qld
-          submodules: recursive
-          path: eigen-qld
-      - name: Install eigen-qld
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/eigen-qld
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
-          make && sudo make install
-      - name: Checkout eigen-quadprog
-        uses: actions/checkout@v2
+          build-type: ${{ matrix.build-type }}
+          github: |
+            - path: google/googletest
+              ref: release-1.12.1
+      - name: Install solvers
+        uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
-          repository: jrl-umi3218/eigen-quadprog
-          submodules: recursive
-          path: eigen-quadprog
-      - name: Install eigen-quadprog
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/eigen-quadprog
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
-          make && sudo make install
-      - name: Checkout jrl-qp
-        uses: actions/checkout@v2
-        with:
-          repository: jrl-umi3218/jrl-qp
-          ref: topic/BlockStructure
-          submodules: recursive
-          path: jrl-qp
-      - name: Install jrl-qp
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/jrl-qp
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
-          make && sudo make install
-      - name: Checkout qpOASES
-        uses: actions/checkout@v2
-        with:
-          repository: coin-or/qpOASES
-          submodules: recursive
-          path: qpOASES
-      - name: Install qpOASES
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/qpOASES
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
-          make && sudo make install
-      - name: Checkout osqp
-        uses: actions/checkout@v2
-        with:
-          repository: osqp/osqp
-          submodules: recursive
-          path: osqp
-      - name: Install osqp
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/osqp
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-          make && sudo make install
-      - name: Checkout osqp-eigen
-        uses: actions/checkout@v2
-        with:
-          repository: robotology/osqp-eigen
-          submodules: recursive
-          path: osqp-eigen
-      - name: Install osqp-eigen
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/osqp-eigen
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }}
-          make && sudo make install
-      - name: Checkout nasoq
-        uses: actions/checkout@v2
-        with:
-          repository: mmurooka/nasoq
-          ref: cmake-install
-          submodules: recursive
-          path: nasoq
-      - name: Install nasoq
-        run: |
-          set -e
-          set -x
-          sudo apt-get install -qq libmetis-dev
-          cd ${GITHUB_WORKSPACE}/nasoq
-          mkdir build && cd build
-          cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
-          -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON \
-          -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
-          make && sudo make install
-      - name: Checkout eigen-lssol
+          build-type: ${{ matrix.build-type }}
+          ubuntu: |
+            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen
+          github: |
+            - path: jrl-umi3218/eigen-qld
+              options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: jrl-umi3218/eigen-quadprog
+              options: -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: jrl-umi3218/jrl-qp
+              ref: topic/BlockStructure
+              options: -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: coin-or/qpOASES
+              options: -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
+            - path: osqp/osqp
+            - path: robotology/osqp-eigen
+            - path: mmurooka/nasoq
+              ref: cmake-install
+              options: -DCMAKE_INSTALL_PREFIX=/usr/local -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
+      - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
-        run: |
-          git clone "https://m-murooka_at_aist_go_jp:$GITLAB_TOKEN@gite.lirmm.fr/multi-contact/eigen-lssol" \
-          --recursive ${GITHUB_WORKSPACE}/eigen-lssol
-        env:
-          GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
-      - name: Install eigen-lssol
-        if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
-        run: |
-          set -e
-          set -x
-          cd ${GITHUB_WORKSPACE}/eigen-lssol
-          mkdir build && cd build
-          cmake .. -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
-          make && sudo make install
-      #### [End] Install QP solvers ####
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          build-type: ${{ matrix.build-type }}
+          github: |
+            - path: git@gite.lirmm.fr/multi-contact/eigen-lssol
+              options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
       - name: Catkin build
+        if: matrix.standalone == 'OFF'
         run: |
           set -e
           set -x
@@ -222,8 +153,9 @@ jobs:
           set -x
           catkin build --limit-status-rate 0.1 -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
           -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} \
-          -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DINSTALL_DOCUMENTATION=ON
+          -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
+        if: matrix.standalone == 'OFF'
         run: |
           set -e
           set -x
@@ -233,9 +165,15 @@ jobs:
           set -x
           catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- qp_solver_collection --no-deps
           catkin_test_results --verbose --all build
+      - name: Build and test
+        if: matrix.standalone == 'ON'
+        uses: jrl-umi3218/github-actions/build-cmake-project@master
+        with:
+          build-type: ${{ matrix.build-type }}
+          options: -DQP_SOLVER_COLLECTION_STANDALONE:BOOL=ON -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
       - name: Upload documentation
         # Only run for one configuration and on origin master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'OFF' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x

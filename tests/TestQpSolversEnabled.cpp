@@ -16,43 +16,54 @@ TEST(TestQpSolversEnabled, Any)
 {
   checkOneSolver(QpSolverType::Any);
 }
-
+#if ENABLE_QLD || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, QLD)
 {
   checkOneSolver(QpSolverType::QLD);
 }
+#endif
 
+#if ENABLE_QUADPROG || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, QuadProg)
 {
   checkOneSolver(QpSolverType::QuadProg);
 }
+#endif
 
-#ifndef SKIP_PRIVATE_SOLVER_TEST
+#if ENABLE_LSSOL || (defined FORCE_ALL_SOLVER_TEST && !defined SKIP_PRIVATE_SOLVER_TEST)
 TEST(TestQpSolversEnabled, LSSOL)
 {
   checkOneSolver(QpSolverType::LSSOL);
 }
 #endif
 
+#if ENABLE_JRLQP || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, JRLQP)
 {
   checkOneSolver(QpSolverType::JRLQP);
 }
+#endif
 
+#if ENABLE_QPOASES || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, qpOASES)
 {
   checkOneSolver(QpSolverType::qpOASES);
 }
+#endif
 
+#if ENABLE_OSQP || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, OSQP)
 {
   checkOneSolver(QpSolverType::OSQP);
 }
+#endif
 
+#if ENABLE_NASOQ || defined FORCE_ALL_SOLVER_TEST
 TEST(TestQpSolversEnabled, NASOQ)
 {
   checkOneSolver(QpSolverType::NASOQ);
 }
+#endif
 
 int main(int argc, char ** argv)
 {
