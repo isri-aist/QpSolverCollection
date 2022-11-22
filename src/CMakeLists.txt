@@ -27,6 +27,13 @@ if(QP_SOLVER_COLLECTION_STANDALONE)
           ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
           RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
   )
+
+  install(FILES
+      "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
+      "${QP_SOLVER_OPTIONS_HEADER_FILE}"
+    DESTINATION
+      "${CMAKE_INSTALL_INCLUDEDIR}/qp_solver_collection"
+  )
 else()
   target_include_directories(QpSolverCollection PUBLIC
     ${catkin_INCLUDE_DIRS})
