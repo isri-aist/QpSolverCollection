@@ -6,7 +6,7 @@ Unified C++ interface for quadratic programming solvers
 
 ## Features
 - Unified C++ interface to many QP solvers
-- Can be built as a ROS package
+- Can be built as a standalone package or ROS package (depending on `QP_SOLVER_COLLECTION_STANDALONE` option)
 - High portability decoupled from each QP solver by [Pimpl technique](https://en.cppreference.com/w/cpp/language/pimpl)
 
 ## Supported QP solvers
