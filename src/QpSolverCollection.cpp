@@ -571,7 +571,6 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
                                      const Eigen::Ref<const Eigen::VectorXd> & x_max)
 {
   // Allocate memory
-  // TODO 初期値はゼロなのか？
   if(!(qp_dim_->nv == dim_var && qp_dim_->ne == dim_eq && qp_dim_->ng == dim_ineq))
   {
     int qp_dim_size = d_dense_qp_dim_memsize();
