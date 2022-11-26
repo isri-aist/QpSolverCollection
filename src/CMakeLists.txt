@@ -54,3 +54,7 @@ if(${ENABLE_NASOQ})
   target_link_libraries(QpSolverCollection PRIVATE
     nasoq)
 endif()
+if(${ENABLE_HPIPM})
+  target_link_libraries(QpSolverCollection PRIVATE
+    blasfeo hpipm)
+endif()
