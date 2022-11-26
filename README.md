@@ -16,6 +16,7 @@ Unified C++ interface for quadratic programming solvers
 - [qpOASES](https://github.com/coin-or/qpOASES)
 - [OSQP](https://osqp.org/)
 - [NASOQ](https://nasoq.github.io/)
+- [HPIPM](https://github.com/giaf/hpipm)
 - [LSSOL](https://gite.lirmm.fr/multi-contact/eigen-lssol) (private)
 
 ## Installation
@@ -74,6 +75,10 @@ Add `-DENABLE_OSQP=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 #### NASOQ
 Install [cmake-install branch](https://github.com/mmurooka/nasoq/tree/cmake-install) of nasoq.  
 Add `-DENABLE_NASOQ=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
+
+#### HPIPM
+Install master branch of [blasfeo](https://github.com/giaf/blasfeo) and [find-package-blasfeo branch](https://github.com/mmurooka/hpipm/tree/find-package-blasfeo) of hpipm.  
+Add `-DENABLE_HPIPM=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### LSSOL (private)
 Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).  
