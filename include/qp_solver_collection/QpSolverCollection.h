@@ -60,7 +60,8 @@ enum class QpSolverType
   JRLQP,
   qpOASES,
   OSQP,
-  NASOQ
+  NASOQ,
+  HPIPM
 };
 
 /*! \brief Convert std::string to QpSolverType. */
@@ -89,6 +90,8 @@ inline string to_string(QpSolverType qp_solver_type)
       return "QpSolverType::OSQP";
     case QpSolverType::NASOQ:
       return "QpSolverType::NASOQ";
+    case QpSolverType::HPIPM:
+      return "QpSolverType::HPIPM";
     default:
       QSC_ERROR_STREAM("[QpSolverType] Unsupported value: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
@@ -193,7 +196,7 @@ public:
 
       \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C}
      \boldsymbol{x} \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while
-     LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints.
+     LSSOL, JRLQP, QPOASES, OSQP, and HPIPM support both-sided constraints.
   */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -445,6 +448,29 @@ protected:
   Eigen::SparseMatrix<double, Eigen::ColMajor, int> C_with_bound_sparse_;
 
   double sparse_duration_ = 0; // [ms]
+};
+#endif
+
+#if ENABLE_HPIPM
+/** \brief QP solver HPIPM. */
+class QpSolverHpipm : public QpSolver
+{
+public:
+  /** \brief Constructor. */
+  QpSolverHpipm();
+
+  /** \brief Solve QP. */
+  virtual Eigen::VectorXd solve(int dim_var,
+                                int dim_eq,
+                                int dim_ineq,
+                                Eigen::Ref<Eigen::MatrixXd> Q,
+                                const Eigen::Ref<const Eigen::VectorXd> & c,
+                                const Eigen::Ref<const Eigen::MatrixXd> & A,
+                                const Eigen::Ref<const Eigen::VectorXd> & b,
+                                const Eigen::Ref<const Eigen::MatrixXd> & C,
+                                const Eigen::Ref<const Eigen::VectorXd> & d,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_min,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 };
 #endif
 

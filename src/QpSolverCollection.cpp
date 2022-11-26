@@ -31,6 +31,21 @@
 #if ENABLE_NASOQ
 #include <nasoq/nasoq_eigen.h>
 #endif
+#if ENABLE_HPIPM
+#include <blasfeo_target.h>
+#include <blasfeo_common.h>
+#include <blasfeo_v_aux_ext_dep.h>
+#include <blasfeo_d_aux_ext_dep.h>
+#include <blasfeo_i_aux_ext_dep.h>
+#include <blasfeo_d_aux.h>
+#include <blasfeo_d_blas.h>
+#include <blasfeo_d_aux_ext_dep.h>
+#include <hpipm_d_dense_qp_ipm.h>
+#include <hpipm_d_dense_qp_dim.h>
+#include <hpipm_d_dense_qp.h>
+#include <hpipm_d_dense_qp_sol.h>
+#include <hpipm_timing.h>
+#endif
 // clang-format on
 
 using namespace QpSolverCollection;
@@ -68,6 +83,10 @@ QpSolverType QpSolverCollection::strToQpSolverType(const std::string & qp_solver
   else if(qp_solver_type == "NASOQ")
   {
     return QpSolverType::NASOQ;
+  }
+  else if(qp_solver_type == "HPIPM")
+  {
+    return QpSolverType::HPIPM;
   }
   else
   {
@@ -517,6 +536,29 @@ Eigen::VectorXd QpSolverNasoq::solve(int dim_var,
 }
 #endif
 
+#if ENABLE_HPIPM
+QpSolverHpipm::QpSolverHpipm()
+{
+  type_ = QpSolverType::HPIPM;
+}
+
+Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
+                                     int dim_eq,
+                                     int dim_ineq,
+                                     Eigen::Ref<Eigen::MatrixXd> Q,
+                                     const Eigen::Ref<const Eigen::VectorXd> & c,
+                                     const Eigen::Ref<const Eigen::MatrixXd> & A,
+                                     const Eigen::Ref<const Eigen::VectorXd> & b,
+                                     const Eigen::Ref<const Eigen::MatrixXd> & C,
+                                     const Eigen::Ref<const Eigen::VectorXd> & d,
+                                     const Eigen::Ref<const Eigen::VectorXd> & x_min,
+                                     const Eigen::Ref<const Eigen::VectorXd> & x_max)
+{
+  // TODO
+  return Eigen::VectorXd(0);
+}
+#endif
+
 QpSolverType QpSolverCollection::getAnyQpSolverType()
 {
   if(ENABLE_QLD)
@@ -546,6 +588,10 @@ QpSolverType QpSolverCollection::getAnyQpSolverType()
   else if(ENABLE_NASOQ)
   {
     return QpSolverType::NASOQ;
+  }
+  else if(ENABLE_HPIPM)
+  {
+    return QpSolverType::HPIPM;
   }
   else
   {
@@ -587,6 +633,10 @@ bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
   else if(qp_solver_type == QpSolverType::NASOQ)
   {
     return ENABLE_NASOQ;
+  }
+  else if(qp_solver_type == QpSolverType::HPIPM)
+  {
+    return ENABLE_HPIPM;
   }
   else
   {
@@ -643,6 +693,12 @@ std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverTyp
   {
 #if ENABLE_NASOQ
     qp = std::make_shared<QpSolverNasoq>();
+#endif
+  }
+  else if(qp_solver_type == QpSolverType::HPIPM)
+  {
+#if ENABLE_HPIPM
+    qp = std::make_shared<QpSolverHpipm>();
 #endif
   }
   else
