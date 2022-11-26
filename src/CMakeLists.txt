@@ -1,6 +1,14 @@
 add_library(QpSolverCollection
   QpSolverCollection.cpp
-  )
+  QpSolverQld.cpp
+  QpSolverQuadprog.cpp
+  QpSolverLssol.cpp
+  QpSolverJrlqp.cpp
+  QpSolverQpoases.cpp
+  QpSolverOsqp.cpp
+  QpSolverNasoq.cpp
+  QpSolverHpipm.cpp
+)
 
 target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
 
