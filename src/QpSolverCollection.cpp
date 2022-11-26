@@ -596,7 +596,7 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
     ipm_ws_mem_ = malloc(ipm_ws_size);
     d_dense_qp_ipm_ws_create(qp_dim_.get(), ipm_arg_.get(), ipm_ws_.get(), ipm_ws_mem_);
 
-    opt_x_mem_ = (double *)malloc(dim_var * sizeof(double));
+    opt_x_mem_ = static_cast<double *>(malloc(dim_var * sizeof(double)));
   }
 
   // Set QP coefficients
@@ -606,14 +606,14 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
     d_dense_qp_set_A(const_cast<double *>(A.data()), qp_.get());
     d_dense_qp_set_b(const_cast<double *>(b.data()), qp_.get());
     d_dense_qp_set_C(const_cast<double *>(C.data()), qp_.get());
-    std::vector<double> lg(dim_ineq, -1 * std::numeric_limits<double>::infinity());
+    std::vector<double> lg(dim_ineq, -1 * bound_limit_);
     d_dense_qp_set_lg(lg.data(), qp_.get());
-    d_dense_qp_set_ug(const_cast<double *>(d.data()), qp_.get());
+    d_dense_qp_set_ug(const_cast<double *>(d.cwiseMin(bound_limit_).eval().data()), qp_.get());
     std::vector<int> idxb(dim_var);
     std::iota(idxb.begin(), idxb.end(), 0);
     d_dense_qp_set_idxb(idxb.data(), qp_.get());
-    d_dense_qp_set_lb(const_cast<double *>(x_min.data()), qp_.get());
-    d_dense_qp_set_ub(const_cast<double *>(x_max.data()), qp_.get());
+    d_dense_qp_set_lb(const_cast<double *>(x_min.cwiseMax(-1 * bound_limit_).eval().data()), qp_.get());
+    d_dense_qp_set_ub(const_cast<double *>(x_max.cwiseMin(bound_limit_).eval().data()), qp_.get());
   }
 
   // Solve QP
@@ -623,7 +623,7 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
 
     int status;
     d_dense_qp_ipm_get_status(ipm_ws_.get(), &status);
-    if(status == SUCCESS) // enum hpipm_status
+    if(status == SUCCESS || status == MAX_ITER) // enum hpipm_status
     {
       solve_failed_ = false;
     }

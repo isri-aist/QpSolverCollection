@@ -481,6 +481,14 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
 
+public:
+  /** \brief Maximum limits of inequality bounds.
+
+      \note Setting very large values for inequality bounds will result in NaN or incorrect solutions.
+     std::numeric_limits<double>::infinity(), std::numeric_limits<double>::max(), and even 1e20 have this problem.
+  */
+  double bound_limit_ = 1e10;
+
 protected:
   std::unique_ptr<struct d_dense_qp_dim> qp_dim_;
   std::unique_ptr<struct d_dense_qp> qp_;
