@@ -52,11 +52,11 @@ find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 set(EXIST_ENABLED_SOLVER FALSE)
-macro(add_qp_solver _SOLVER_NAME _PACKAGE_NAME)
+macro(add_qp_solver _SOLVER_NAME)
   if(${ENABLE_${_SOLVER_NAME}})
-    if(NOT "${_PACKAGE_NAME}" STREQUAL "")
+    foreach(_PACKAGE_NAME ${ARGN})
       find_package(${_PACKAGE_NAME} REQUIRED)
-    endif()
+    endforeach()
     set(EXIST_ENABLED_SOLVER TRUE)
   endif()
   message(NOTICE "- ENABLE_${_SOLVER_NAME}: ${ENABLE_${_SOLVER_NAME}}")
@@ -75,7 +75,7 @@ add_qp_solver(LSSOL eigen-lssol)
 add_qp_solver(JRLQP jrl-qp)
 
 # qpOASES
-add_qp_solver(QPOASES "")
+add_qp_solver(QPOASES)
 
 # OsqpEigen
 add_qp_solver(OSQP OsqpEigen)
