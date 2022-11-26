@@ -47,6 +47,12 @@ namespace OsqpEigen
 class Solver;
 } // namespace OsqpEigen
 
+struct d_dense_qp_dim;
+struct d_dense_qp;
+struct d_dense_qp_sol;
+struct d_dense_qp_ipm_arg;
+struct d_dense_qp_ipm_ws;
+
 namespace QpSolverCollection
 {
 /** \brief QP solver type. */
@@ -459,6 +465,9 @@ public:
   /** \brief Constructor. */
   QpSolverHpipm();
 
+  /** \brief Destructor. */
+  ~QpSolverHpipm();
+
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -471,6 +480,21 @@ public:
                                 const Eigen::Ref<const Eigen::VectorXd> & d,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_min,
                                 const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
+
+protected:
+  std::unique_ptr<struct d_dense_qp_dim> qp_dim_;
+  std::unique_ptr<struct d_dense_qp> qp_;
+  std::unique_ptr<struct d_dense_qp_sol> qp_sol_;
+  std::unique_ptr<struct d_dense_qp_ipm_arg> ipm_arg_;
+  std::unique_ptr<struct d_dense_qp_ipm_ws> ipm_ws_;
+
+  void * qp_dim_mem_;
+  void * qp_mem_;
+  void * qp_sol_mem_;
+  void * ipm_arg_mem_;
+  void * ipm_ws_mem_;
+
+  double * opt_x_mem_;
 };
 #endif
 
