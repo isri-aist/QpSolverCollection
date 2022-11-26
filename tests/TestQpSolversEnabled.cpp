@@ -65,6 +65,13 @@ TEST(TestQpSolversEnabled, NASOQ)
 }
 #endif
 
+#if ENABLE_HPIPM || defined FORCE_ALL_SOLVER_TEST
+TEST(TestQpSolversEnabled, HPIPM)
+{
+  checkOneSolver(QpSolverType::HPIPM);
+}
+#endif
+
 int main(int argc, char ** argv)
 {
   testing::InitGoogleTest(&argc, argv);

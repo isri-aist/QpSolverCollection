@@ -19,7 +19,8 @@ void solveOneQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
       QpSolverType::JRLQP,
       QpSolverType::qpOASES,
       QpSolverType::OSQP,
-      QpSolverType::NASOQ
+      QpSolverType::NASOQ,
+      QpSolverType::HPIPM
   };
   // clang-format on
   for(const auto & qp_solver_type : qp_solver_type_list)
