@@ -550,12 +550,30 @@ QpSolverHpipm::QpSolverHpipm()
 
 QpSolverHpipm::~QpSolverHpipm()
 {
-  free(qp_dim_mem_);
-  free(qp_mem_);
-  free(qp_sol_mem_);
-  free(ipm_arg_mem_);
-  free(ipm_ws_mem_);
-  free(opt_x_mem_);
+  if(qp_dim_mem_ != nullptr)
+  {
+    free(qp_dim_mem_);
+  }
+  if(qp_mem_ != nullptr)
+  {
+    free(qp_mem_);
+  }
+  if(qp_sol_mem_ != nullptr)
+  {
+    free(qp_sol_mem_);
+  }
+  if(ipm_arg_mem_ != nullptr)
+  {
+    free(ipm_arg_mem_);
+  }
+  if(ipm_ws_mem_ != nullptr)
+  {
+    free(ipm_ws_mem_);
+  }
+  if(opt_x_mem_ != nullptr)
+  {
+    free(opt_x_mem_);
+  }
 }
 
 Eigen::VectorXd QpSolverHpipm::solve(int dim_var,

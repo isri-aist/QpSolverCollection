@@ -496,11 +496,11 @@ protected:
   std::unique_ptr<struct d_dense_qp_ipm_arg> ipm_arg_;
   std::unique_ptr<struct d_dense_qp_ipm_ws> ipm_ws_;
 
-  void * qp_dim_mem_;
-  void * qp_mem_;
-  void * qp_sol_mem_;
-  void * ipm_arg_mem_;
-  void * ipm_ws_mem_;
+  void * qp_dim_mem_ = nullptr;
+  void * qp_mem_ = nullptr;
+  void * qp_sol_mem_ = nullptr;
+  void * ipm_arg_mem_ = nullptr;
+  void * ipm_ws_mem_ = nullptr;
 
   double * opt_x_mem_;
 };
