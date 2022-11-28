@@ -60,8 +60,6 @@ jobs:
             echo "ENABLE_PRIVATE_SOLVERS=OFF" >> $GITHUB_ENV
             echo "SKIP_PRIVATE_SOLVER_TEST=ON" >> $GITHUB_ENV
           fi
-          # Temporary change to clone qpOASES
-          git config --global url."https://github.com/".insteadOf git@github.com:
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install ROS
