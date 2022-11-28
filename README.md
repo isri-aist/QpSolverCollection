@@ -77,8 +77,8 @@ Install [cmake-install branch](https://github.com/mmurooka/nasoq/tree/cmake-inst
 Add `-DENABLE_NASOQ=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### HPIPM
-Install master branch of [blasfeo](https://github.com/giaf/blasfeo) and [hpipm](https://github.com/giaf/hpipm).
-Add `/opt/blasfeo/lib` and `/opt/hpipm/lib` to the environment variable `LD_LIBRARY_PATH`.
+Install master branch of [blasfeo](https://github.com/giaf/blasfeo) and [hpipm](https://github.com/giaf/hpipm).  
+Add `/opt/blasfeo/lib` and `/opt/hpipm/lib` to the environment variable `LD_LIBRARY_PATH`.  
 Add `-DENABLE_HPIPM=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### LSSOL (private)
