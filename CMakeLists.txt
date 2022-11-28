@@ -12,6 +12,7 @@ option(ENABLE_JRLQP "Enable JRLQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_QPOASES "Enable qpOASES" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_OSQP "Enable OSQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
+option(ENABLE_HPIPM "Enable HPIPM" ${DEFAULT_ENABLE_VALUE})
 
 option(FORCE_ALL_SOLVER_TEST "Test for all solvers regardless of options" OFF)
 mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
@@ -52,11 +53,11 @@ find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 set(EXIST_ENABLED_SOLVER FALSE)
-macro(add_qp_solver _SOLVER_NAME _PACKAGE_NAME)
+macro(add_qp_solver _SOLVER_NAME)
   if(${ENABLE_${_SOLVER_NAME}})
-    if(NOT "${_PACKAGE_NAME}" STREQUAL "")
+    foreach(_PACKAGE_NAME ${ARGN})
       find_package(${_PACKAGE_NAME} REQUIRED)
-    endif()
+    endforeach()
     set(EXIST_ENABLED_SOLVER TRUE)
   endif()
   message(NOTICE "- ENABLE_${_SOLVER_NAME}: ${ENABLE_${_SOLVER_NAME}}")
@@ -75,13 +76,16 @@ add_qp_solver(LSSOL eigen-lssol)
 add_qp_solver(JRLQP jrl-qp)
 
 # qpOASES
-add_qp_solver(QPOASES "")
+add_qp_solver(QPOASES)
 
 # OsqpEigen
 add_qp_solver(OSQP OsqpEigen)
 
 # NASOQ
 add_qp_solver(NASOQ nasoq)
+
+# HPIPM
+add_qp_solver(HPIPM blasfeo hpipm)
 
 if(NOT ${EXIST_ENABLED_SOLVER})
   message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")

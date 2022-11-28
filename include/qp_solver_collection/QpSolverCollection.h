@@ -47,6 +47,12 @@ namespace OsqpEigen
 class Solver;
 } // namespace OsqpEigen
 
+struct d_dense_qp_dim;
+struct d_dense_qp;
+struct d_dense_qp_sol;
+struct d_dense_qp_ipm_arg;
+struct d_dense_qp_ipm_ws;
+
 namespace QpSolverCollection
 {
 /** \brief QP solver type. */
@@ -60,7 +66,8 @@ enum class QpSolverType
   JRLQP,
   qpOASES,
   OSQP,
-  NASOQ
+  NASOQ,
+  HPIPM
 };
 
 /*! \brief Convert std::string to QpSolverType. */
@@ -89,6 +96,8 @@ inline string to_string(QpSolverType qp_solver_type)
       return "QpSolverType::OSQP";
     case QpSolverType::NASOQ:
       return "QpSolverType::NASOQ";
+    case QpSolverType::HPIPM:
+      return "QpSolverType::HPIPM";
     default:
       QSC_ERROR_STREAM("[QpSolverType] Unsupported value: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
@@ -193,7 +202,7 @@ public:
 
       \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C}
      \boldsymbol{x} \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while
-     LSSOL, JRLQP, QPOASES, and OSQP support both-sided constraints.
+     LSSOL, JRLQP, QPOASES, OSQP, and HPIPM support both-sided constraints.
   */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -445,6 +454,55 @@ protected:
   Eigen::SparseMatrix<double, Eigen::ColMajor, int> C_with_bound_sparse_;
 
   double sparse_duration_ = 0; // [ms]
+};
+#endif
+
+#if ENABLE_HPIPM
+/** \brief QP solver HPIPM. */
+class QpSolverHpipm : public QpSolver
+{
+public:
+  /** \brief Constructor. */
+  QpSolverHpipm();
+
+  /** \brief Destructor. */
+  ~QpSolverHpipm();
+
+  /** \brief Solve QP. */
+  virtual Eigen::VectorXd solve(int dim_var,
+                                int dim_eq,
+                                int dim_ineq,
+                                Eigen::Ref<Eigen::MatrixXd> Q,
+                                const Eigen::Ref<const Eigen::VectorXd> & c,
+                                const Eigen::Ref<const Eigen::MatrixXd> & A,
+                                const Eigen::Ref<const Eigen::VectorXd> & b,
+                                const Eigen::Ref<const Eigen::MatrixXd> & C,
+                                const Eigen::Ref<const Eigen::VectorXd> & d,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_min,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
+
+public:
+  /** \brief Maximum limits of inequality bounds.
+
+      \note Setting very large values for inequality bounds will result in NaN or incorrect solutions.
+     std::numeric_limits<double>::infinity(), std::numeric_limits<double>::max(), and even 1e20 have this problem.
+  */
+  double bound_limit_ = 1e10;
+
+protected:
+  std::unique_ptr<struct d_dense_qp_dim> qp_dim_;
+  std::unique_ptr<struct d_dense_qp> qp_;
+  std::unique_ptr<struct d_dense_qp_sol> qp_sol_;
+  std::unique_ptr<struct d_dense_qp_ipm_arg> ipm_arg_;
+  std::unique_ptr<struct d_dense_qp_ipm_ws> ipm_ws_;
+
+  void * qp_dim_mem_ = nullptr;
+  void * qp_mem_ = nullptr;
+  void * qp_sol_mem_ = nullptr;
+  void * ipm_arg_mem_ = nullptr;
+  void * ipm_ws_mem_ = nullptr;
+
+  double * opt_x_mem_;
 };
 #endif
 
