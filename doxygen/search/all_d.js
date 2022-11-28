@@ -1,23 +1,4 @@
 var searchData=
 [
-  ['q_5fsparse_5f_35',['Q_sparse_',['../classQpSolverCollection_1_1QpSolverOsqp.html#a7acbe4ec77d3e3950ae2dcecdf725ef7',1,'QpSolverCollection::QpSolverOsqp::Q_sparse_()'],['../classQpSolverCollection_1_1QpSolverNasoq.html#a877a8daa15d1475701803810294562f6',1,'QpSolverCollection::QpSolverNasoq::Q_sparse_()']]],
-  ['qld_36',['QLD',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0ac6f45fe1ff59e2232e252c632252c728',1,'QpSolverCollection']]],
-  ['qld_5f_37',['qld_',['../classQpSolverCollection_1_1QpSolverQld.html#a0c5b81a383e1c01fca530fb967373c62',1,'QpSolverCollection::QpSolverQld']]],
-  ['qpcoeff_38',['QpCoeff',['../classQpSolverCollection_1_1QpCoeff.html',1,'QpSolverCollection::QpCoeff'],['../classQpSolverCollection_1_1QpCoeff.html#a1a612c62b242a930c88e8abd2734778e',1,'QpSolverCollection::QpCoeff::QpCoeff()']]],
-  ['qpoases_39',['qpOASES',['../namespaceqpOASES.html',1,'qpOASES'],['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a18bce89676122da431c3205305e71a50',1,'QpSolverCollection::qpOASES()']]],
-  ['qpoases_5f_40',['qpoases_',['../classQpSolverCollection_1_1QpSolverQpoases.html#a78fcb1064760624e3f055f889236cb36',1,'QpSolverCollection::QpSolverQpoases']]],
-  ['qpsolver_41',['QpSolver',['../classQpSolverCollection_1_1QpSolver.html',1,'QpSolverCollection::QpSolver'],['../classQpSolverCollection_1_1QpSolver.html#a7e61f5324d573b5005cd5296f45c8c29',1,'QpSolverCollection::QpSolver::QpSolver()']]],
-  ['qpsolvercollection_42',['QpSolverCollection',['../namespaceQpSolverCollection.html',1,'']]],
-  ['qpsolvercollection_2eh_43',['QpSolverCollection.h',['../QpSolverCollection_8h.html',1,'']]],
-  ['qpsolverjrlqp_44',['QpSolverJrlqp',['../classQpSolverCollection_1_1QpSolverJrlqp.html',1,'QpSolverCollection::QpSolverJrlqp'],['../classQpSolverCollection_1_1QpSolverJrlqp.html#a28e696bfc983b0d21e28cbe20715e4f9',1,'QpSolverCollection::QpSolverJrlqp::QpSolverJrlqp()']]],
-  ['qpsolverlssol_45',['QpSolverLssol',['../classQpSolverCollection_1_1QpSolverLssol.html',1,'QpSolverCollection::QpSolverLssol'],['../classQpSolverCollection_1_1QpSolverLssol.html#a66dc4297fc14884b2dc9ae79a853af58',1,'QpSolverCollection::QpSolverLssol::QpSolverLssol()']]],
-  ['qpsolvernasoq_46',['QpSolverNasoq',['../classQpSolverCollection_1_1QpSolverNasoq.html',1,'QpSolverCollection::QpSolverNasoq'],['../classQpSolverCollection_1_1QpSolverNasoq.html#a938b5c424849ec1546c21626df64dcc1',1,'QpSolverCollection::QpSolverNasoq::QpSolverNasoq()']]],
-  ['qpsolveroptions_2eh_47',['QpSolverOptions.h',['../QpSolverOptions_8h.html',1,'']]],
-  ['qpsolverosqp_48',['QpSolverOsqp',['../classQpSolverCollection_1_1QpSolverOsqp.html',1,'QpSolverCollection::QpSolverOsqp'],['../classQpSolverCollection_1_1QpSolverOsqp.html#a5a93397caab03bb88a6d765a417d1b9a',1,'QpSolverCollection::QpSolverOsqp::QpSolverOsqp()']]],
-  ['qpsolverqld_49',['QpSolverQld',['../classQpSolverCollection_1_1QpSolverQld.html',1,'QpSolverCollection::QpSolverQld'],['../classQpSolverCollection_1_1QpSolverQld.html#a4bee785b01b40153e8765f67bcca44c1',1,'QpSolverCollection::QpSolverQld::QpSolverQld()']]],
-  ['qpsolverqpoases_50',['QpSolverQpoases',['../classQpSolverCollection_1_1QpSolverQpoases.html',1,'QpSolverCollection::QpSolverQpoases'],['../classQpSolverCollection_1_1QpSolverQpoases.html#a2f3697aba8cd2b1a51ce98fa07c224e2',1,'QpSolverCollection::QpSolverQpoases::QpSolverQpoases()']]],
-  ['qpsolverquadprog_51',['QpSolverQuadprog',['../classQpSolverCollection_1_1QpSolverQuadprog.html',1,'QpSolverCollection::QpSolverQuadprog'],['../classQpSolverCollection_1_1QpSolverQuadprog.html#a48ccec273267791b40a6a42d9dc2feba',1,'QpSolverCollection::QpSolverQuadprog::QpSolverQuadprog()']]],
-  ['qpsolvertype_52',['QpSolverType',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0',1,'QpSolverCollection::QpSolverType()'],['../namespacestd.html#a7eeb7b691606fc7480c89d84725beaa0',1,'std::QpSolverType()']]],
-  ['quadprog_53',['QuadProg',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a6fad668a55c145d64b95148c83bedb01',1,'QpSolverCollection']]],
-  ['quadprog_5f_54',['quadprog_',['../classQpSolverCollection_1_1QpSolverQuadprog.html#a29427e0db876630a76e6183a5118c836',1,'QpSolverCollection::QpSolverQuadprog']]]
+  ['printinfo_41',['printInfo',['../classQpSolverCollection_1_1QpCoeff.html#a4f22cf7d8fd1098562ae8d6041a9d63e',1,'QpSolverCollection::QpCoeff::printInfo()'],['../classQpSolverCollection_1_1QpSolver.html#a04d7304d8567eaa474b42c11b2f1723e',1,'QpSolverCollection::QpSolver::printInfo()']]]
 ];

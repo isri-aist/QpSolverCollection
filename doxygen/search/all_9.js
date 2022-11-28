@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['lssol_25',['LSSOL',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a02fca816419735cf9ef4ff2069aa36cf',1,'QpSolverCollection']]],
-  ['lssol_5f_26',['lssol_',['../classQpSolverCollection_1_1QpSolverLssol.html#abfebf6f6a85a8b8dab7d214497df4396',1,'QpSolverCollection::QpSolverLssol']]]
+  ['jrl_27',['jrl',['../namespacejrl.html',1,'']]],
+  ['jrlqp_28',['JRLQP',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38',1,'QpSolverCollection']]],
+  ['jrlqp_5f_29',['jrlqp_',['../classQpSolverCollection_1_1QpSolverJrlqp.html#a087b0789a62fdc7b44c4ec9f8faea2b3',1,'QpSolverCollection::QpSolverJrlqp']]],
+  ['qp_30',['qp',['../namespacejrl_1_1qp.html',1,'jrl']]]
 ];

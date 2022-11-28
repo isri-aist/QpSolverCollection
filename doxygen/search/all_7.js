@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['ineq_5fmat_5f_18',['ineq_mat_',['../classQpSolverCollection_1_1QpCoeff.html#a17d0dd07d872341562cac1f06ac7edc5',1,'QpSolverCollection::QpCoeff']]],
-  ['ineq_5fvec_5f_19',['ineq_vec_',['../classQpSolverCollection_1_1QpCoeff.html#a0b27937c2bfdb66b0ad12747e6ea30d5',1,'QpSolverCollection::QpCoeff']]],
-  ['isqpsolverenabled_20',['isQpSolverEnabled',['../namespaceQpSolverCollection.html#a52259fdd829ae6ed00a9b391589b12f9',1,'QpSolverCollection']]]
+  ['hpipm_19',['HPIPM',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a35e1c2c06ced8b2ea1ef8e2e6fb049e1',1,'QpSolverCollection']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jrlqp_142',['JRLQP',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a5fae8df5fb43122408059bcb1f3eeb38',1,'QpSolverCollection']]]
+  ['hpipm_172',['HPIPM',['../namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a35e1c2c06ced8b2ea1ef8e2e6fb049e1',1,'QpSolverCollection']]]
 ];
