@@ -145,7 +145,7 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           github: |
-            - path: git@gite.lirmm.fr/multi-contact/eigen-lssol
+            - path: git@gite.lirmm.fr:multi-contact/eigen-lssol
               options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
       - name: Catkin build
         if: matrix.standalone == 'OFF'
