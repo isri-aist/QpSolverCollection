@@ -8,6 +8,7 @@ add_library(QpSolverCollection
   QpSolverOsqp.cpp
   QpSolverNasoq.cpp
   QpSolverHpipm.cpp
+  QpSolverProxqp.cpp
 )
 
 target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
@@ -65,4 +66,8 @@ endif()
 if(${ENABLE_HPIPM})
   target_link_libraries(QpSolverCollection PRIVATE
     blasfeo hpipm)
+endif()
+if(${ENABLE_PROXQP})
+  target_link_libraries(QpSolverCollection PRIVATE
+    blasfeo proxsuite::proxsuite)
 endif()

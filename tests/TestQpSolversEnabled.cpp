@@ -72,6 +72,13 @@ TEST(TestQpSolversEnabled, HPIPM)
 }
 #endif
 
+#if ENABLE_PROXQP || defined FORCE_ALL_SOLVER_TEST
+TEST(TestQpSolversEnabled, PROXQP)
+{
+  checkOneSolver(QpSolverType::PROXQP);
+}
+#endif
+
 int main(int argc, char ** argv)
 {
   testing::InitGoogleTest(&argc, argv);

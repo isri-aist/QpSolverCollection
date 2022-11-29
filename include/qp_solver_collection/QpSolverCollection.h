@@ -53,6 +53,18 @@ struct d_dense_qp_sol;
 struct d_dense_qp_ipm_arg;
 struct d_dense_qp_ipm_ws;
 
+namespace proxsuite
+{
+namespace proxqp
+{
+namespace dense
+{
+template<typename T>
+class QP;
+}
+} // namespace proxqp
+} // namespace proxsuite
+
 namespace QpSolverCollection
 {
 /** \brief QP solver type. */
@@ -67,7 +79,8 @@ enum class QpSolverType
   qpOASES,
   OSQP,
   NASOQ,
-  HPIPM
+  HPIPM,
+  PROXQP
 };
 
 /*! \brief Convert std::string to QpSolverType. */
@@ -98,6 +111,8 @@ inline string to_string(QpSolverType qp_solver_type)
       return "QpSolverType::NASOQ";
     case QpSolverType::HPIPM:
       return "QpSolverType::HPIPM";
+    case QpSolverType::PROXQP:
+      return "QpSolverType::PROXQP";
     default:
       QSC_ERROR_STREAM("[QpSolverType] Unsupported value: " << std::to_string(static_cast<int>(qp_solver_type)));
   }
@@ -202,7 +217,7 @@ public:
 
       \todo Support both-sided inequality constraints (i.e., \f$\boldsymbol{d}_{lower} \leq \boldsymbol{C}
      \boldsymbol{x} \leq \boldsymbol{d}_{upper}\f$). QLD, QuadProg, and NASOQ support only one-sided constraints, while
-     LSSOL, JRLQP, QPOASES, OSQP, and HPIPM support both-sided constraints.
+     LSSOL, JRLQP, QPOASES, OSQP, HPIPM, and PROXQP support both-sided constraints.
   */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -503,6 +518,32 @@ protected:
   void * ipm_ws_mem_ = nullptr;
 
   double * opt_x_mem_;
+};
+#endif
+
+#if ENABLE_PROXQP
+/** \brief QP solver PROXQP. */
+class QpSolverProxqp : public QpSolver
+{
+public:
+  /** \brief Constructor. */
+  QpSolverProxqp();
+
+  /** \brief Solve QP. */
+  virtual Eigen::VectorXd solve(int dim_var,
+                                int dim_eq,
+                                int dim_ineq,
+                                Eigen::Ref<Eigen::MatrixXd> Q,
+                                const Eigen::Ref<const Eigen::VectorXd> & c,
+                                const Eigen::Ref<const Eigen::MatrixXd> & A,
+                                const Eigen::Ref<const Eigen::VectorXd> & b,
+                                const Eigen::Ref<const Eigen::MatrixXd> & C,
+                                const Eigen::Ref<const Eigen::VectorXd> & d,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_min,
+                                const Eigen::Ref<const Eigen::VectorXd> & x_max) override;
+
+protected:
+  std::unique_ptr<proxsuite::proxqp::dense::QP<double>> proxqp_;
 };
 #endif
 
