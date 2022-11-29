@@ -17,6 +17,7 @@ Unified C++ interface for quadratic programming solvers
 - [OSQP](https://osqp.org/)
 - [NASOQ](https://nasoq.github.io/)
 - [HPIPM](https://github.com/giaf/hpipm)
+- [ProxQP](https://github.com/Simple-Robotics/proxsuite)
 - [LSSOL](https://gite.lirmm.fr/multi-contact/eigen-lssol) (private)
 
 ## Installation
@@ -80,6 +81,10 @@ Add `-DENABLE_NASOQ=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 Install master branch of [blasfeo](https://github.com/giaf/blasfeo) and [hpipm](https://github.com/giaf/hpipm).  
 Add `/opt/blasfeo/lib` and `/opt/hpipm/lib` to the environment variable `LD_LIBRARY_PATH`.  
 Add `-DENABLE_HPIPM=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
+
+#### ProxQP
+Install master branch of [proxsuite](https://github.com/Simple-Robotics/proxsuite).  
+Add `-DENABLE_PROXQP=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### LSSOL (private)
 Install [eigen-lssol](https://gite.lirmm.fr/multi-contact/eigen-lssol).  

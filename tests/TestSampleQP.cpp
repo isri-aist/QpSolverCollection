@@ -20,7 +20,8 @@ void solveOneQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
       QpSolverType::qpOASES,
       QpSolverType::OSQP,
       QpSolverType::NASOQ,
-      QpSolverType::HPIPM
+      QpSolverType::HPIPM,
+      QpSolverType::PROXQP
   };
   // clang-format on
   for(const auto & qp_solver_type : qp_solver_type_list)
@@ -46,6 +47,11 @@ void solveOneQP(const QpCoeff & qp_coeff, const Eigen::VectorXd & x_gt)
     if(qp_solver_type == QpSolverType::OSQP)
     {
       thre = 1e-3;
+    }
+    else if(qp_solver_type == QpSolverType::PROXQP)
+    {
+      // Set proxqp_->settings.eps_abs to 1e-8 to satisfy thre of 1e-6
+      thre = 1e-4;
     }
     EXPECT_LT((x_opt - x_gt).norm(), thre)
         << "QP solution of " << std::to_string(qp_solver_type) << " is incorrect:\n"

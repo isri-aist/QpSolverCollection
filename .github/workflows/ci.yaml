@@ -139,6 +139,9 @@ jobs:
               options: -DBUILD_SHARED_LIBS=ON -DTARGET=X64_AUTOMATIC -DBLASFEO_EXAMPLES=OFF
             - path: giaf/hpipm
               options: -DBUILD_SHARED_LIBS=ON -DHPIPM_TESTING=OFF
+            - path: Simple-Robotics/proxsuite
+              ref: main
+              options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master
