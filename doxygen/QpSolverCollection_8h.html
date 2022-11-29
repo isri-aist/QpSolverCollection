@@ -87,6 +87,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classproxsuite_1_1proxqp_1_1dense_1_1QP.html">proxsuite::proxqp::dense::QP&lt; T &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpCoeff.html">QpSolverCollection::QpCoeff</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class of QP coefficient.  <a href="classQpSolverCollection_1_1QpCoeff.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,6 +119,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolverHpipm.html">QpSolverCollection::QpSolverHpipm</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver HPIPM.  <a href="classQpSolverCollection_1_1QpSolverHpipm.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classQpSolverCollection_1_1QpSolverProxqp.html">QpSolverCollection::QpSolverProxqp</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver PROXQP.  <a href="classQpSolverCollection_1_1QpSolverProxqp.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -129,6 +134,12 @@ Namespaces</h2></td></tr>
 <tr class="memitem:namespaceqpOASES"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceqpOASES.html">qpOASES</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceOsqpEigen"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceOsqpEigen.html">OsqpEigen</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceproxsuite"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceproxsuite.html">proxsuite</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceproxsuite_1_1proxqp"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceproxsuite_1_1proxqp.html">proxsuite::proxqp</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceproxsuite_1_1proxqp_1_1dense"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceproxsuite_1_1proxqp_1_1dense.html">proxsuite::proxqp::dense</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceQpSolverCollection"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceQpSolverCollection.html">QpSolverCollection</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -154,7 +165,8 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a53730f1bac13c301a753dd108a172c2c">QpSolverCollection::QpSolverType::OSQP</a>, 
 <br />
 &#160;&#160;<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a8a6e7e17b88ae0c37d65ddfdfc524927">QpSolverCollection::QpSolverType::NASOQ</a>, 
-<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a35e1c2c06ced8b2ea1ef8e2e6fb049e1">QpSolverCollection::QpSolverType::HPIPM</a>
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0a35e1c2c06ced8b2ea1ef8e2e6fb049e1">QpSolverCollection::QpSolverType::HPIPM</a>, 
+<a class="el" href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0adfcf3d8a66a59bef98cb6a8c22cc08ab">QpSolverCollection::QpSolverType::PROXQP</a>
 <br />
  }</td></tr>
 <tr class="memdesc:a04c5180b8f435d0d78976bdc8fed3da0"><td class="mdescLeft">&#160;</td><td class="mdescRight">QP solver type.  <a href="namespaceQpSolverCollection.html#a04c5180b8f435d0d78976bdc8fed3da0">More...</a><br /></td></tr>

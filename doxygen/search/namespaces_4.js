@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['std_101',['std',['../namespacestd.html',1,'']]]
+  ['qpoases_110',['qpOASES',['../namespaceqpOASES.html',1,'']]],
+  ['qpsolvercollection_111',['QpSolverCollection',['../namespaceQpSolverCollection.html',1,'']]]
 ];

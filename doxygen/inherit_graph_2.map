@@ -1,0 +1,12 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classQpSolverCollection_1_1QpSolver.html" title="Virtual class of QP solver." alt="" coords="5,267,152,308"/>
+<area shape="rect" id="node2" href="$classQpSolverCollection_1_1QpSolverHpipm.html" title="QP solver HPIPM." alt="" coords="203,5,349,47"/>
+<area shape="rect" id="node3" href="$classQpSolverCollection_1_1QpSolverJrlqp.html" title="QP solver JRLQP." alt="" coords="203,71,349,112"/>
+<area shape="rect" id="node4" href="$classQpSolverCollection_1_1QpSolverLssol.html" title="QP solver LSSOL." alt="" coords="203,136,349,177"/>
+<area shape="rect" id="node5" href="$classQpSolverCollection_1_1QpSolverNasoq.html" title="QP solver NASOQ." alt="" coords="203,201,349,243"/>
+<area shape="rect" id="node6" href="$classQpSolverCollection_1_1QpSolverOsqp.html" title="QP solver OSQP." alt="" coords="203,267,349,308"/>
+<area shape="rect" id="node7" href="$classQpSolverCollection_1_1QpSolverProxqp.html" title="QP solver PROXQP." alt="" coords="203,332,349,373"/>
+<area shape="rect" id="node8" href="$classQpSolverCollection_1_1QpSolverQld.html" title="QP solver QLD." alt="" coords="203,397,349,439"/>
+<area shape="rect" id="node9" href="$classQpSolverCollection_1_1QpSolverQpoases.html" title="QP solver qpOASES." alt="" coords="203,463,349,504"/>
+<area shape="rect" id="node10" href="$classQpSolverCollection_1_1QpSolverQuadprog.html" title="QP solver QuadProg." alt="" coords="200,528,352,569"/>
+</map>
