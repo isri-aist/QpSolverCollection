@@ -14,6 +14,7 @@ option(ENABLE_OSQP "Enable OSQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_HPIPM "Enable HPIPM" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_PROXQP "Enable PROXQP" ${DEFAULT_ENABLE_VALUE})
+option(ENABLE_QPMAD "Enable QPMAD" ${DEFAULT_ENABLE_VALUE})
 
 option(FORCE_ALL_SOLVER_TEST "Test for all solvers regardless of options" OFF)
 mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
@@ -90,6 +91,9 @@ add_qp_solver(HPIPM blasfeo hpipm)
 
 # PROXQP
 add_qp_solver(PROXQP proxsuite)
+
+# QPMAD
+add_qp_solver(QPMAD qpmad)
 
 if(NOT ${EXIST_ENABLED_SOLVER})
   message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")

@@ -9,6 +9,7 @@ add_library(QpSolverCollection
   QpSolverNasoq.cpp
   QpSolverHpipm.cpp
   QpSolverProxqp.cpp
+  QpSolverQpmad.cpp
 )
 
 target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
@@ -69,5 +70,9 @@ if(${ENABLE_HPIPM})
 endif()
 if(${ENABLE_PROXQP})
   target_link_libraries(QpSolverCollection PRIVATE
-    blasfeo proxsuite::proxsuite)
+    proxsuite::proxsuite)
+endif()
+if(${ENABLE_QPMAD})
+  target_include_directories(QpSolverCollection PRIVATE
+    ${qpmad_INCLUDE_DIRS})
 endif()

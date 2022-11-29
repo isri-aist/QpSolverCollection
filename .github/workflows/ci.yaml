@@ -142,6 +142,7 @@ jobs:
             - path: Simple-Robotics/proxsuite
               ref: main
               options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
+            - path: asherikov/qpmad
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master
