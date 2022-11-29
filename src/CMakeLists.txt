@@ -13,6 +13,10 @@ add_library(QpSolverCollection
 
 target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
 
+# This warning is included in the header of qpOASES
+set_source_files_properties(QpSolverQpoases.cpp PROPERTIES
+  COMPILE_FLAGS -Wno-unused-parameter)
+
 if(QP_SOLVER_COLLECTION_STANDALONE)
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
