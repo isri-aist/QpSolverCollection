@@ -48,6 +48,10 @@ QpSolverType QpSolverCollection::strToQpSolverType(const std::string & qp_solver
   {
     return QpSolverType::PROXQP;
   }
+  else if(qp_solver_type == "QPMAD")
+  {
+    return QpSolverType::QPMAD;
+  }
   else
   {
     throw std::runtime_error("[strToQpSolverType] Unsupported QpSolverType name: " + qp_solver_type);
@@ -140,6 +144,10 @@ QpSolverType QpSolverCollection::getAnyQpSolverType()
   {
     return QpSolverType::PROXQP;
   }
+  else if(ENABLE_QPMAD)
+  {
+    return QpSolverType::QPMAD;
+  }
   else
   {
     throw std::runtime_error("[getAnyQpSolverType] No QP solver is enabled.");
@@ -189,6 +197,10 @@ bool QpSolverCollection::isQpSolverEnabled(const QpSolverType & qp_solver_type)
   {
     return ENABLE_PROXQP;
   }
+  else if(qp_solver_type == QpSolverType::QPMAD)
+  {
+    return ENABLE_QPMAD;
+  }
   else
   {
     QSC_ERROR_STREAM("[isQpSolverEnabled] Unsupported QP solver: " << std::to_string(static_cast<int>(qp_solver_type)));
@@ -224,6 +236,9 @@ std::shared_ptr<QpSolver> allocateQpSolverHpipm();
 #endif
 #if ENABLE_PROXQP
 std::shared_ptr<QpSolver> allocateQpSolverProxqp();
+#endif
+#if ENABLE_QPMAD
+std::shared_ptr<QpSolver> allocateQpSolverQpmad();
 #endif
 } // namespace QpSolverCollection
 
@@ -287,6 +302,12 @@ std::shared_ptr<QpSolver> QpSolverCollection::allocateQpSolver(const QpSolverTyp
   {
 #if ENABLE_PROXQP
     qp = allocateQpSolverProxqp();
+#endif
+  }
+  else if(qp_solver_type == QpSolverType::QPMAD)
+  {
+#if ENABLE_QPMAD
+    qp = allocateQpSolverQpmad();
 #endif
   }
   else

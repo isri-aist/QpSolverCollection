@@ -79,6 +79,13 @@ TEST(TestQpSolversEnabled, PROXQP)
 }
 #endif
 
+#if ENABLE_QPMAD || defined FORCE_ALL_SOLVER_TEST
+TEST(TestQpSolversEnabled, QPMAD)
+{
+  checkOneSolver(QpSolverType::QPMAD);
+}
+#endif
+
 int main(int argc, char ** argv)
 {
   testing::InitGoogleTest(&argc, argv);

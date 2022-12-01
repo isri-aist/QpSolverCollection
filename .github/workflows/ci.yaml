@@ -126,7 +126,6 @@ jobs:
             - path: jrl-umi3218/eigen-quadprog
               options: -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
             - path: jrl-umi3218/jrl-qp
-              ref: topic/BlockStructure
               options: -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
             - path: coin-or/qpOASES
               options: -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
@@ -142,6 +141,7 @@ jobs:
             - path: Simple-Robotics/proxsuite
               ref: main
               options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
+            - path: asherikov/qpmad
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master
