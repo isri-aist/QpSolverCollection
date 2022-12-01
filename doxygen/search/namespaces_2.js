@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['osqpeigen_106',['OsqpEigen',['../namespaceOsqpEigen.html',1,'']]]
+  ['osqpeigen_113',['OsqpEigen',['../namespaceOsqpEigen.html',1,'']]]
 ];
