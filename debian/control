@@ -25,7 +25,7 @@ Build-Depends: debhelper (>= 9),
                libqpmad-dev,
                libgtest-dev
 
-Package: qpsolvercollection
+Package: libqpsolvercollection-dev
 Section: libdevel
 Architecture: any
 Depends: cmake,
@@ -42,4 +42,3 @@ Depends: cmake,
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Unified C++ interface for quadratic programming solvers
- Unified C++ interface to many QP solvers
