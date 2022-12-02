@@ -66,8 +66,10 @@ endif()
 if(${ENABLE_QPOASES})
   target_include_directories(QpSolverCollection PRIVATE
     ${QPOASES_INCLUDE_DIR})
-  target_link_directories(QpSolverCollection PRIVATE
-    ${QPOASES_LIBRARY_DIR})
+  if(COMMAND target_link_directories)
+    target_link_directories(QpSolverCollection PRIVATE
+      ${QPOASES_LIBRARY_DIR})
+  endif()
   target_link_libraries(QpSolverCollection PRIVATE
     qpOASES)
 endif()
