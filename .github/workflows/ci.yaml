@@ -119,29 +119,10 @@ jobs:
         with:
           build-type: ${{ matrix.build-type }}
           ubuntu: |
-            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen
-          github: |
-            - path: jrl-umi3218/eigen-qld
-              options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
-            - path: jrl-umi3218/eigen-quadprog
-              options: -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
-            - path: jrl-umi3218/jrl-qp
-              options: -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
-            - path: coin-or/qpOASES
-              options: -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
-            - path: osqp/osqp
-            - path: robotology/osqp-eigen
-            - path: mmurooka/nasoq
-              ref: cmake-install
-              options: -DCMAKE_INSTALL_PREFIX=/usr/local -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
-            - path: giaf/blasfeo
-              options: -DBUILD_SHARED_LIBS=ON -DTARGET=X64_AUTOMATIC -DBLASFEO_EXAMPLES=OFF
-            - path: giaf/hpipm
-              options: -DBUILD_SHARED_LIBS=ON -DHPIPM_TESTING=OFF
-            - path: Simple-Robotics/proxsuite
-              ref: main
-              options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
-            - path: asherikov/qpmad
+            apt-mirrors:
+              mc-rtc:
+                cloudsmith: mc-rtc/head
+            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master

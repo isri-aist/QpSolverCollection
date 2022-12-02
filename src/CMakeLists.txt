@@ -22,7 +22,18 @@ if(QP_SOLVER_COLLECTION_STANDALONE)
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
   install(TARGETS QpSolverCollection
-          EXPORT ${PROJECT_NAME})
+          EXPORT ${PROJECT_NAME}
+          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+          RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  )
+
+  install(FILES
+      "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
+      "${QP_SOLVER_OPTIONS_HEADER_FILE}"
+    DESTINATION
+      "${CMAKE_INSTALL_INCLUDEDIR}/qp_solver_collection"
+  )
 else()
   target_include_directories(QpSolverCollection PUBLIC
     ${catkin_INCLUDE_DIRS})
@@ -55,8 +66,10 @@ endif()
 if(${ENABLE_QPOASES})
   target_include_directories(QpSolverCollection PRIVATE
     ${QPOASES_INCLUDE_DIR})
-  target_link_directories(QpSolverCollection PRIVATE
-    ${QPOASES_LIBRARY_DIR})
+  if(COMMAND target_link_directories)
+    target_link_directories(QpSolverCollection PRIVATE
+      ${QPOASES_LIBRARY_DIR})
+  endif()
   target_link_libraries(QpSolverCollection PRIVATE
     qpOASES)
 endif()
