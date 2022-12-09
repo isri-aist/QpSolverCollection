@@ -29,8 +29,6 @@ if(DEFINED CATKIN_DEVEL_PREFIX)
 else()
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
-  target_compile_definitions(QpSolverCollection PUBLIC QP_SOLVER_COLLECTION_STANDALONE)
-
   install(TARGETS QpSolverCollection
           EXPORT ${PROJECT_NAME}
           LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
