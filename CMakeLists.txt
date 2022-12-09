@@ -22,10 +22,7 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-# Option to switch between Catkin and pure CMake build system
-option(QP_SOLVER_COLLECTION_STANDALONE "If ON, build without requiring Catkin and roscpp" OFF)
-
-if(NOT QP_SOLVER_COLLECTION_STANDALONE)
+if(DEFINED CATKIN_DEVEL_PREFIX)
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     )
@@ -96,7 +93,7 @@ if(NOT ${EXIST_ENABLED_SOLVER})
   message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")
 endif()
 
-if(NOT QP_SOLVER_COLLECTION_STANDALONE)
+if(DEFINED CATKIN_DEVEL_PREFIX)
   catkin_package(
     CATKIN_DEPENDS
     roscpp
@@ -115,7 +112,7 @@ configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_F
 
 add_subdirectory(src)
 
-if(QP_SOLVER_COLLECTION_STANDALONE)
+if(NOT DEFINED CATKIN_DEVEL_PREFIX)
   install(EXPORT ${PROJECT_NAME}
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}

@@ -18,8 +18,18 @@ target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
 set_source_files_properties(QpSolverQpoases.cpp PROPERTIES
   COMPILE_FLAGS -Wno-unused-parameter)
 
-if(QP_SOLVER_COLLECTION_STANDALONE)
+if(DEFINED CATKIN_DEVEL_PREFIX)
+  target_include_directories(QpSolverCollection PUBLIC
+    ${catkin_INCLUDE_DIRS}
+  )
+
+  target_link_libraries(QpSolverCollection PUBLIC
+    ${catkin_LIBRARIES}
+  )
+else()
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
+
+  target_compile_definitions(QpSolverCollection PUBLIC QP_SOLVER_COLLECTION_STANDALONE)
 
   install(TARGETS QpSolverCollection
           EXPORT ${PROJECT_NAME}
@@ -33,14 +43,6 @@ if(QP_SOLVER_COLLECTION_STANDALONE)
       "${QP_SOLVER_OPTIONS_HEADER_FILE}"
     DESTINATION
       "${CMAKE_INSTALL_INCLUDEDIR}/qp_solver_collection"
-  )
-else()
-  target_include_directories(QpSolverCollection PUBLIC
-    ${catkin_INCLUDE_DIRS}
-  )
-
-  target_link_libraries(QpSolverCollection PUBLIC
-    ${catkin_LIBRARIES}
   )
 endif()
 
