@@ -14,7 +14,7 @@
 #  include <iostream>
 #  define QSC_ERROR_STREAM(x) std::cerr << x << "\n"
 #  define QSC_WARN_STREAM(x) std::cerr << x << "\n"
-#  define QSC_INFO_STREAM(x) std::cerr << x << "\n"
+#  define QSC_INFO_STREAM(x) std::cout << x << "\n"
 #else
 #  include <ros/console.h>
 #  define QSC_ERROR_STREAM ROS_ERROR_STREAM
