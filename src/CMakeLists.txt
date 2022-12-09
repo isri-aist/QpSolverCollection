@@ -36,7 +36,8 @@ if(QP_SOLVER_COLLECTION_STANDALONE)
   )
 else()
   target_include_directories(QpSolverCollection PUBLIC
-    ${catkin_INCLUDE_DIRS})
+    ${catkin_INCLUDE_DIRS}
+  )
 
   target_link_libraries(QpSolverCollection PUBLIC
     ${catkin_LIBRARIES}
