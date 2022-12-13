@@ -4,7 +4,7 @@ set(QpSolverCollection_gtest_list
   )
 
 foreach(NAME IN LISTS QpSolverCollection_gtest_list)
-  if(NOT QP_SOLVER_COLLECTION_STANDALONE)
+  if(DEFINED CATKIN_DEVEL_PREFIX)
     catkin_add_gtest(${NAME} ${NAME}.cpp)
   else()
     find_package(GTest REQUIRED)

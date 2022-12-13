@@ -14,5 +14,4 @@ namespace QpSolverCollection
 #cmakedefine01 ENABLE_HPIPM
 #cmakedefine01 ENABLE_PROXQP
 #cmakedefine01 ENABLE_QPMAD
-#cmakedefine01 QP_SOLVER_COLLECTION_STANDALONE
 } // namespace QpSolverCollection
