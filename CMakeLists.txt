@@ -23,14 +23,12 @@ option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
 if(DEFINED CATKIN_DEVEL_PREFIX)
-  set(QP_SOLVER_COLLECTION_STANDALONE OFF)
   find_package(catkin REQUIRED COMPONENTS
     roscpp
     )
 else()
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
   option(BUILD_TESTING "Build test" ON)
-  set(QP_SOLVER_COLLECTION_STANDALONE ON)
   if(BUILD_TESTING)
     enable_testing()
   endif()

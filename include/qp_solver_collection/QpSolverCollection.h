@@ -10,7 +10,7 @@
 
 #include <qp_solver_collection/QpSolverOptions.h>
 
-#if QP_SOLVER_COLLECTION_STANDALONE
+#ifdef QP_SOLVER_COLLECTION_STANDALONE
 #  include <iostream>
 #  define QSC_ERROR_STREAM(x) std::cerr << x << "\n"
 #  define QSC_WARN_STREAM(x) std::cerr << x << "\n"
