@@ -67,7 +67,7 @@ class QP;
 
 namespace qpmad
 {
-template<typename t_Scalar, int t_primal_size, int t_has_bounds, int t_general_ctr_number>
+template<typename t_Scalar, int... t_Parameters>
 class SolverTemplate;
 using Solver = SolverTemplate<double, Eigen::Dynamic, 1, Eigen::Dynamic>;
 } // namespace qpmad
