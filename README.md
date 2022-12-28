@@ -62,7 +62,7 @@ Install [eigen-quadprog](https://github.com/jrl-umi3218/eigen-quadprog).
 Add `-DENABLE_QUADPROG=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### JRLQP
-Install [BlockStructure branch](https://github.com/jrl-umi3218/jrl-qp/tree/topic/BlockStructure) of jrl-qp  .
+Install master branch of [jrl-qp](https://github.com/jrl-umi3218/jrl-qp).
 Add `-DENABLE_JRLQP=ON` to the catkin build command (i.e., `<qp-solver-flags>`).
 
 #### qpOASES
