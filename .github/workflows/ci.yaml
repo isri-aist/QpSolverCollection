@@ -32,6 +32,7 @@ jobs:
         os: [ubuntu-20.04, ubuntu-18.04]
         build-type: [Debug, RelWithDebInfo]
         standalone: [ON, OFF]
+        solvers-from-source: [ON, OFF]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set environment variables
@@ -114,7 +115,8 @@ jobs:
           github: |
             - path: google/googletest
               ref: release-1.12.1
-      - name: Install solvers
+      - name: Install solvers via apt
+        if: matrix.solvers-from-source == 'OFF'
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
           build-type: ${{ matrix.build-type }}
@@ -123,6 +125,35 @@ jobs:
               mc-rtc:
                 cloudsmith: mc-rtc/head
             apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
+      - name: Install solvers from source
+        if: matrix.solvers-from-source == 'ON'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          build-type: ${{ matrix.build-type }}
+          ubuntu: |
+            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen
+          github: |
+            - path: jrl-umi3218/eigen-qld
+              options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: jrl-umi3218/eigen-quadprog
+              options: -DBUILD_TESTING=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: jrl-umi3218/jrl-qp
+              options: -DBUILD_TESTING=OFF -DBUILD_BENCHMARKS=OFF -DINSTALL_DOCUMENTATION=OFF
+            - path: coin-or/qpOASES
+              options: -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
+            - path: osqp/osqp
+            - path: robotology/osqp-eigen
+            - path: mmurooka/nasoq
+              ref: cmake-install
+              options: -DCMAKE_INSTALL_PREFIX=/usr/local -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
+            - path: giaf/blasfeo
+              options: -DBUILD_SHARED_LIBS=ON -DTARGET=X64_AUTOMATIC -DBLASFEO_EXAMPLES=OFF
+            - path: giaf/hpipm
+              options: -DBUILD_SHARED_LIBS=ON -DHPIPM_TESTING=OFF
+            - path: Simple-Robotics/proxsuite
+              ref: main
+              options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
+            - path: asherikov/qpmad
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master
@@ -162,7 +193,7 @@ jobs:
           options: -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
       - name: Upload documentation
         # Only run for one configuration and on origin master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'OFF' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'OFF' && matrix.solvers-from-source == 'OFF' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
