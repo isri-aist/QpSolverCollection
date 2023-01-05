@@ -31,15 +31,15 @@ jobs:
       matrix:
         os: [ubuntu-20.04, ubuntu-18.04]
         build-type: [Debug, RelWithDebInfo]
-        standalone: [ON, OFF]
-        solvers-from-source: [ON, OFF]
+        standalone: [standalone, catkin]
+        solvers-from-source: [SolversFromSource, SolversFromAPT]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set environment variables
         run: |
           echo "LD_LIBRARY_PATH=/opt/blasfeo/lib:/opt/hpipm/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV # for HPIPM
       - name: Set ROS version
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           if [ "${{ matrix.os }}" == "ubuntu-20.04" ]
           then
@@ -64,7 +64,7 @@ jobs:
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install ROS
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           set -e
           set -x
@@ -73,7 +73,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq ros-${ROS_DISTRO}-ros-base ${PYTHON_PACKAGE_PREFIX}-catkin-tools ${PYTHON_PACKAGE_PREFIX}-rosdep doxygen graphviz
       - name: Setup catkin workspace
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           set -e
           set -x
@@ -85,18 +85,18 @@ jobs:
           catkin init
           catkin build --limit-status-rate 0.1
       - name: Checkout repository code
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         uses: actions/checkout@v3
         with:
           submodules: recursive
           path: catkin_ws/src/QpSolverCollection
       - name: Checkout repository code
-        if: matrix.standalone == 'ON'
+        if: matrix.standalone == 'standalone'
         uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Rosdep install
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           set -e
           set -x
@@ -108,7 +108,7 @@ jobs:
           rosdep update
           rosdep install -y -r --from-paths src --ignore-src
       - name: Install GTest
-        if: matrix.standalone == 'ON' && matrix.os == 'ubuntu-18.04'
+        if: matrix.standalone == 'standalone' && matrix.os == 'ubuntu-18.04'
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
           build-type: ${{ matrix.build-type }}
@@ -116,7 +116,7 @@ jobs:
             - path: google/googletest
               ref: release-1.12.1
       - name: Install solvers via apt
-        if: matrix.solvers-from-source == 'OFF'
+        if: matrix.solvers-from-source == 'SolversFromAPT'
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
           build-type: ${{ matrix.build-type }}
@@ -126,7 +126,7 @@ jobs:
                 cloudsmith: mc-rtc/head
             apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
       - name: Install solvers from source
-        if: matrix.solvers-from-source == 'ON'
+        if: matrix.solvers-from-source == 'SolversFromSource'
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
           build-type: ${{ matrix.build-type }}
@@ -163,7 +163,7 @@ jobs:
             - path: git@gite.lirmm.fr:multi-contact/eigen-lssol
               options: -DBUILD_TESTING=OFF -DPYTHON_BINDING=OFF -DINSTALL_DOCUMENTATION=OFF
       - name: Catkin build
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           set -e
           set -x
@@ -175,7 +175,7 @@ jobs:
           -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} \
           -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
       - name: Run tests
-        if: matrix.standalone == 'OFF'
+        if: matrix.standalone == 'catkin'
         run: |
           set -e
           set -x
@@ -186,14 +186,14 @@ jobs:
           catkin build --limit-status-rate 0.1 --catkin-make-args run_tests -- qp_solver_collection --no-deps
           catkin_test_results --verbose --all build
       - name: Build and test
-        if: matrix.standalone == 'ON'
+        if: matrix.standalone == 'standalone'
         uses: jrl-umi3218/github-actions/build-cmake-project@master
         with:
           build-type: ${{ matrix.build-type }}
           options: -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
       - name: Upload documentation
         # Only run for one configuration and on origin master branch
-        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'OFF' && matrix.solvers-from-source == 'OFF' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        if: matrix.os == 'ubuntu-20.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'catkin' && matrix.solvers-from-source == 'SolversFromAPT' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
         run: |
           set -e
           set -x
