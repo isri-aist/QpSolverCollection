@@ -10,6 +10,29 @@
 #  include <OsqpEigen/OsqpEigen.h>
 #  define OSQP_EIGEN_DEBUG_OUTPUT
 
+static inline std::string to_string(OsqpEigen::ErrorExitFlag flag)
+{
+  switch(flag)
+  {
+    case OsqpEigen::ErrorExitFlag::NoError:
+      return "No error";
+    case OsqpEigen::ErrorExitFlag::DataValidationError:
+      return "Data validation error";
+    case OsqpEigen::ErrorExitFlag::SettingsValidationError:
+      return "Settings validation error";
+    case OsqpEigen::ErrorExitFlag::LinsysSolverInitError:
+      return "Linsys solver initialization error";
+    case OsqpEigen::ErrorExitFlag::NonCvxError:
+      return "Non convex error";
+    case OsqpEigen::ErrorExitFlag::MemAllocError:
+      return "Mem alloc error";
+    case OsqpEigen::ErrorExitFlag::WorkspaceNotInitError:
+      return "Workspace not initialized error";
+    default:
+      return "Unknown value: " + std::to_string(static_cast<std::underlying_type_t<OsqpEigen::ErrorExitFlag>>(flag));
+  }
+}
+
 using namespace QpSolverCollection;
 
 QpSolverOsqp::QpSolverOsqp()
@@ -90,16 +113,16 @@ Eigen::VectorXd QpSolverOsqp::solve(int dim_var,
     osqp_->initSolver();
   }
 
-  osqp_->solve();
+  auto status = osqp_->solveProblem();
 
-  if(osqp_->workspace()->info->status_val == OSQP_SOLVED)
+  if(status == OsqpEigen::ErrorExitFlag::NoError)
   {
     solve_failed_ = false;
   }
   else
   {
     solve_failed_ = true;
-    QSC_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << osqp_->workspace()->info->status);
+    QSC_WARN_STREAM("[QpSolverOsqp::solve] Failed to solve: " << to_string(status));
   }
 
   return osqp_->getSolution();
