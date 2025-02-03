@@ -22,16 +22,18 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
-option(BUILD_TESTING "Build test" ON)
-if(BUILD_TESTING)
-  enable_testing()
+if(NOT DEFINED USE_ROS2)
+  option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+  option(BUILD_TESTING "Build test" ON)
+  if(BUILD_TESTING)
+    enable_testing()
+  endif()
+  include(GNUInstallDirs)
+  # Place output artifacts all in the same directory to simplify running tests on Windows
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
 endif()
-include(GNUInstallDirs)
-# Place output artifacts all in the same directory to simplify running tests on Windows
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
 
 # To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
 # See https://cmake.org/cmake/help/v3.4/variable/CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS.html
