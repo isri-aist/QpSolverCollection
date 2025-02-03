@@ -22,22 +22,16 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    )
-else()
-  option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
-  option(BUILD_TESTING "Build test" ON)
-  if(BUILD_TESTING)
-    enable_testing()
-  endif()
-  include(GNUInstallDirs)
-  # Place output artifacts all in the same directory to simplify running tests on Windows
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+option(BUILD_TESTING "Build test" ON)
+if(BUILD_TESTING)
+  enable_testing()
 endif()
+include(GNUInstallDirs)
+# Place output artifacts all in the same directory to simplify running tests on Windows
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
 
 # To build shared libraries in Windows, we set CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS to TRUE.
 # See https://cmake.org/cmake/help/v3.4/variable/CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS.html
@@ -93,16 +87,8 @@ if(NOT ${EXIST_ENABLED_SOLVER})
   message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")
 endif()
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  catkin_package(
-    CATKIN_DEPENDS
-    roscpp
-    DEPENDS EIGEN3
-    INCLUDE_DIRS include
-    LIBRARIES QpSolverCollection
-    CFG_EXTRAS qp_solver_options.cmake
-    )
-endif()
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_gtest REQUIRED)
 
 set(QP_SOLVER_OPTIONS_HEADER_FILE "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverOptions.h")
 configure_file("${QP_SOLVER_OPTIONS_HEADER_FILE}.in" "${QP_SOLVER_OPTIONS_HEADER_FILE}")
@@ -112,7 +98,7 @@ configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_F
 
 add_subdirectory(src)
 
-if(NOT DEFINED CATKIN_DEVEL_PREFIX)
+if(NOT DEFINED USE_ROS2)
   install(EXPORT ${PROJECT_NAME}
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
@@ -161,7 +147,8 @@ set(\@PROJECT_NAME\@_LIBRARIES \@PROJECT_NAME\@::QpSolverCollection)
     )
 endif()
 
-if(CATKIN_ENABLE_TESTING OR BUILD_TESTING)
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
   add_subdirectory(tests)
 endif()
 

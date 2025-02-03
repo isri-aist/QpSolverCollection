@@ -1,14 +1,15 @@
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
 set(QpSolverCollection_gtest_list
   TestQpSolversEnabled
   TestSampleQP
   )
 
 foreach(NAME IN LISTS QpSolverCollection_gtest_list)
-  if(DEFINED CATKIN_DEVEL_PREFIX)
-    catkin_add_gtest(${NAME} ${NAME}.cpp)
+  if(DEFINED USE_ROS2)
+    ament_add_gtest(${NAME} ${NAME}.cpp)
   else()
-    find_package(GTest REQUIRED)
-    include(GoogleTest)
     add_executable(${NAME} ${NAME}.cpp)
     target_link_libraries(${NAME} GTest::gtest)
     gtest_discover_tests(${NAME})
