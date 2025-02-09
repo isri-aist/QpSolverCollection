@@ -22,11 +22,7 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    )
-else()
+if(NOT DEFINED USE_ROS2)
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
   option(BUILD_TESTING "Build test" ON)
   if(BUILD_TESTING)
@@ -93,16 +89,8 @@ if(NOT ${EXIST_ENABLED_SOLVER})
   message(FATAL_ERROR "None of the QP solvers are enabled. Enable at least one QP solver.")
 endif()
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  catkin_package(
-    CATKIN_DEPENDS
-    roscpp
-    DEPENDS EIGEN3
-    INCLUDE_DIRS include
-    LIBRARIES QpSolverCollection
-    CFG_EXTRAS qp_solver_options.cmake
-    )
-endif()
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_gtest REQUIRED)
 
 set(QP_SOLVER_OPTIONS_HEADER_FILE "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverOptions.h")
 configure_file("${QP_SOLVER_OPTIONS_HEADER_FILE}.in" "${QP_SOLVER_OPTIONS_HEADER_FILE}")
@@ -112,7 +100,7 @@ configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_F
 
 add_subdirectory(src)
 
-if(NOT DEFINED CATKIN_DEVEL_PREFIX)
+if(NOT DEFINED USE_ROS2)
   install(EXPORT ${PROJECT_NAME}
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
@@ -161,7 +149,8 @@ set(\@PROJECT_NAME\@_LIBRARIES \@PROJECT_NAME\@::QpSolverCollection)
     )
 endif()
 
-if(CATKIN_ENABLE_TESTING OR BUILD_TESTING)
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
   add_subdirectory(tests)
 endif()
 

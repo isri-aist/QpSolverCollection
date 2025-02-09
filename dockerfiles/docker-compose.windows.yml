@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  qp_solver_collection:
+    image: qp_solver_collection:humble
+    user: root
+    container_name: qp_solver_collection-humble
+    build:
+      context: ..
+      dockerfile: ./dockerfiles/Dockerfile.windows
+    volumes:
+      - "../:/root/catkin_ws/src/qp_solver_collection/"
+    privileged: True
+    stdin_open: True
+    # network_mode: host
+    command: bash
