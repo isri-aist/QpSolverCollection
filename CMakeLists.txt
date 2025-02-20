@@ -15,6 +15,7 @@ option(ENABLE_NASOQ "Enable NASOQ" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_HPIPM "Enable HPIPM" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_PROXQP "Enable PROXQP" ${DEFAULT_ENABLE_VALUE})
 option(ENABLE_QPMAD "Enable QPMAD" ${DEFAULT_ENABLE_VALUE})
+option(USE_ROS2 "Use ROS2" OFF)
 
 option(FORCE_ALL_SOLVER_TEST "Test for all solvers regardless of options" OFF)
 mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
@@ -22,7 +23,7 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-if(NOT DEFINED USE_ROS2)
+if(NOT USE_ROS2)
   option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
   option(BUILD_TESTING "Build test" ON)
   if(BUILD_TESTING)
@@ -100,7 +101,7 @@ configure_file("${QP_SOLVER_OPTIONS_CMAKE_FILE}.in" "${QP_SOLVER_OPTIONS_CMAKE_F
 
 add_subdirectory(src)
 
-if(NOT DEFINED USE_ROS2)
+if(NOT USE_ROS2)
   install(EXPORT ${PROJECT_NAME}
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}

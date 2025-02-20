@@ -7,7 +7,7 @@ set(QpSolverCollection_gtest_list
   )
 
 foreach(NAME IN LISTS QpSolverCollection_gtest_list)
-  if(DEFINED USE_ROS2)
+  if(USE_ROS2)
     ament_add_gtest(${NAME} ${NAME}.cpp)
   else()
     add_executable(${NAME} ${NAME}.cpp)
