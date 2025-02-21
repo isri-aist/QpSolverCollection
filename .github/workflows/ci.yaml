@@ -66,18 +66,18 @@ jobs:
           fi
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
-      - name: Install solvers via apt
-        if: matrix.solvers-from-source == 'SolversFromAPT'
-        uses: jrl-umi3218/github-actions/install-dependencies@master
-        with:
-          build-type: ${{ matrix.build-type }}
-          ubuntu: |
-            apt-mirrors:
-              mc-rtc:
-                cloudsmith: mc-rtc/head
-            apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
-          ros: |
-            apt: ros-base
+      # - name: Install solvers via apt
+      #   if: matrix.solvers-from-source == 'SolversFromAPT'
+      #   uses: jrl-umi3218/github-actions/install-dependencies@master
+      #   with:
+      #     build-type: ${{ matrix.build-type }}
+      #     ubuntu: |
+      #       apt-mirrors:
+      #         mc-rtc:
+      #           cloudsmith: mc-rtc/head
+      #       apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
+      #     ros: |
+      #       apt: ros-base
       - name: Install solvers from source
         if: matrix.solvers-from-source == 'SolversFromSource'
         uses: jrl-umi3218/github-actions/install-dependencies@master
