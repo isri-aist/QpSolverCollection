@@ -18,8 +18,8 @@
 #else
 #  include <rclcpp/rclcpp.hpp>
 #  define QSC_ERROR_STREAM(msg) RCLCPP_ERROR_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
-#  define QSC_WARN_STREAM(msg)  RCLCPP_WARN_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
-#  define QSC_INFO_STREAM(msg)  RCLCPP_INFO_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_WARN_STREAM(msg) RCLCPP_WARN_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_INFO_STREAM(msg) RCLCPP_INFO_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
 #endif
 
 namespace Eigen
