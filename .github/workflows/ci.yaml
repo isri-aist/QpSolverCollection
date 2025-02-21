@@ -33,7 +33,6 @@ jobs:
         build-type: [Debug, RelWithDebInfo]
         standalone: [standalone, colcon]
         solver-from-source: [SolversFromSource]
-        # solvers-from-source: [SolversFromSource, SolversFromAPT]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set environment variables
