@@ -92,7 +92,6 @@ endif()
 
 if(USE_ROS2)
   find_package(ament_cmake REQUIRED)
-  find_package(ament_cmake_gtest REQUIRED)
   find_package(rclcpp REQUIRED)
 endif()
 
@@ -154,7 +153,6 @@ set(\@PROJECT_NAME\@_LIBRARIES \@PROJECT_NAME\@::QpSolverCollection)
 endif()
 
 if(BUILD_TESTING)
-  find_package(ament_cmake_gtest REQUIRED)
   add_subdirectory(tests)
 endif()
 

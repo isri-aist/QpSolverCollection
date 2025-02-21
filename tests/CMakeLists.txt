@@ -8,6 +8,7 @@ set(QpSolverCollection_gtest_list
 
 foreach(NAME IN LISTS QpSolverCollection_gtest_list)
   if(USE_ROS2)
+    find_package(ament_cmake_gtest REQUIRED)
     ament_add_gtest(${NAME} ${NAME}.cpp)
   else()
     add_executable(${NAME} ${NAME}.cpp)
