@@ -95,8 +95,7 @@ jobs:
             - path: coin-or/qpOASES
               options: -DBUILD_SHARED_LIBS=ON -DQPOASES_BUILD_EXAMPLES=OFF
             - path: osqp/osqp
-              ref: f47895a908de997238270ff3d8f78c1763b20f79
-            - path: robotology/osqp-eigen
+            - path: chuoru/osqp-eigen
             - path: mmurooka/nasoq
               ref: cmake-install
               options: -DCMAKE_INSTALL_PREFIX=/usr/local -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
