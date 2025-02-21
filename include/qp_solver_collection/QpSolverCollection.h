@@ -523,7 +523,7 @@ protected:
   std::unique_ptr<uint8_t[]> qp_sol_mem_ = nullptr;
   std::unique_ptr<uint8_t[]> ipm_arg_mem_ = nullptr;
   std::unique_ptr<uint8_t[]> ipm_ws_mem_ = nullptr;
-  
+
   std::unique_ptr<double[]> opt_x_mem_ = nullptr;
 };
 #endif

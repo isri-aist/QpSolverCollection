@@ -37,29 +37,29 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
   if(!(qp_dim_->nv == dim_var && qp_dim_->ne == dim_eq && qp_dim_->ng == dim_ineq))
   {
     int qp_dim_size = d_dense_qp_dim_memsize();
-    qp_dim_mem_ = std::make_unique<uint8_t[]>(qp_dim_size);  
+    qp_dim_mem_ = std::make_unique<uint8_t[]>(qp_dim_size);
     d_dense_qp_dim_create(qp_dim_.get(), qp_dim_mem_.get());
     d_dense_qp_dim_set_all(dim_var, dim_eq, dim_var, dim_ineq, 0, 0, qp_dim_.get());
 
     int qp_size = d_dense_qp_memsize(qp_dim_.get());
-    qp_mem_ = std::make_unique<uint8_t[]>(qp_size);  
+    qp_mem_ = std::make_unique<uint8_t[]>(qp_size);
     d_dense_qp_create(qp_dim_.get(), qp_.get(), qp_mem_.get());
 
     int qp_sol_size = d_dense_qp_sol_memsize(qp_dim_.get());
-    qp_sol_mem_ = std::make_unique<uint8_t[]>(qp_sol_size);  
+    qp_sol_mem_ = std::make_unique<uint8_t[]>(qp_sol_size);
     d_dense_qp_sol_create(qp_dim_.get(), qp_sol_.get(), qp_sol_mem_.get());
 
     int ipm_arg_size = d_dense_qp_ipm_arg_memsize(qp_dim_.get());
-    ipm_arg_mem_ = std::make_unique<uint8_t[]>(ipm_arg_size);  
+    ipm_arg_mem_ = std::make_unique<uint8_t[]>(ipm_arg_size);
     d_dense_qp_ipm_arg_create(qp_dim_.get(), ipm_arg_.get(), ipm_arg_mem_.get());
-    enum hpipm_mode mode = SPEED;  // SPEED_ABS, SPEED, BALANCE, ROBUST
+    enum hpipm_mode mode = SPEED; // SPEED_ABS, SPEED, BALANCE, ROBUST
     d_dense_qp_ipm_arg_set_default(mode, ipm_arg_.get());
 
     int ipm_ws_size = d_dense_qp_ipm_ws_memsize(qp_dim_.get(), ipm_arg_.get());
-    ipm_ws_mem_ = std::make_unique<uint8_t[]>(ipm_ws_size);  
+    ipm_ws_mem_ = std::make_unique<uint8_t[]>(ipm_ws_size);
     d_dense_qp_ipm_ws_create(qp_dim_.get(), ipm_arg_.get(), ipm_ws_.get(), ipm_ws_mem_.get());
 
-    opt_x_mem_ = std::make_unique<double[]>(dim_var);  // Automatic memory management for the array
+    opt_x_mem_ = std::make_unique<double[]>(dim_var); // Automatic memory management for the array
   }
 
   // Set QP coefficients
