@@ -127,18 +127,18 @@ jobs:
         uses: jrl-umi3218/github-actions/build-cmake-project@master
         with:
           build-type: ${{ matrix.build-type }}
-          options: -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
+          options: -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON
       - name: Colcon build
         if: matrix.standalone == 'colcon'
         uses: jrl-umi3218/github-actions/build-colcon-project@master
         with:
           build-type: ${{ matrix.build-type }}
-          cmake-args: -DUSE_ROS2=ON -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON -DINSTALL_DOCUMENTATION=ON
+          cmake-args: -DUSE_ROS2=ON -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON 
           build-packages: qp_solver_collection
           test-packages: qp_solver_collection
       - name: Upload documentation
         # Only run for one configuration and on origin master branch
-        if: matrix.os == 'ubuntu-22.04' && matrix.build-type == 'RelWithDebInfo' && matrix.standalone == 'colcon' && matrix.solvers-from-source == 'SolversFromAPT' && github.repository_owner == 'isri-aist' && github.ref == 'refs/heads/master'
+        if: env.UPLOAD_DOCUMENTATION == 'true'
         run: |
           set -e
           set -x
