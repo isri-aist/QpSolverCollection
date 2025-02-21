@@ -16,10 +16,10 @@
 #  define QSC_WARN_STREAM(x) std::cerr << x << "\n"
 #  define QSC_INFO_STREAM(x) std::cout << x << "\n"
 #else
-#  include <ros/console.h>
-#  define QSC_ERROR_STREAM ROS_ERROR_STREAM
-#  define QSC_WARN_STREAM ROS_WARN_STREAM
-#  define QSC_INFO_STREAM ROS_INFO_STREAM
+#  include <rclcpp/rclcpp.hpp>
+#  define QSC_ERROR_STREAM(msg) RCLCPP_ERROR_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_WARN_STREAM(msg)  RCLCPP_WARN_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_INFO_STREAM(msg)  RCLCPP_INFO_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
 #endif
 
 namespace Eigen

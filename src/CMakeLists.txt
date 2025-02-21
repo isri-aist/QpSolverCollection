@@ -18,13 +18,19 @@ target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
 set_source_files_properties(QpSolverQpoases.cpp PROPERTIES
   COMPILE_FLAGS -Wno-unused-parameter)
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
+if(USE_ROS2)
+  ament_target_dependencies(QpSolverCollection
+    PUBLIC
+      rclcpp
+      Eigen3
+  )
+
   target_include_directories(QpSolverCollection PUBLIC
-    ${catkin_INCLUDE_DIRS}
+    ${ament_INCLUDE_DIRS}
   )
 
   target_link_libraries(QpSolverCollection PUBLIC
-    ${catkin_LIBRARIES}
+    ${ament_LIBRARIES}
   )
 else()
   target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
