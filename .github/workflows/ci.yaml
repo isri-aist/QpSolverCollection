@@ -32,7 +32,7 @@ jobs:
         os: [ubuntu-22.04]
         build-type: [Debug, RelWithDebInfo]
         standalone: [standalone, colcon]
-        solver-from-source: [SolversFromAPT]
+        solver-from-source: [SolversFromSource]
         # solvers-from-source: [SolversFromSource, SolversFromAPT]
     runs-on: ${{ matrix.os }}
     steps:
