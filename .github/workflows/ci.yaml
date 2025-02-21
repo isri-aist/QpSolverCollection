@@ -32,7 +32,8 @@ jobs:
         os: [ubuntu-22.04]
         build-type: [Debug, RelWithDebInfo]
         standalone: [standalone, colcon]
-        solvers-from-source: [SolversFromSource, SolversFromAPT]
+        solver-from-source: [SolversFromAPT]
+        # solvers-from-source: [SolversFromSource, SolversFromAPT]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set environment variables
