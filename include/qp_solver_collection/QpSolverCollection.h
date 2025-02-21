@@ -490,9 +490,6 @@ public:
   /** \brief Constructor. */
   QpSolverHpipm();
 
-  /** \brief Destructor. */
-  ~QpSolverHpipm();
-
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -521,13 +518,13 @@ protected:
   std::unique_ptr<struct d_dense_qp_ipm_arg> ipm_arg_;
   std::unique_ptr<struct d_dense_qp_ipm_ws> ipm_ws_;
 
-  void * qp_dim_mem_ = nullptr;
-  void * qp_mem_ = nullptr;
-  void * qp_sol_mem_ = nullptr;
-  void * ipm_arg_mem_ = nullptr;
-  void * ipm_ws_mem_ = nullptr;
-
-  double * opt_x_mem_;
+  std::unique_ptr<uint8_t[]> qp_dim_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> qp_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> qp_sol_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> ipm_arg_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> ipm_ws_mem_ = nullptr;
+  
+  std::unique_ptr<double[]> opt_x_mem_ = nullptr;
 };
 #endif
 
