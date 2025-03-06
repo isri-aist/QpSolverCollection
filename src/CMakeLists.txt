@@ -1,4 +1,4 @@
-add_library(QpSolverCollection
+add_library(QpSolverCollection SHARED
   QpSolverCollection.cpp
   QpSolverQld.cpp
   QpSolverQuadprog.cpp
@@ -19,42 +19,32 @@ set_source_files_properties(QpSolverQpoases.cpp PROPERTIES
   COMPILE_FLAGS -Wno-unused-parameter)
 
 if(USE_ROS2)
-  ament_target_dependencies(QpSolverCollection
-    PUBLIC
-      rclcpp
-      Eigen3
-  )
-
-  target_include_directories(QpSolverCollection PUBLIC
-    ${ament_INCLUDE_DIRS}
-  )
-
   target_link_libraries(QpSolverCollection PUBLIC
-    ${ament_LIBRARIES}
+    rclcpp::rclcpp
   )
 else()
-  target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
-
   target_compile_definitions(QpSolverCollection PUBLIC QP_SOLVER_COLLECTION_STANDALONE)
-
-  install(TARGETS QpSolverCollection
-          EXPORT ${PROJECT_NAME}
-          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-          RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
-
-  install(FILES
-      "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
-      "${QP_SOLVER_OPTIONS_HEADER_FILE}"
-    DESTINATION
-      "${CMAKE_INSTALL_INCLUDEDIR}/qp_solver_collection"
-  )
 endif()
+
+target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
 target_include_directories(QpSolverCollection PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
+)
+
+install(FILES
+  "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
+  "${QP_SOLVER_OPTIONS_HEADER_FILE}"
+  DESTINATION include/${PROJECT_NAME}
+)
+
+install(TARGETS QpSolverCollection
+  EXPORT QpSolverCollection
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
 if(${ENABLE_QLD})
   target_link_libraries(QpSolverCollection PRIVATE

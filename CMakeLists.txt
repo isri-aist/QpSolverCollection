@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.14)
 project(qp_solver_collection)
 
 # Options for solvers
@@ -159,4 +159,11 @@ endif()
 OPTION(INSTALL_DOCUMENTATION "Generate and install the documentation" OFF)
 if(INSTALL_DOCUMENTATION)
   add_subdirectory(doc)
+endif()
+
+if(USE_ROS2)
+  ament_export_libraries(QpSolverCollection)
+  ament_export_include_directories(include)
+  ament_export_targets(QpSolverCollection)
+  ament_package()
 endif()
