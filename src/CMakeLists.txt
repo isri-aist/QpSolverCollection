@@ -28,24 +28,6 @@ endif()
 
 target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
-target_include_directories(QpSolverCollection PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
-)
-
-install(FILES
-  "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
-  "${QP_SOLVER_OPTIONS_HEADER_FILE}"
-  DESTINATION include/${PROJECT_NAME}
-)
-
-install(TARGETS QpSolverCollection
-  EXPORT ${PROJECT_NAME}
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-  RUNTIME DESTINATION bin
-)
-
 if(${ENABLE_QLD})
   target_link_libraries(QpSolverCollection PRIVATE
     eigen-qld::eigen-qld)
@@ -92,3 +74,21 @@ if(${ENABLE_QPMAD})
   target_include_directories(QpSolverCollection PRIVATE
     ${qpmad_INCLUDE_DIRS})
 endif()
+
+target_include_directories(QpSolverCollection PUBLIC
+  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
+)
+
+install(FILES
+  "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
+  "${QP_SOLVER_OPTIONS_HEADER_FILE}"
+  DESTINATION include/${PROJECT_NAME}
+)
+
+install(TARGETS QpSolverCollection
+  EXPORT ${PROJECT_NAME}
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
