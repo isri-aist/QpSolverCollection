@@ -40,7 +40,7 @@ install(FILES
 )
 
 install(TARGETS QpSolverCollection
-  EXPORT QpSolverCollection
+  EXPORT ${PROJECT_NAME}
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION bin
