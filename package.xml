@@ -16,8 +16,6 @@
 
   <build_depend>eigen</build_depend>
 
-  <test_depend>ament_cmake_gtest</test_depend>
-
   <doc_depend>doxygen</doc_depend>
   <doc_depend>graphviz</doc_depend>
   

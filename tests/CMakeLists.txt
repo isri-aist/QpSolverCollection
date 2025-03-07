@@ -7,9 +7,9 @@ set(QpSolverCollection_gtest_list
   )
 
 foreach(NAME IN LISTS QpSolverCollection_gtest_list)
-    add_executable(${NAME} ${NAME}.cpp)
-    target_link_libraries(${NAME} GTest::gtest QpSolverCollection)
-    gtest_discover_tests(${NAME})
+  add_executable(${NAME} ${NAME}.cpp)
+  target_link_libraries(${NAME} GTest::gtest QpSolverCollection)
+  gtest_discover_tests(${NAME})
   if(SKIP_PRIVATE_SOLVER_TEST)
     target_compile_definitions(${NAME} PRIVATE SKIP_PRIVATE_SOLVER_TEST)
   endif()
