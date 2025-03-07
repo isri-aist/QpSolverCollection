@@ -39,7 +39,7 @@ jobs:
         run: |
           set -e
           set -x
-          echo "LD_LIBRARY_PATH=/opt/blasfeo/lib:/opt/hpipm/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV # for HPIPM
+          echo "LD_LIBRARY_PATH=/opt/blasfeo/lib:/opt/hpipm/lib:/usr/local/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV # for HPIPM
           if [ "${{ matrix.os }}" == "ubuntu-22.04" ] && \
              [ "${{ matrix.build-type }}" == "RelWithDebInfo" ] && \
              [ "${{ matrix.standalone }}" == "colcon" ] &&  \
@@ -138,7 +138,6 @@ jobs:
           test-packages: qp_solver_collection
       - name: Check dependencies
         run: |
-          echo ${LD_LIBRARY_PATH}
           ls /usr/local/lib/libeigen-qld.so.1
           ldd ./home/runner/work/QpSolverCollection/QpSolverCollection/colcon_ws/build/qp_solver_collection/tests/TestQpSolversEnabled
       - name: Upload documentation
