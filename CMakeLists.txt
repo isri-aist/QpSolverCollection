@@ -165,6 +165,10 @@ endif()
 if(USE_ROS2)
   ament_export_libraries(QpSolverCollection)
   ament_export_include_directories(include)
+  ament_export_dependencies(
+    rclcpp
+    Eigen3
+  )
   ament_export_targets(${PROJECT_NAME})
   ament_package()
 endif()
