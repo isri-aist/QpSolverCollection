@@ -136,6 +136,11 @@ jobs:
           cmake-args: -DUSE_ROS2=ON -DINSTALL_DOCUMENTATION=${{ env.UPLOAD_DOCUMENTATION }} -DDEFAULT_ENABLE_ALL=ON -DENABLE_LSSOL=${{ env.ENABLE_PRIVATE_SOLVERS }} -DSKIP_PRIVATE_SOLVER_TEST=${{ env.SKIP_PRIVATE_SOLVER_TEST }} -DFORCE_ALL_SOLVER_TEST=ON 
           build-packages: qp_solver_collection
           test-packages: qp_solver_collection
+      - name: Check dependencies using ldd
+        run: |
+          echo ${LD_LIBRARY_PATH}
+          ls /usr/local/lib/libeigen-qld.so.1
+          ldd ./home/runner/work/QpSolverCollection/QpSolverCollection/colcon_ws/build/qp_solver_collection/tests/TestQpSolversEnabled
       - name: Upload documentation
         # Only run for one configuration and on origin master branch
         if: env.UPLOAD_DOCUMENTATION == 'true'
