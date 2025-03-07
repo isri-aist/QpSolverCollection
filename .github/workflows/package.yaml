@@ -25,7 +25,7 @@ jobs:
       main-repo: isri-aist/QpSolverCollection
       matrix: |
         {
-          "dist": ["jammy", "noble"],
+          "dist": ["focal"],
           "arch": ["amd64"]
         }
     secrets:
