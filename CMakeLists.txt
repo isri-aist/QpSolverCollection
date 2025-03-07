@@ -23,8 +23,9 @@ mark_as_advanced(FORCE FORCE_ALL_SOLVER_TEST)
 option(SKIP_PRIVATE_SOLVER_TEST "Skip private solver test" OFF)
 mark_as_advanced(FORCE SKIP_PRIVATE_SOLVER_TEST)
 
-if(USE_ROS2)
-  option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+
+if(NOT USE_ROS2)
   option(BUILD_TESTING "Build test" ON)
   if(BUILD_TESTING)
     enable_testing()
