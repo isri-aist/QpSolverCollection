@@ -32,7 +32,7 @@ jobs:
         os: [ubuntu-22.04, ubuntu-24.04]
         build-type: [Debug, RelWithDebInfo]
         standalone: [standalone, colcon]
-        solvers-from-source: [SolversFromSource]
+        solvers-from-source: [SolversFromSource, SolversFromAPT]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set environment variables
@@ -67,7 +67,7 @@ jobs:
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
       - name: Install solvers via apt
-        if: matrix.solvers-from-source == 'SolversFromAPT'
+        if: matrix.solvers-from-source == 'SolversFromAPT' && matrix.os == 'ubuntu-22.04'
         uses: jrl-umi3218/github-actions/install-dependencies@master
         with:
           build-type: ${{ matrix.build-type }}
