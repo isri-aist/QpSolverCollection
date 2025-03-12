@@ -93,6 +93,7 @@ jobs:
           github: |
             - path: isri-aist/nasoq
               ref: debian
+              options: -DCMAKE_INSTALL_PREFIX=/usr/local -DNASOQ_BLAS_BACKEND=OpenBLAS -DNASOQ_USE_CLAPACK=ON -DNASOQ_BUILD_CLI=OFF -DNASOQ_BUILD_EXAMPLES=OFF -DNASOQ_BUILD_TESTS=OFF -DNASOQ_BUILD_DOCS=OFF
       - name: Install solvers from source
         if: matrix.solvers-from-source == 'SolversFromSource'
         uses: jrl-umi3218/github-actions/install-dependencies@master
