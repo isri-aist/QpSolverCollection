@@ -92,7 +92,7 @@ jobs:
             apt: ros-base 
           github: |
             - path: isri-aist/nasoq
-                ref: debian
+              ref: debian
       - name: Install solvers from source
         if: matrix.solvers-from-source == 'SolversFromSource'
         uses: jrl-umi3218/github-actions/install-dependencies@master
