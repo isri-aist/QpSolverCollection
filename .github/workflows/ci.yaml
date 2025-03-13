@@ -66,6 +66,12 @@ jobs:
           fi
         env:
           GITLAB_TOKEN : ${{ secrets.GITLAB_TOKEN }}
+      - name: Install ROS2
+        if: matrix.standalone == 'colcon'
+        uses: jrl-umi3218/github-actions/install-dependencies@master
+        with:
+          ros: |
+            apt: ros-base
       - name: Install solvers via apt (Ubuntu 22)
         if: matrix.solvers-from-source == 'SolversFromAPT' && matrix.os == 'ubuntu-22.04'
         uses: jrl-umi3218/github-actions/install-dependencies@master
@@ -76,8 +82,6 @@ jobs:
               mc-rtc:
                 cloudsmith: mc-rtc/head
             apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libnasoq-dev libhpipm-dev libproxsuite-dev libqpmad-dev
-          ros: |
-            apt: ros-base
       - name: Install solvers via apt (Ubuntu 24)
         if: matrix.solvers-from-source == 'SolversFromAPT' && matrix.os == 'ubuntu-24.04'
         uses: jrl-umi3218/github-actions/install-dependencies@master
@@ -88,8 +92,6 @@ jobs:
               mc-rtc:
                 cloudsmith: mc-rtc/head
             apt: libmetis-dev libeigen3-dev libgtest-dev graphviz doxygen libeigen-qld-dev libeigen-quadprog-dev libjrl-qp-dev libqpoases-dev libosqp-eigen-dev libhpipm-dev libproxsuite-dev libqpmad-dev
-          ros: |
-            apt: ros-base 
           github: |
             - path: isri-aist/nasoq
               ref: debian
@@ -123,8 +125,6 @@ jobs:
               ref: main
               options: -DBUILD_TESTING=OFF -DBUILD_WITH_VECTORIZATION_SUPPORT=OFF
             - path: asherikov/qpmad
-          ros: |
-            apt: ros-base
       - name: Install private solvers
         if: env.ENABLE_PRIVATE_SOLVERS == 'ON'
         uses: jrl-umi3218/github-actions/install-dependencies@master
