@@ -39,7 +39,7 @@ $ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolv
 $ wstool update -t src
 ```
 
-> `wstool` can be installed with `pip install wstool` 
+> `wstool` can be installed with `apt install python3-wstool` or `pip install wstool`.
 
 3. Install dependent packages.
 ```bash
