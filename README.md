@@ -1,4 +1,4 @@
-This is the branch for ROS2; use the ros1 branch for ROS1.
+This is the branch for ROS2; use the [ros1](https://github.com/isri-aist/QpSolverCollection/tree/ros1) branch for ROS1.
 
 # [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 Unified C++ interface for quadratic programming solvers
