@@ -1,3 +1,5 @@
+This is the branch for ROS2; use the [ros1](https://github.com/isri-aist/QpSolverCollection/tree/ros1) branch for ROS1.
+
 # [QpSolverCollection](https://github.com/isri-aist/QpSolverCollection)
 Unified C++ interface for quadratic programming solvers
 
@@ -28,7 +30,7 @@ It is assumed that ROS is installed.
 
 1. Install the QP solver you wish to use according to [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-installation). You can skip installing QP solvers that you do not use.
 
-2. Setup catkin workspace.
+2. Setup colcon workspace.
 ```bash
 $ mkdir -p ~/ros/ws_qp_solver_collection/src
 $ cd ~/ros/ws_qp_solver_collection
@@ -36,6 +38,8 @@ $ wstool init src
 $ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y
 $ wstool update -t src
 ```
+
+> `wstool` can be installed with `apt install python3-wstool` or `pip install wstool`.
 
 3. Install dependent packages.
 ```bash
@@ -45,7 +49,9 @@ $ rosdep install -y -r --from-paths src --ignore-src
 
 4. Build a package.
 ```bash
-$ catkin build -DCMAKE_BUILD_TYPE=RelWithDebInfo <qp-solver-flags> --catkin-make-args all tests
+$ cd ~/ros/ws_qp_solver_collection
+$ colcon build --packages-select qp_solver_collection --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo <qp-solver-flags>
+$ colcon test --merge-install --packages-select qp_solver_collection # [optional] to compile and run tests 
 ```
 See [this section](https://github.com/isri-aist/QpSolverCollection#qp-solver-installation) for `<qp-solver-flags>`.
 

@@ -16,10 +16,10 @@
 #  define QSC_WARN_STREAM(x) std::cerr << x << "\n"
 #  define QSC_INFO_STREAM(x) std::cout << x << "\n"
 #else
-#  include <ros/console.h>
-#  define QSC_ERROR_STREAM ROS_ERROR_STREAM
-#  define QSC_WARN_STREAM ROS_WARN_STREAM
-#  define QSC_INFO_STREAM ROS_INFO_STREAM
+#  include <rclcpp/rclcpp.hpp>
+#  define QSC_ERROR_STREAM(msg) RCLCPP_ERROR_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_WARN_STREAM(msg) RCLCPP_WARN_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
+#  define QSC_INFO_STREAM(msg) RCLCPP_INFO_STREAM(rclcpp::get_logger("QpSolverCollection"), msg)
 #endif
 
 namespace Eigen
@@ -490,9 +490,6 @@ public:
   /** \brief Constructor. */
   QpSolverHpipm();
 
-  /** \brief Destructor. */
-  ~QpSolverHpipm();
-
   /** \brief Solve QP. */
   virtual Eigen::VectorXd solve(int dim_var,
                                 int dim_eq,
@@ -521,13 +518,13 @@ protected:
   std::unique_ptr<struct d_dense_qp_ipm_arg> ipm_arg_;
   std::unique_ptr<struct d_dense_qp_ipm_ws> ipm_ws_;
 
-  void * qp_dim_mem_ = nullptr;
-  void * qp_mem_ = nullptr;
-  void * qp_sol_mem_ = nullptr;
-  void * ipm_arg_mem_ = nullptr;
-  void * ipm_ws_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> qp_dim_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> qp_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> qp_sol_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> ipm_arg_mem_ = nullptr;
+  std::unique_ptr<uint8_t[]> ipm_ws_mem_ = nullptr;
 
-  double * opt_x_mem_;
+  std::unique_ptr<double[]> opt_x_mem_ = nullptr;
 };
 #endif
 

@@ -18,37 +18,33 @@ target_compile_features(QpSolverCollection PUBLIC cxx_std_17)
 set_source_files_properties(QpSolverQpoases.cpp PROPERTIES
   COMPILE_FLAGS -Wno-unused-parameter)
 
-if(DEFINED CATKIN_DEVEL_PREFIX)
-  target_include_directories(QpSolverCollection PUBLIC
-    ${catkin_INCLUDE_DIRS}
-  )
-
+if(USE_ROS2)
   target_link_libraries(QpSolverCollection PUBLIC
-    ${catkin_LIBRARIES}
+    rclcpp::rclcpp
   )
 else()
-  target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
-
   target_compile_definitions(QpSolverCollection PUBLIC QP_SOLVER_COLLECTION_STANDALONE)
-
-  install(TARGETS QpSolverCollection
-          EXPORT ${PROJECT_NAME}
-          LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-          ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
-          RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
-  )
-
-  install(FILES
-      "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
-      "${QP_SOLVER_OPTIONS_HEADER_FILE}"
-    DESTINATION
-      "${CMAKE_INSTALL_INCLUDEDIR}/qp_solver_collection"
-  )
 endif()
+
+target_link_libraries(QpSolverCollection PUBLIC Eigen3::Eigen)
 
 target_include_directories(QpSolverCollection PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>)
+  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include>
+)
+
+install(FILES
+  "${PROJECT_SOURCE_DIR}/include/qp_solver_collection/QpSolverCollection.h"
+  "${QP_SOLVER_OPTIONS_HEADER_FILE}"
+  DESTINATION include/${PROJECT_NAME}
+)
+
+install(TARGETS QpSolverCollection
+  EXPORT ${PROJECT_NAME}
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
 if(${ENABLE_QLD})
   target_link_libraries(QpSolverCollection PRIVATE
