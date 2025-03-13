@@ -158,14 +158,14 @@ jobs:
         run: |
           set -e
           set -x
-          cd ${GITHUB_WORKSPACE}/catkin_ws/src/QpSolverCollection
+          cd ${GITHUB_WORKSPACE}/colcon_ws/src/QpSolverCollection
           git config --global user.name "Masaki Murooka"
           git config --global user.email "m-murooka@aist.go.jp"
           git remote set-url origin "https://mmurooka:${{ secrets.CI_TOKEN }}@github.com/isri-aist/QpSolverCollection"
           git fetch --depth=1 origin gh-pages:gh-pages
           git checkout --quiet gh-pages
           rm -rf doxygen/
-          cp -r ${GITHUB_WORKSPACE}/catkin_ws/build/qp_solver_collection/doc/html/ doxygen
+          cp -r ${GITHUB_WORKSPACE}/colcon_ws/build/qp_solver_collection/doc/html/ doxygen
           git add doxygen
           git_status=`git status -s`
           if test -n "$git_status"; then
