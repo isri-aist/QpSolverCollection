@@ -33,19 +33,23 @@ It is assumed that ROS is installed.
 2. Setup colcon workspace.
 ```bash
 $ mkdir -p ~/ros/ws_qp_solver_collection/src
-$ git clone https://github.com/isri-aist/QpSolverCollection
+$ cd ~/ros/ws_qp_solver_collection
+$ wstool init src
+$ wstool set -t src isri-aist/QpSolverCollection git@github.com:isri-aist/QpSolverCollection.git --git -y
+$ wstool update -t src
 ```
+
+> `wstool` can be installed with `pip install wstool` 
 
 3. Install dependent packages.
 ```bash
-$ cd ~/ros
 $ source /opt/ros/${ROS_DISTRO}/setup.bash
 $ rosdep install -y -r --from-paths src --ignore-src
 ```
 
 4. Build a package.
 ```bash
-$ cd ~/ros
+$ cd ~/ros/ws_qp_solver_collection
 $ colcon build --packages-select qp_solver_collection --merge-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo <qp-solver-flags>
 $ colcon test --merge-install --packages-select qp_solver_collection # [optional] to compile and run tests 
 ```
