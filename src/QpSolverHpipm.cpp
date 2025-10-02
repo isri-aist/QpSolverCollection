@@ -39,7 +39,7 @@ Eigen::VectorXd QpSolverHpipm::solve(int dim_var,
     int qp_dim_size = d_dense_qp_dim_memsize();
     qp_dim_mem_ = std::make_unique<uint8_t[]>(qp_dim_size);
     d_dense_qp_dim_create(qp_dim_.get(), qp_dim_mem_.get());
-    d_dense_qp_dim_set_all(dim_var, dim_eq, dim_var, dim_ineq, 0, 0, qp_dim_.get());
+    d_dense_qp_dim_set_all(dim_var, dim_eq, dim_var, dim_ineq, 0, qp_dim_.get());
 
     int qp_size = d_dense_qp_memsize(qp_dim_.get());
     qp_mem_ = std::make_unique<uint8_t[]>(qp_size);
